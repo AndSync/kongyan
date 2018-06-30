@@ -36,10 +36,10 @@ public class SplashActivity extends BaseActivity {
     };
 
     private void startLogin() {
-        if(UserHelper.isLogin()){
+        if (UserHelper.isLogin()) {
             Intent intent = new Intent(this, HomePageActivity.class);
             startActivity(intent);
-        }else {
+        } else {
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }

@@ -25,7 +25,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private ImageView iv_people;
     private TextView iv_wenjuan;
     private TextView iv_shuju;
-    private Ser1UserInfo user= UserHelper.getUserInfo();
+    private Ser1UserInfo user = UserHelper.getUserInfo();
     private RelativeLayout layout_version;
 
     private Version versionInfo;
@@ -75,7 +75,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 startActivity(intent);
                 break;
             case R.id.tv_wenjuan:
-                Intent intent2 = new Intent(this, QuestionIndexActivity.class);
+                Intent intent2 = new Intent(this, BloodMeasureActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.tv_shuju:

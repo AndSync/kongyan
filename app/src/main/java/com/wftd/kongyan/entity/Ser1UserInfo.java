@@ -127,7 +127,7 @@ public class Ser1UserInfo implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public boolean isLogin(){
+    public boolean isLogin() {
         return !TextUtils.isEmpty(name);
     }
 }

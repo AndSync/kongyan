@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by liwei on 2018/6/17.
  */
 
-public class Doctor implements Parcelable,Serializable {
+public class Doctor implements Parcelable, Serializable {
 
     private static final long serialVersionUID = -714018897634924671L;
     /**

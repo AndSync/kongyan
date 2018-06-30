@@ -95,8 +95,9 @@ public class HttpUtils {
                     case 0:
                         String data = jsonObject.getString("data");
 
-                        List<Ser1UserInfo> loginResultDTO = new Gson().fromJson(data, new TypeToken<List<Ser1UserInfo>>() {
-                        }.getType());
+                        List<Ser1UserInfo> loginResultDTO =
+                            new Gson().fromJson(data, new TypeToken<List<Ser1UserInfo>>() {
+                            }.getType());
                         callback.success(loginResultDTO);
                         break;
                     case 1:

@@ -71,7 +71,7 @@ public class QuestionListActivity extends BaseActivity2
     private EditText Edoctor, Eaddress;
 
     private String orname;
-    private Ser1UserInfo mUser= UserHelper.getUserInfo();
+    private Ser1UserInfo mUser = UserHelper.getUserInfo();
 
     private static final String[] sexs = {
         "男", "女"

@@ -31,6 +31,7 @@ import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import com.wftd.kongyan.util.LogUtils;
 import com.wftd.kongyan.util.StringUtils;
+import com.wftd.kongyan.util.ToastUtils;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
@@ -42,13 +43,13 @@ import static com.wftd.kongyan.R.id.radioGroup;
 /**
  * 主页
  */
-public class QuestionIndexActivity extends BaseActivity
+public class BloodMeasureActivity extends BaseActivity
     implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, DoctorCallback {
     private ImageView mGoPersonal;//个人中心
     private ImageView mNextStep;//填写问卷
     private ImageView mBack;
-    private EditText mSBP;//收缩压
-    private EditText mDBP;//舒张压
+    private EditText mEtSBP;//收缩压
+    private EditText mEtDBP;//舒张压
     private TextView mAuto;//自动获取
     private TextView mHint;//未选择口服盐编号提示
     private RadioGroup mGroup;
@@ -58,10 +59,10 @@ public class QuestionIndexActivity extends BaseActivity
     private RadioButton fourth;
     private Ser1UserInfo user = UserHelper.getUserInfo();
 
-    private String mType, mMac;
-    private static Bp3lControl bp3lControl;
+    private String mType, deviceMac;
+    private Bp3lControl bp3lControl;
     private int clientCallbackId;
-    String userName = "kongyan";
+    private String userName = "kongyan";
     private List<Doctor> doctorList = UserHelper.getDoctorList();
     private DoctorListAdapter spinnerAdapter;
     private Spinner spinner;
@@ -71,10 +72,14 @@ public class QuestionIndexActivity extends BaseActivity
      * 扫描到血压仪
      */
     private static final int MESSAGE_SCAN_SUCCESS = 100;
-    private static final int HANDLER_MESSAGE = 101;
-    private static final int HANDLER_END = 102;
-    private static final int HANDLER_ERROR = 103;
-    private static final int DORTOR = 104;
+    private static final int MESSAGE_SCAN_FAILURE = 101;
+    private static final int MESSAGE_LINK_SUCCESS = 102;
+    private static final int MESSAGE_LINK_FAILURE = 103;
+    private static final int MESSAGE_MEASURE_END = 104;
+    private static final int MESSAGE_MEASURE_TIMEOUT = 105;
+    private static final int HANDLER_MESSAGE = 106;
+    private static final int HANDLER_ERROR = 107;
+    private boolean isMeasure;
 
     private Handler mHandler = new Handler() {
         @SuppressLint("WrongConstant")
@@ -86,28 +91,30 @@ public class QuestionIndexActivity extends BaseActivity
                 case MESSAGE_SCAN_SUCCESS:
                     mAuto.setText("连接设备");
                     break;
-                case 2:
+                case MESSAGE_LINK_SUCCESS:
                     mAuto.setText("自动获取");
                     break;
-                case HANDLER_MESSAGE:
-                    Log.e(TAG, (String) msg.obj);
+                case MESSAGE_LINK_FAILURE:
+                    mAuto.setText("连接设备");
                     break;
-                case HANDLER_END:
+                case MESSAGE_MEASURE_END:
                     Bundle bundle = msg.getData();
                     String low = bundle.getString("low", "");
                     String hight = bundle.getString("hight", "");
-                    mSBP.setText(hight);
-                    mDBP.setText(low);
+                    mEtSBP.setText(hight);
+                    mEtDBP.setText(low);
                     mAuto.setText("自动获取");
                     break;
-
                 case HANDLER_ERROR:
                     mAuto.setText("自动获取");
-                    Toast.makeText(QuestionIndexActivity.this, "获取失败请确保正确佩戴设备", 1).show();
+                    DialogUtils.showAlertDialog(context, "获取失败", "请确保正确佩戴设备");
                     break;
-                case DORTOR:
-                    //绑定 Adapter到控件
-                    spinnerAdapter.notifyDataSetChanged();
+                case MESSAGE_MEASURE_TIMEOUT:
+                    mAuto.setText("自动获取");
+                    DialogUtils.showAlertDialog(context, "获取失败", "获取超时请重新获取");
+                    break;
+                case HANDLER_MESSAGE:
+                    Log.d(TAG, (String) msg.obj);
                     break;
                 default:
                     break;
@@ -125,14 +132,18 @@ public class QuestionIndexActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (bp3lControl != null) {
+            LogUtils.d(TAG, "断开连接");
+            bp3lControl.disconnect();
+        }
         iHealthDevicesManager.getInstance().unRegisterClientCallback(clientCallbackId);
     }
 
     private void init() {
         mGoPersonal = (ImageView) findViewById(R.id.go_personal_center);
         mNextStep = (ImageView) findViewById(R.id.next_step);
-        mSBP = (EditText) findViewById(R.id.home_input_sbp);
-        mDBP = (EditText) findViewById(R.id.home_input_dbp);
+        mEtSBP = (EditText) findViewById(R.id.home_input_sbp);
+        mEtDBP = (EditText) findViewById(R.id.home_input_dbp);
         mAuto = (TextView) findViewById(R.id.home_auto_get);
         mHint = (TextView) findViewById(R.id.kfy_hint);
         mGroup = (RadioGroup) findViewById(radioGroup);
@@ -152,6 +163,7 @@ public class QuestionIndexActivity extends BaseActivity
         clientCallbackId = iHealthDevicesManager.getInstance().registerClientCallback(miHealthDevicesCallback);
         /* Limited wants to receive notification specified device */
         iHealthDevicesManager.getInstance().startDiscovery(32L);
+
         if (user != null && user.getOrganizationId() != null) {
             HttpUtils.DoctorGet(user.getOrganizationId(), this);
         }
@@ -180,10 +192,35 @@ public class QuestionIndexActivity extends BaseActivity
 
         @Override
         public void onScanDevice(String mac, String deviceType, int rssi, Map manufactorData) {
-            mMac = mac;
+            deviceMac = mac;
             mType = deviceType;
             mHandler.sendEmptyMessage(MESSAGE_SCAN_SUCCESS);
             LogUtils.d(TAG, "扫描到血压仪:" + mac + "、" + deviceType);
+        }
+
+        @Override
+        public void onDeviceConnectionStateChange(String mac, String deviceType, int status, int errorID) {
+
+            if (status == iHealthDevicesManager.DEVICE_STATE_CONNECTED) {
+                Message msg = new Message();
+                msg.what = MESSAGE_LINK_SUCCESS;
+                mHandler.sendMessage(msg);
+                ToastUtils.show(context, "连接成功");
+                LogUtils.d(TAG, "连接成功");
+                iHealthDevicesManager.getInstance()
+                    .addCallbackFilterForDeviceType(clientCallbackId, iHealthDevicesManager.TYPE_BP3L);
+                /* Limited wants to receive notification specified device */
+                iHealthDevicesManager.getInstance()
+                    .addCallbackFilterForDeviceType(clientCallbackId, iHealthDevicesManager.TYPE_BP3L);
+                /* Get bp3 controller */
+                bp3lControl = iHealthDevicesManager.getInstance().getBp3lControl(deviceMac);
+            } else if (status == iHealthDevicesManager.DEVICE_STATE_DISCONNECTED) {
+                Message msg = new Message();
+                msg.what = MESSAGE_LINK_FAILURE;
+                mHandler.sendMessage(msg);
+                LogUtils.d(TAG, "断开连接");
+            }
+            LogUtils.d(TAG, status + ":" + errorID);
         }
 
         @Override
@@ -312,7 +349,7 @@ public class QuestionIndexActivity extends BaseActivity
                     String ahr = info.getString(BpProfile.MEASUREMENT_AHR_BP);
                     String pulse = info.getString(BpProfile.PULSE_BP);
                     Message msg = new Message();
-                    msg.what = HANDLER_END;
+                    msg.what = MESSAGE_MEASURE_END;
                     msg.obj = "highPressure: "
                         + highPressure
                         + "lowPressure: "
@@ -340,6 +377,10 @@ public class QuestionIndexActivity extends BaseActivity
                 msg.what = HANDLER_MESSAGE;
                 msg.obj = "zoreover";
                 mHandler.sendMessage(msg);
+            } else if (BpProfile.ACTION_COMMUNICATION_TIMEOUT.equals(action)) {
+                Message msg = new Message();
+                msg.what = MESSAGE_MEASURE_TIMEOUT;
+                mHandler.sendMessage(msg);
             }
         }
     };
@@ -352,8 +393,8 @@ public class QuestionIndexActivity extends BaseActivity
                 startActivity(personalIntent);
                 break;
             case R.id.next_step:
-                String sbp = mSBP.getText().toString();
-                String dbp = mDBP.getText().toString();
+                String sbp = mEtSBP.getText().toString();
+                String dbp = mEtDBP.getText().toString();
                 if (StringUtils.isEmpty(sbp)
                     || sbp.substring(0, 1).equals("0")
                     || StringUtils.isEmpty(dbp)
@@ -390,27 +431,23 @@ public class QuestionIndexActivity extends BaseActivity
                 break;
             case R.id.home_auto_get:
                 if ("自动获取".equals(mAuto.getText().toString())) {
-                    mAuto.setText("获取中，请等待");
-                    bp3lControl.startMeasure();
+                    mAuto.setText("获取中，请稍等...");
+                    mEtSBP.setText("");
+                    mEtDBP.setText("");
+                    if (bp3lControl != null) {
+                        bp3lControl.startMeasure();
+                    } else {
+                        ToastUtils.show(context, "iHealth未连接");
+                    }
                 }
                 if ("连接设备".equals(mAuto.getText().toString())) {
-                    mAuto.setText("获取中，请等待");
-                    iHealthDevicesManager.getInstance()
-                        .addCallbackFilterForDeviceType(clientCallbackId, iHealthDevicesManager.TYPE_BP3L);
-
+                    mAuto.setText("连接中，请稍等...");
                     boolean req = iHealthDevicesManager.getInstance()
-                        .connectDevice(userName, mMac, iHealthDevicesManager.TYPE_BP3L);
+                        .connectDevice(userName, deviceMac, iHealthDevicesManager.TYPE_BP3L);
                     if (!req) {
-                        Toast.makeText(QuestionIndexActivity.this,
+                        Toast.makeText(BloodMeasureActivity.this,
                             "Haven’t permission to connect this device or the mac is not valid", Toast.LENGTH_LONG)
                             .show();
-                    }
-
-                    String test = iHealthDevicesManager.getInstance().getDevicesIDPS(mMac);
-                    if (bp3lControl != null) {
-                        mHandler.sendEmptyMessage(2);
-                    } else {
-                        bp3lControl = iHealthDevicesManager.getInstance().getBp3lControl(mMac);
                     }
                 }
                 break;
@@ -432,9 +469,12 @@ public class QuestionIndexActivity extends BaseActivity
         UserHelper.updateDoctorList(doctors);
         doctorList.clear();
         doctorList.addAll(doctors);
-        Message message = new Message();
-        message.what = DORTOR;
-        mHandler.sendMessage(message);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                spinnerAdapter.notifyDataSetChanged();
+            }
+        });
         return false;
     }
 
@@ -452,8 +492,8 @@ public class QuestionIndexActivity extends BaseActivity
     }
 
     private void clearInput() {
-        mSBP.setText("");
-        mDBP.setText("");
+        mEtSBP.setText("");
+        mEtDBP.setText("");
         for (int i = 0; i < mGroup.getChildCount(); i++) {
             View view = mGroup.getChildAt(i);
             if (view instanceof RadioButton) {

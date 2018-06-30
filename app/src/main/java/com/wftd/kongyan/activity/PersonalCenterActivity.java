@@ -24,7 +24,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
     private TextView mUserName;
     private ImageView todata;
     private ImageView message;
-    private Ser1UserInfo user= UserHelper.getUserInfo();
+    private Ser1UserInfo user = UserHelper.getUserInfo();
 
     private TextView people_name, people_job, hosp_name, equipment;
     private ImageView iv_new_version;
