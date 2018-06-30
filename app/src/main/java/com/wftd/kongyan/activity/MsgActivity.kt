@@ -10,7 +10,7 @@ import com.wftd.kongyan.app.UserHelper
 import com.wftd.kongyan.base.BaseActivity
 import com.wftd.kongyan.callback.MessageCallback
 import com.wftd.kongyan.entity.Message
-import com.wftd.kongyan.entity.Ser1UserInfo
+import com.wftd.kongyan.entity.People
 import com.wftd.kongyan.util.HttpUtils
 import kotlinx.android.synthetic.main.activity_message.back
 import kotlinx.android.synthetic.main.activity_message.mylistview
@@ -63,7 +63,7 @@ class MsgActivity : BaseActivity(), View.OnClickListener, MessageCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
         var user = UserHelper.getUserInfo()
-        HttpUtils.MessageGet((user as Ser1UserInfo).id, this@MsgActivity)
+        HttpUtils.MessageGet((user as People).id, this@MsgActivity)
         mylistview.adapter = MessageAdapter(this@MsgActivity)
         back.setOnClickListener(this)
     }

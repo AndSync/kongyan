@@ -11,7 +11,7 @@ import java.util.List;
 public class LoginResult implements Serializable {
     private static final long serialVersionUID = 6582181405644630863L;
     private List<Doctor> doctors;
-    private Ser1UserInfo people;
+    private People people;
 
     public List<Doctor> getDoctors() {
         return doctors;
@@ -21,11 +21,11 @@ public class LoginResult implements Serializable {
         this.doctors = doctors;
     }
 
-    public Ser1UserInfo getPeople() {
+    public People getPeople() {
         return people;
     }
 
-    public void setPeople(Ser1UserInfo people) {
+    public void setPeople(People people) {
         this.people = people;
     }
 }

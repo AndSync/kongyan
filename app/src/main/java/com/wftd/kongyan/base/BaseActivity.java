@@ -9,6 +9,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.wftd.kongyan.app.App;
 import com.wftd.kongyan.app.Constant;
 import com.wftd.kongyan.db.DbConfig;
+import com.wftd.kongyan.util.UiHelper;
 import org.xutils.DbManager;
 import org.xutils.x;
 
@@ -33,8 +34,8 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        App.getInstance().remove(this);
         super.onDestroy();
+        App.getInstance().remove(this);
     }
 
     @Override
@@ -48,5 +49,11 @@ public class BaseActivity extends Activity {
     protected void finishActivity() {
         ((Activity) context).setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        UiHelper.hideSoftKeyboard(this);
     }
 }

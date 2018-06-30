@@ -3,22 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="app_bg">#B7B7B7</color>
     <color name="white">#ffffff</color>
     <color name="green">#178078</color>
     <color name="black">#99000000</color>
     <color name="red">#ff0000</color>
     <color name="gray">#E4E4E4</color>
-    <color name="light_blue">#80A4D6</color>
     <color name="light_green">#178078</color>
-    <color name="button_color">#108EE9</color>
-    <color name="fen">#aaf57a7a</color>
     <color name="transparent">#00000000</color>
     <color name="radio_green_bg">#D5F1EF</color>
     <color name="text_black">#666666</color>
     <color name="text_gray">#999999</color>
     <!--城市选择-->
-    <color name="green_11B57C">#11B57C</color>
     <color name="black_333333">#333333</color>
     <color name="line_DDDDDD">#DDDDDD</color>
 

@@ -26,7 +26,7 @@ import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.DoctorCallback;
 import com.wftd.kongyan.entity.Doctor;
-import com.wftd.kongyan.entity.Ser1UserInfo;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import com.wftd.kongyan.util.LogUtils;
@@ -57,7 +57,7 @@ public class BloodMeasureActivity extends BaseActivity
     private RadioButton second;
     private RadioButton third;
     private RadioButton fourth;
-    private Ser1UserInfo user = UserHelper.getUserInfo();
+    private People user = UserHelper.getUserInfo();
 
     private String mType, deviceMac;
     private Bp3lControl bp3lControl;

@@ -31,7 +31,7 @@ import com.wftd.kongyan.callback.QuestionCallback;
 import com.wftd.kongyan.db.DBHelper;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
-import com.wftd.kongyan.entity.Ser1UserInfo;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.DisplayUtils;
@@ -71,7 +71,7 @@ public class QuestionListActivity extends BaseActivity2
     private EditText Edoctor, Eaddress;
 
     private String orname;
-    private Ser1UserInfo mUser = UserHelper.getUserInfo();
+    private People mUser = UserHelper.getUserInfo();
 
     private static final String[] sexs = {
         "男", "女"

@@ -9,13 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.wftd.kongyan.R;
+import com.wftd.kongyan.app.App;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.LoginCallback;
 import com.wftd.kongyan.callback.PeopleCallback;
 import com.wftd.kongyan.db.DBManager;
-import com.wftd.kongyan.entity.Ser1UserInfo;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.HttpUtils;
+import com.wftd.kongyan.util.LogUtils;
 import com.wftd.kongyan.util.PhoneUtils;
 import com.wftd.kongyan.util.StringUtils;
 import com.wftd.kongyan.util.ToastUtils;
@@ -82,7 +84,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 if (PhoneUtils.isNetworkAvailable(this)) {
                     HttpUtils.LoginGet(PhoneNumber, pwd, (LoginCallback) LoginActivity.this);
                 } else {//没有网络的情况下
-                    ToastUtils.show(context, "没有网络，请检查网络是否连接");
+                    try {
+                        List<People> list=db.findAll(People.class);
+                        LogUtils.d(TAG,list.toString());
+                        People user = db.selector(People.class)
+                            .where("phoneNumber", "=", PhoneNumber)
+                            .and("passwordText", "=", pwd)
+                            .findFirst();
+                        if (user == null) {
+                            ToastUtils.show(this, "用户名或密码错误");
+                            return;
+                        }
+                        App.loginUser=user;
+                        Intent homePagdeIntent = new Intent(LoginActivity.this, HomePageActivity.class);
+                        startActivity(homePagdeIntent);
+                        finish();
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 break;
@@ -95,9 +114,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
-    public boolean success(Ser1UserInfo obj) {
+    public boolean success(People obj) {
         Intent homePageIntent = new Intent(LoginActivity.this, HomePageActivity.class);
         startActivity(homePageIntent);
+        try {
+            db.saveOrUpdate(obj);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
         if (obj.getOrganizationId() != null) {
             HttpUtils.PeopleGet(obj.getOrganizationId(), this);
         }
@@ -106,9 +130,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
-    public boolean success(List<Ser1UserInfo> mLoginResult) {
+    public boolean success(List<People> peopleList) {
         try {
-            db.save(mLoginResult);
+            db.saveOrUpdate(peopleList);
             Log.e("aaa", "数据更新成功");
         } catch (DbException e) {
             e.printStackTrace();

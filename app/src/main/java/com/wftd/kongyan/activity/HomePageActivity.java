@@ -11,7 +11,7 @@ import com.wftd.kongyan.R;
 import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.VersionCallback;
-import com.wftd.kongyan.entity.Ser1UserInfo;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Version;
 import com.wftd.kongyan.util.HttpUtils;
 
@@ -25,7 +25,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private ImageView iv_people;
     private TextView iv_wenjuan;
     private TextView iv_shuju;
-    private Ser1UserInfo user = UserHelper.getUserInfo();
+    private People user = UserHelper.getUserInfo();
     private RelativeLayout layout_version;
 
     private Version versionInfo;

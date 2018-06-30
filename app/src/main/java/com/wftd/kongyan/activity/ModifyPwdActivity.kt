@@ -9,7 +9,7 @@ import com.wftd.kongyan.R
 import com.wftd.kongyan.app.UserHelper
 import com.wftd.kongyan.base.BaseActivity
 import com.wftd.kongyan.callback.ModifyCallback
-import com.wftd.kongyan.entity.Ser1UserInfo
+import com.wftd.kongyan.entity.People
 import com.wftd.kongyan.util.CommonUtils
 import com.wftd.kongyan.util.HttpUtils
 import com.wftd.kongyan.util.PhoneUtils
@@ -55,7 +55,7 @@ class ModifyPwdActivity : BaseActivity(), View.OnClickListener, ModifyCallback {
 //        Toast.makeText(this, "修改密码失败", Toast.LENGTH_SHORT).show()
     }
 
-    lateinit var user: Ser1UserInfo
+    lateinit var user: People
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.confirm -> {

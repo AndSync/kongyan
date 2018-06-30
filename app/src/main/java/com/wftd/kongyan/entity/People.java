@@ -8,9 +8,9 @@ import org.xutils.db.annotation.Table;
 /**
  * 用户
  */
-@Table(name = "user")
-public class Ser1UserInfo implements Serializable {
-    @Column(name = "id", isId = true, autoGen = true)
+@Table(name = "people")
+public class People implements Serializable {
+    @Column(name = "id", isId = true, autoGen = false)
     private String id;
     @Column(name = "organizationId")
     private String organizationId;
@@ -129,5 +129,41 @@ public class Ser1UserInfo implements Serializable {
 
     public boolean isLogin() {
         return !TextUtils.isEmpty(name);
+    }
+
+    @Override
+    public String toString() {
+        return "People{"
+            + "id='"
+            + id
+            + '\''
+            + ", organizationId='"
+            + organizationId
+            + '\''
+            + ", name='"
+            + name
+            + '\''
+            + ", password='"
+            + password
+            + '\''
+            + ", passwordText='"
+            + passwordText
+            + '\''
+            + ", type="
+            + type
+            + ", remark='"
+            + remark
+            + '\''
+            + ", isDelete="
+            + isDelete
+            + ", phoneNumber='"
+            + phoneNumber
+            + '\''
+            + ", post="
+            + post
+            + ", orgnizationName='"
+            + orgnizationName
+            + '\''
+            + '}';
     }
 }

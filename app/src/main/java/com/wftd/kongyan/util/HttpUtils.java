@@ -17,7 +17,7 @@ import com.wftd.kongyan.entity.Doctor;
 import com.wftd.kongyan.entity.LoginResult;
 import com.wftd.kongyan.entity.Message;
 import com.wftd.kongyan.entity.Question;
-import com.wftd.kongyan.entity.Ser1UserInfo;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Version;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -95,9 +95,10 @@ public class HttpUtils {
                     case 0:
                         String data = jsonObject.getString("data");
 
-                        List<Ser1UserInfo> loginResultDTO =
-                            new Gson().fromJson(data, new TypeToken<List<Ser1UserInfo>>() {
+                        List<People> loginResultDTO =
+                            new Gson().fromJson(data, new TypeToken<List<People>>() {
                             }.getType());
+                        LogUtils.d("LoginActivity",loginResultDTO.toString());
                         callback.success(loginResultDTO);
                         break;
                     case 1:

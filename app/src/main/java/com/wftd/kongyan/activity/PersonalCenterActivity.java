@@ -12,7 +12,7 @@ import com.wftd.kongyan.app.App;
 import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.VersionCallback;
-import com.wftd.kongyan.entity.Ser1UserInfo;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Version;
 import com.wftd.kongyan.util.AppUtils;
 import com.wftd.kongyan.util.HttpUtils;
@@ -24,7 +24,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
     private TextView mUserName;
     private ImageView todata;
     private ImageView message;
-    private Ser1UserInfo user = UserHelper.getUserInfo();
+    private People user = UserHelper.getUserInfo();
 
     private TextView people_name, people_job, hosp_name, equipment;
     private ImageView iv_new_version;
