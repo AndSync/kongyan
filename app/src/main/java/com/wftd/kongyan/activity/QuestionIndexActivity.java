@@ -28,6 +28,7 @@ import com.wftd.kongyan.entity.Doctor;
 import com.wftd.kongyan.entity.User;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
+import com.wftd.kongyan.util.LogUtils;
 import com.wftd.kongyan.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,13 +67,15 @@ public class QuestionIndexActivity extends BaseActivity
     private Spinner spinner;
 
     String doctorName;
-
+    /**
+     * 扫描到血压仪
+     */
+    private static final int MESSAGE_SCAN_SUCCESS=100;
     private static final int HANDLER_MESSAGE = 101;
     private static final int HANDLER_END = 102;
     private static final int HANDLER_ERROR = 103;
     private static final int DORTOR = 104;
 
-    private String TAG = "iHealthMessage";
 
     private Handler mHandler = new Handler() {
         @SuppressLint("WrongConstant")
@@ -81,7 +84,7 @@ public class QuestionIndexActivity extends BaseActivity
             super.handleMessage(msg);
 
             switch (msg.what) {
-                case 1:
+                case MESSAGE_SCAN_SUCCESS:
                     mAuto.setText("连接设备");
                     break;
                 case 2:
@@ -181,14 +184,15 @@ public class QuestionIndexActivity extends BaseActivity
         public void onScanDevice(String mac, String deviceType, int rssi, Map manufactorData) {
             mMac = mac;
             mType = deviceType;
-            mHandler.sendEmptyMessage(1);
+            mHandler.sendEmptyMessage(MESSAGE_SCAN_SUCCESS);
+            LogUtils.d(TAG,"扫描到血压仪:"+mac+"、"+deviceType);
         }
 
         @Override
         public void onDeviceNotify(String mac, String deviceType, String action, String message) {
             i++;
 
-            Log.e(TAG, action + "message=" + message);
+            LogUtils.d(TAG, "mac:"+mac+"\ndeviceType"+deviceType+"\naction:"+action + "\nmessage:" + message);
 
             if (BpProfile.ACTION_BATTERY_BP.equals(action)) {
                 try {
@@ -396,7 +400,7 @@ public class QuestionIndexActivity extends BaseActivity
                     bp3lControl.startMeasure();
                 }
                 if ("连接设备".equals(mAuto.getText().toString())) {
-
+                    mAuto.setText("获取中，请等待");
                     iHealthDevicesManager.getInstance()
                         .addCallbackFilterForDeviceType(clientCallbackId, iHealthDevicesManager.TYPE_BP3L);
 

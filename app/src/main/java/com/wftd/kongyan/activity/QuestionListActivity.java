@@ -191,11 +191,13 @@ public class QuestionListActivity extends BaseActivity2
     private ArrayList<City> mAreaList = new ArrayList<>();//县列表
     private DBHelper mHelper;
     private PopupWindow mPopupWindow;
-    private RadioGroup rg_high_blood;
+    private RadioGroup rg_is_high_blood;
     private RadioGroup rg_is_jyy;
 
+    private boolean isHighBlood;
+    private boolean isUsedJyy;
     private boolean highBloodSelected;
-    private boolean highJyySelected;
+    private boolean jyySelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -434,7 +436,7 @@ public class QuestionListActivity extends BaseActivity2
         mSBP.setText(sbp);
         mDBP.setText(dbp);
         //是否高血压患者
-        rg_high_blood = (RadioGroup) findViewById(R.id.rg_high_blood);
+        rg_is_high_blood = (RadioGroup) findViewById(R.id.rg_is_high_blood);
         mHighBloodGroup = (RadioGroup) findViewById(R.id.high_blood_group);
         setHighBlood(false);
         //是否服用降压药
@@ -449,16 +451,17 @@ public class QuestionListActivity extends BaseActivity2
         checkE = (CheckBox) findViewById(R.id.checkE);
         checkF = (CheckBox) findViewById(R.id.checkF);
         checkG = (CheckBox) findViewById(R.id.checkG);
-        rg_high_blood.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg_is_high_blood.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.rb_blood1) {
-                    highBloodSelected = true;
+                    isHighBlood = true;
                     setHighBlood(true);
                 } else {
-                    highBloodSelected = false;
+                    isHighBlood = false;
                     setHighBlood(false);
                 }
+                highBloodSelected = true;
             }
         });
         rg_is_jyy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -470,6 +473,7 @@ public class QuestionListActivity extends BaseActivity2
                 } else {
                     setJyyType(false);
                 }
+                jyySelected = true;
             }
         });
     }
@@ -549,13 +553,14 @@ public class QuestionListActivity extends BaseActivity2
                     DialogUtils.showAlertDialog(QuestionListActivity.this, "提示", "得分与适用盐度有出入建议复核问卷数据");
                     return;
                 }
-                if (mNumber < 9) {//没有超标
+                if (mNumber < 9) {
+                    //没有超标
                     result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
                         mNumber + "", "低盐（食盐摄入量合适）- 处于正常范围 - 保持清淡饮食，合理膳食。");
-                } else if (9 <= mNumber && mNumber < 13) {
+                } else if (9 <= mNumber && mNumber <= 13) {
                     result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
                         mNumber + "", "正常（食盐摄入量合适）- 处于正常范围 - 请保持清淡饮食，建议咨询门诊医生是否需要调整降压治疗。");
-                } else if (14 <= mNumber && mNumber < 19) {
+                } else if (14 <= mNumber && mNumber <= 19) {
                     result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
                         mNumber + "", "中盐（食盐摄入量偏高）- 超出正常范围，偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压。");
                 } else if (20 <= mNumber) {
@@ -566,7 +571,6 @@ public class QuestionListActivity extends BaseActivity2
                     return;
                 }
                 try {
-
                     Question saveQuestion = new Question();
                     saveQuestion.setId(0);
                     saveQuestion.setAge(Integer.valueOf(age));
@@ -580,7 +584,7 @@ public class QuestionListActivity extends BaseActivity2
                     saveQuestion.setOrganizationId(mUser.getOrganizationId());
                     saveQuestion.setSystolicPressure(Integer.valueOf(sbp));
                     saveQuestion.setDiastolicPressure(Integer.valueOf(dbp));
-                    if (highBloodSelected) {
+                    if (isHighBlood) {
                         if ((mHighBloodGroup.getCheckedRadioButtonId() % 2) == 1) {
                             saveQuestion.setPatientType(2);
                         } else {
@@ -676,28 +680,45 @@ public class QuestionListActivity extends BaseActivity2
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(phone) || StringUtils.isEmpty(age) || StringUtils.isEmpty(
             sex) || StringUtils.isEmpty(height) || StringUtils.isEmpty(weight)) {
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "基本信息不完整");
+            mScrollerView.scrollTo(0, 0);
             return false;
         }
         if (!CommonUtils.isMobile(phone)) {
+            mScrollerView.scrollTo(0, 0);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的手机号");
+            return false;
+        }
+
+        if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {
+            mScrollerView.scrollTo(0, 0);
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的年龄");
+            return false;
+        }
+        if (height.substring(0, 1).equals("0") || Integer.parseInt(height) < 10 || Integer.parseInt(height) > 300) {
+            mScrollerView.scrollTo(0, 0);
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的身高");
+            return false;
+        }
+        if (weight.substring(0, 1).equals("0") || Integer.parseInt(weight) < 1 || Integer.parseInt(weight) > 500) {
+            mScrollerView.scrollTo(0, 0);
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的体重");
+            return false;
+        }
+
+        if (!highBloodSelected) {
+            scrollTarget(rg_is_high_blood);
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请选择是否高血压患者");
+            return false;
+        }
+        if (!jyySelected) {
+            scrollTarget(rg_is_jyy);
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请选择目前是否服用降压药");
             return false;
         }
         if (StringUtils.isEmpty(m11Content)) {
             m11Hint.setVisibility(View.VISIBLE);
             scrollTarget(m11Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
-            return false;
-        }
-        if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的年龄");
-            return false;
-        }
-        if (height.substring(0, 1).equals("0") || Integer.parseInt(height) < 10 || Integer.parseInt(height) > 300) {
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的身高");
-            return false;
-        }
-        if (weight.substring(0, 1).equals("0") || Integer.parseInt(weight) < 1 || Integer.parseInt(weight) > 500) {
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的体重");
             return false;
         }
         if (StringUtils.isEmpty(m12Content)) {
@@ -1004,7 +1025,7 @@ public class QuestionListActivity extends BaseActivity2
                 }
                 LogUtils.d(TAG, "" + location[1]);
                 LogUtils.d(TAG, "" + viewHeight);
-                int offset = viewHeight + location[1] - DisplayUtils.getScreenHeight();
+                int offset = viewHeight + location[1] - DisplayUtils.getScreenHeight() - DisplayUtils.dp2px(100);
                 if (offset < 0) {
                     offset = 0;
                 }

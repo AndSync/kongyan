@@ -86,6 +86,7 @@
 
                     <EditText
                         android:id="@+id/address"
+                        android:focusable="false"
                         style="@style/baseInfo_edit_style"
                         android:background="@drawable/baseinfo_not_edit_shape"
                         android:clickable="false"
@@ -102,6 +103,7 @@
 
                     <EditText
                         android:id="@+id/doctor"
+                        android:focusable="false"
                         style="@style/baseInfo_edit_style"
                         android:background="@drawable/baseinfo_not_edit_shape"
                         android:clickable="false"
@@ -319,7 +321,7 @@
                     android:textSize="14sp"/>
 
                 <RadioGroup
-                    android:id="@+id/rg_high_blood"
+                    android:id="@+id/rg_is_high_blood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

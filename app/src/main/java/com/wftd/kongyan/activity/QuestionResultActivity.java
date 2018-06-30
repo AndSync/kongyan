@@ -60,6 +60,7 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
         tv_tips2 = (TextView) findViewById(R.id.tv_tips2);
         tv_tips3 = (TextView) findViewById(R.id.tv_tips3);
         mHealthTip = (LinearLayout) findViewById(R.id.question_health_tip);
+        findViewById(R.id.personal_back).setOnClickListener(this);
         mPrint.setOnClickListener(this);
         mBack.setOnClickListener(this);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -109,6 +110,7 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
                 //打印
                 break;
             case R.id.result_back:
+            case R.id.personal_back:
                 finish();
                 break;
             default:
