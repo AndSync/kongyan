@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import com.ihealth.communication.manager.iHealthDevicesManager;
-import com.wftd.kongyan.entity.LoginResult;
 import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.AidlUtil;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class App extends Application {
     private ArrayList<Activity> mList;
     private static Context context;
 
-    public static People loginUser=new People();
+    public static People loginUser = new People();
 
     @Override
     public void onCreate() {

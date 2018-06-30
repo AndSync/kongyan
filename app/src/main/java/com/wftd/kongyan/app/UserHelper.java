@@ -77,7 +77,7 @@ public class UserHelper {
      * 清空用户信息
      */
     public static void clearUserInfo() {
-        App.loginUser=null;
+        App.loginUser = null;
         //FileHelper.saveObject2File(new LoginResult(), KEY_USER_INFO);
     }
 }

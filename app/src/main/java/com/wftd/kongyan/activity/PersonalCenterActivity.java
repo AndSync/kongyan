@@ -70,7 +70,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
         layout_version.setOnClickListener(this);
         layout_message.setOnClickListener(this);
         people_name.setText(user.getName());
-        people_job.setText(user.getPost());
+        people_job.setText(user.getPostStr());
         hosp_name.setText(user.getOrgnizationName());
         equipment.setText(user.getPhoneNumber());
         tv_version.setText("版本" + AppUtils.getVersionName(this));

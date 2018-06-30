@@ -85,8 +85,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     HttpUtils.LoginGet(PhoneNumber, pwd, (LoginCallback) LoginActivity.this);
                 } else {//没有网络的情况下
                     try {
-                        List<People> list=db.findAll(People.class);
-                        LogUtils.d(TAG,list.toString());
+                        List<People> list = db.findAll(People.class);
+                        LogUtils.d(TAG, list.toString());
                         People user = db.selector(People.class)
                             .where("phoneNumber", "=", PhoneNumber)
                             .and("passwordText", "=", pwd)
@@ -95,7 +95,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             ToastUtils.show(this, "用户名或密码错误");
                             return;
                         }
-                        App.loginUser=user;
+                        App.loginUser = user;
                         Intent homePagdeIntent = new Intent(LoginActivity.this, HomePageActivity.class);
                         startActivity(homePagdeIntent);
                         finish();

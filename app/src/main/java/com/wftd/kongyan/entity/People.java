@@ -29,7 +29,7 @@ public class People implements Serializable {
     @Column(name = "phoneNumber") //手机号
     private String phoneNumber;
     @Column(name = "post")
-    private int post;
+    private String post;
     @Column(name = "orgnizationName")
     private String orgnizationName;
 
@@ -42,16 +42,20 @@ public class People implements Serializable {
     }
 
     public String getPost() {
-        if (post == 1) {
+        return post;
+    }
+
+    public String getPostStr() {
+        if (TextUtils.equals(post, "1")) {
             return "医生";
         }
-        if (post == 2) {
+        if (TextUtils.equals(post, "2")) {
             return "护士";
         }
         return "暂无数据";
     }
 
-    public void setPost(int post) {
+    public void setPost(String post) {
         this.post = post;
     }
 
