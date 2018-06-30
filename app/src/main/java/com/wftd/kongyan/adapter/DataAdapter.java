@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
-import com.wftd.kongyan.activity.QuestionnaireResultActivity;
+import com.wftd.kongyan.activity.QuestionResultActivity;
 import com.wftd.kongyan.base.BaseAdapter;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
@@ -98,7 +98,7 @@ public class DataAdapter extends BaseAdapter<Question> {
                     result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士", question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%", mNumber + "", "高盐（食盐摄入量偏高）- 超出正常范围偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，您的血压水平是否合适，以获得更恰当的治疗");
 
                 }
-                Intent intent = new Intent(mContext, QuestionnaireResultActivity.class);
+                Intent intent = new Intent(mContext, QuestionResultActivity.class);
                 intent.putExtra("result", result1);
                 mContext.startActivity(intent);
 

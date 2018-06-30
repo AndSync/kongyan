@@ -76,7 +76,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 startActivity(intent);
                 break;
             case R.id.tv_wenjuan:
-                Intent intent2 = new Intent(this, ScreenActivity.class);
+                Intent intent2 = new Intent(this, QuestionIndexActivity.class);
                 intent2.putExtra("user", user);
                 startActivity(intent2);
                 break;

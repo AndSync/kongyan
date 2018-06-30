@@ -23,9 +23,9 @@ import com.ihealth.communication.manager.iHealthDevicesManager;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.adapter.DoctorListAdapter;
 import com.wftd.kongyan.base.BaseActivity;
+import com.wftd.kongyan.callback.DoctorCallback;
 import com.wftd.kongyan.entity.Doctor;
 import com.wftd.kongyan.entity.User;
-import com.wftd.kongyan.callback.DoctorCallback;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import com.wftd.kongyan.util.StringUtils;
@@ -41,7 +41,7 @@ import static com.wftd.kongyan.R.id.radioGroup;
 /**
  * 主页
  */
-public class ScreenActivity extends BaseActivity
+public class QuestionIndexActivity extends BaseActivity
     implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, DoctorCallback {
     private ImageView mGoPersonal;//个人中心
     private ImageView mNextStep;//填写问卷
@@ -72,7 +72,7 @@ public class ScreenActivity extends BaseActivity
     private static final int HANDLER_ERROR = 103;
     private static final int DORTOR = 104;
 
-    private String TAG="iHealthMessage";
+    private String TAG = "iHealthMessage";
 
     private Handler mHandler = new Handler() {
         @SuppressLint("WrongConstant")
@@ -101,7 +101,7 @@ public class ScreenActivity extends BaseActivity
 
                 case HANDLER_ERROR:
                     mAuto.setText("自动获取");
-                    Toast.makeText(ScreenActivity.this, "获取失败请确保正确佩戴设备", 1).show();
+                    Toast.makeText(QuestionIndexActivity.this, "获取失败请确保正确佩戴设备", 1).show();
                     break;
                 case DORTOR:
                     //绑定 Adapter到控件
@@ -173,8 +173,6 @@ public class ScreenActivity extends BaseActivity
             }
         });
     }
-
-
 
     private int i = 0;
     private iHealthDevicesCallback miHealthDevicesCallback = new iHealthDevicesCallback() {
@@ -361,18 +359,18 @@ public class ScreenActivity extends BaseActivity
                     || sbp.substring(0, 1).equals("0")
                     || StringUtils.isEmpty(dbp)
                     || dbp.substring(0, 1).equals("0")) {
-                    DialogUtils.showAlertDialog(this,"提交失败","请输入正确的血压值");
+                    DialogUtils.showAlertDialog(this, "提交失败", "请输入正确的血压值");
                     return;
                 }
                 int checkId = mGroup.getCheckedRadioButtonId();
                 //未选择口服盐编号
                 if (checkId == -1) {
                     mHint.setVisibility(View.VISIBLE);
-                    String alertText="所有内容均为必填项，请填写完整。当前 <font color=\"#FE0000\">口服盐咀嚼片</font>未选";
+                    String alertText = "所有内容均为必填项，请填写完整。当前 <font color=\"#FE0000\">口服盐咀嚼片</font>未选";
                     DialogUtils.showAlertDialog(this, "提交失败", alertText);
                     return;
                 }
-                Intent nextIntent = new Intent(this, QuestionnaireActivity.class);
+                Intent nextIntent = new Intent(this, QuestionListActivity.class);
 
                 nextIntent.putExtra("orname", TextUtils.isEmpty(doctorName) ? "暂无数据" : doctorName);
                 nextIntent.putExtra("user", user);
@@ -389,7 +387,8 @@ public class ScreenActivity extends BaseActivity
                     index = 1;
                 }
                 nextIntent.putExtra("index", index);
-                startActivity(nextIntent);
+                //startActivity(nextIntent);
+                startActivityForResult(nextIntent, 0);
                 break;
             case R.id.home_auto_get:
                 if ("自动获取".equals(mAuto.getText().toString())) {
@@ -404,7 +403,7 @@ public class ScreenActivity extends BaseActivity
                     boolean req = iHealthDevicesManager.getInstance()
                         .connectDevice(userName, mMac, iHealthDevicesManager.TYPE_BP3L);
                     if (!req) {
-                        Toast.makeText(ScreenActivity.this,
+                        Toast.makeText(QuestionIndexActivity.this,
                             "Haven’t permission to connect this device or the mac is not valid", Toast.LENGTH_LONG)
                             .show();
                     }
@@ -443,5 +442,24 @@ public class ScreenActivity extends BaseActivity
     @Override
     public boolean fail() {
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            clearInput();
+        }
+    }
+
+    private void clearInput() {
+        mSBP.setText("");
+        mDBP.setText("");
+        for (int i = 0; i < mGroup.getChildCount(); i++) {
+            View view = mGroup.getChildAt(i);
+            if (view instanceof RadioButton) {
+                ((RadioButton) view).setChecked(false);
+            }
+        }
     }
 }

@@ -32,7 +32,7 @@ import java.util.Date;
 /**
  * 调查结果
  */
-public class QuestionnaireResultActivity extends BaseActivity implements View.OnClickListener {
+public class QuestionResultActivity extends BaseActivity implements View.OnClickListener {
     private final static String GREETING = ",您好";
     private String call = "先生";
     private TextView mName;
@@ -175,13 +175,13 @@ public class QuestionnaireResultActivity extends BaseActivity implements View.On
                 }
                 mPrint.setVisibility(View.VISIBLE);
                 mBack.setVisibility(View.VISIBLE);
-
-                QuestionnaireResultActivity.this.startActivity(
-                    new Intent(QuestionnaireResultActivity.this, ScreenActivity.class));
+                finishActivity();
                 //打印
                 break;
             case R.id.result_back:
                 finish();
+                break;
+            default:
                 break;
         }
     }
@@ -201,9 +201,8 @@ public class QuestionnaireResultActivity extends BaseActivity implements View.On
         for (int i = 0; i < scrollView.getChildCount(); i++) {
             h += scrollView.getChildAt(i).getHeight();
         }
-        bitmap =
-            Bitmap.createBitmap(scrollView.getWidth() - ConvertUtils.dip2px(QuestionnaireResultActivity.this, 40), h,
-                Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(scrollView.getWidth() - ConvertUtils.dip2px(QuestionResultActivity.this, 40), h,
+            Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         scrollView.draw(canvas);
         return bitmap;

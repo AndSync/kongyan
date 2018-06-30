@@ -25,6 +25,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
+import com.wftd.kongyan.app.Constant;
 import com.wftd.kongyan.base.BaseActivity2;
 import com.wftd.kongyan.callback.QuestionCallback;
 import com.wftd.kongyan.db.DBHelper;
@@ -48,7 +49,7 @@ import org.xutils.ex.DbException;
 /**
  * 调查问卷页
  */
-public class QuestionnaireActivity extends BaseActivity2
+public class QuestionListActivity extends BaseActivity2
     implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener,
     QuestionCallback {
     private EditText mBaseAddress;//省份
@@ -544,7 +545,7 @@ public class QuestionnaireActivity extends BaseActivity2
                 }
 
                 if (!isNext) {
-                    DialogUtils.showAlertDialog(QuestionnaireActivity.this, "提示", "得分与适用盐度有出入建议复核问卷数据");
+                    DialogUtils.showAlertDialog(QuestionListActivity.this, "提示", "得分与适用盐度有出入建议复核问卷数据");
                     return;
                 }
                 if (mNumber < 9) {//没有超标
@@ -616,10 +617,9 @@ public class QuestionnaireActivity extends BaseActivity2
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(QuestionnaireActivity.this, QuestionnaireResultActivity.class);
+                Intent intent = new Intent(context, QuestionResultActivity.class);
                 intent.putExtra("result", result1);
-                startActivity(intent);
-
+                startActivityForResult(intent, Constant.FINISH_ACTIVITY);
                 break;
             //返回
             case R.id.question_back:
@@ -653,6 +653,8 @@ public class QuestionnaireActivity extends BaseActivity2
             case R.id.input_dbp:
                 questFocus(mDBP);
                 break;
+            default:
+                break;
         }
     }
 
@@ -669,88 +671,88 @@ public class QuestionnaireActivity extends BaseActivity2
         weight = mBaseWeight.getText().toString();
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(phone) || StringUtils.isEmpty(age) || StringUtils.isEmpty(
             sex) || StringUtils.isEmpty(height) || StringUtils.isEmpty(weight)) {
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","基本信息不完整");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "基本信息不完整");
             return false;
         }
         if (!CommonUtils.isMobile(phone)) {
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","请输入正确的手机号");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的手机号");
             return false;
         }
         if (StringUtils.isEmpty(m11Content)) {
             m11Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","请输入正确的年龄");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的年龄");
             return false;
         }
         if (height.substring(0, 1).equals("0") || Integer.parseInt(height) < 10 || Integer.parseInt(height) > 300) {
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","请输入正确的身高");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的身高");
             return false;
         }
         if (weight.substring(0, 1).equals("0") || Integer.parseInt(weight) < 1 || Integer.parseInt(weight) > 500) {
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","请输入正确的体重");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的体重");
             return false;
         }
         if (StringUtils.isEmpty(m12Content)) {
             m12Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m13Content)) {
             m13Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m14Content)) {
             m14Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m15Content)) {
             m15Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m16Content)) {
             m16Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m21Content)) {
             m21Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m22Content)) {
             m22Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m23Content)) {
             m23Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m24Content)) {
             m24Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m25Content)) {
             m25Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m26Content)) {
             m26Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m27Content)) {
             m27Hint.setVisibility(View.VISIBLE);
-            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
+            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         return true;
