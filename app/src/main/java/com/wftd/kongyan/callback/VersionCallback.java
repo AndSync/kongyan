@@ -1,6 +1,6 @@
 package com.wftd.kongyan.callback;
 
-import com.wftd.kongyan.bean.Version;
+import com.wftd.kongyan.entity.Version;
 
 /**
  */

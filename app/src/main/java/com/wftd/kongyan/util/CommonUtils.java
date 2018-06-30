@@ -1,4 +1,4 @@
-package com.wftd.kongyan.utils;
+package com.wftd.kongyan.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

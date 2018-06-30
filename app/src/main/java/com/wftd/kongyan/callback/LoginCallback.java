@@ -1,6 +1,6 @@
 package com.wftd.kongyan.callback;
 
-import com.wftd.kongyan.bean.User;
+import com.wftd.kongyan.entity.User;
 
 /**
  * 登录回调

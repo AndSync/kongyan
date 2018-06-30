@@ -1,4 +1,4 @@
-package com.wftd.kongyan.activity;
+package com.wftd.kongyan.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,9 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wftd.kongyan.R;
+import com.wftd.kongyan.activity.QuestionnaireResultActivity;
 import com.wftd.kongyan.base.BaseAdapter;
-import com.wftd.kongyan.bean.Question;
-import com.wftd.kongyan.bean.Result;
+import com.wftd.kongyan.entity.Question;
+import com.wftd.kongyan.entity.Result;
 
 import java.text.DecimalFormat;
 import java.util.List;

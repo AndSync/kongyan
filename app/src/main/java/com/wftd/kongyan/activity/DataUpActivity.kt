@@ -7,11 +7,11 @@ import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
+import com.wftd.kongyan.adapter.DataAdapter
 import com.wftd.kongyan.base.BaseActivity
-import com.wftd.kongyan.bean.Question
+import com.wftd.kongyan.entity.Question
 import com.wftd.kongyan.callback.QuestionCallback
-import com.wftd.kongyan.utils.HttpUtils
-import kotlinx.android.synthetic.main.activity_data_upfile.*
+import com.wftd.kongyan.util.HttpUtils
 import org.xutils.common.util.KeyValue
 import org.xutils.db.sqlite.WhereBuilder
 import java.util.ArrayList

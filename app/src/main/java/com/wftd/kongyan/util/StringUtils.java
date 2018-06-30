@@ -1,4 +1,4 @@
-package com.wftd.kongyan.utils;
+package com.wftd.kongyan.util;
 
 /**
  * 字符串判断

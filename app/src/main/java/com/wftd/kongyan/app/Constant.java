@@ -1,9 +1,9 @@
-package com.wftd.kongyan.constant;
+package com.wftd.kongyan.app;
 
 /**
  * 描述请求回调接口
  */
-public class CallbackId {
+public class Constant {
     /**
      * 登录回调
      */

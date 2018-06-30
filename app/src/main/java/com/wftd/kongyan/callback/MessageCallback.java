@@ -1,6 +1,6 @@
 package com.wftd.kongyan.callback;
 
-import com.wftd.kongyan.bean.Message;
+import com.wftd.kongyan.entity.Message;
 
 import java.util.List;
 

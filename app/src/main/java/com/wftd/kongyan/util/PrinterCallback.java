@@ -1,4 +1,4 @@
-package com.wftd.kongyan.utils;
+package com.wftd.kongyan.util;
 
 /**
  * Created by Administrator on 2017/6/12.

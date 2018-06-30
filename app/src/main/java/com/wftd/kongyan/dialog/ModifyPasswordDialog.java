@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wftd.kongyan.R;
-import com.wftd.kongyan.utils.CommonUtils;
-import com.wftd.kongyan.utils.ToastUtils;
+import com.wftd.kongyan.util.CommonUtils;
+import com.wftd.kongyan.util.ToastUtils;
 import com.wftd.kongyan.view.PowerfulEditText;
 
 /**

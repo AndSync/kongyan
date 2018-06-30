@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.base.BaseAdapter;
-import com.wftd.kongyan.bean.Doctor;
-import com.wftd.kongyan.utils.ViewHolder;
+import com.wftd.kongyan.entity.Doctor;
+import com.wftd.kongyan.util.ViewHolder;
 import java.util.List;
 
 /**

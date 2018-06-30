@@ -1,4 +1,4 @@
-package com.wftd.kongyan.bean;
+package com.wftd.kongyan.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;

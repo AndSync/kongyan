@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import com.ihealth.communication.manager.iHealthDevicesManager;
-import com.wftd.kongyan.utils.AidlUtil;
+import com.wftd.kongyan.util.AidlUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

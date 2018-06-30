@@ -1,4 +1,4 @@
-package com.wftd.kongyan.utils;
+package com.wftd.kongyan.util;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;

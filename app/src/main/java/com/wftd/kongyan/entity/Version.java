@@ -1,7 +1,7 @@
-package com.wftd.kongyan.bean;
+package com.wftd.kongyan.entity;
 
 import android.content.Context;
-import com.wftd.kongyan.utils.AppUtils;
+import com.wftd.kongyan.util.AppUtils;
 
 /**
  * @author AndSync

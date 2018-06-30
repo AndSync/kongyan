@@ -1,4 +1,4 @@
-package com.wftd.kongyan.utils;
+package com.wftd.kongyan.util;
 
 import android.util.Log;
 import com.wftd.kongyan.app.ServerConfig;

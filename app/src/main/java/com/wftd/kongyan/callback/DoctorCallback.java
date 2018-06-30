@@ -1,6 +1,6 @@
 package com.wftd.kongyan.callback;
 
-import com.wftd.kongyan.bean.Doctor;
+import com.wftd.kongyan.entity.Doctor;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.wftd.kongyan.activity;
+package com.wftd.kongyan.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.base.BaseAdapter;
-import com.wftd.kongyan.bean.Message;
-import com.wftd.kongyan.bean.Question;
+import com.wftd.kongyan.entity.Message;
+import com.wftd.kongyan.entity.Question;
 
 import java.text.DecimalFormat;
 import java.util.List;

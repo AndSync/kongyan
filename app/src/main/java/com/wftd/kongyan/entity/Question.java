@@ -1,4 +1,4 @@
-package com.wftd.kongyan.bean;
+package com.wftd.kongyan.entity;
 
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;

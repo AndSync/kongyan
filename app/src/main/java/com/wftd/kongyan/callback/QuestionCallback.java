@@ -1,6 +1,6 @@
 package com.wftd.kongyan.callback;
 
-import com.wftd.kongyan.bean.Question;
+import com.wftd.kongyan.entity.Question;
 
 /**
  */

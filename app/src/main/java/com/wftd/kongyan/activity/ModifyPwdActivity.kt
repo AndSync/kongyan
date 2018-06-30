@@ -7,12 +7,11 @@ import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
 import com.wftd.kongyan.base.BaseActivity
-import com.wftd.kongyan.bean.User
+import com.wftd.kongyan.entity.User
 import com.wftd.kongyan.callback.ModifyCallback
-import com.wftd.kongyan.utils.CommonUtils
-import com.wftd.kongyan.utils.HttpUtils
-import com.wftd.kongyan.utils.PhoneUtils
-import kotlinx.android.synthetic.main.activity_modify.*
+import com.wftd.kongyan.util.CommonUtils
+import com.wftd.kongyan.util.HttpUtils
+import com.wftd.kongyan.util.PhoneUtils
 
 
 /**

@@ -1,4 +1,4 @@
-package com.wftd.kongyan.bean;
+package com.wftd.kongyan.entity;
 
 /**
  * Created by liwei on 2018/6/19.

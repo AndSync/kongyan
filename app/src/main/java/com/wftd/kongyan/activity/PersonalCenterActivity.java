@@ -10,11 +10,11 @@ import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.app.App;
 import com.wftd.kongyan.base.BaseActivity;
-import com.wftd.kongyan.bean.User;
-import com.wftd.kongyan.bean.Version;
+import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Version;
 import com.wftd.kongyan.callback.VersionCallback;
-import com.wftd.kongyan.utils.AppUtils;
-import com.wftd.kongyan.utils.HttpUtils;
+import com.wftd.kongyan.util.AppUtils;
+import com.wftd.kongyan.util.HttpUtils;
 
 public class PersonalCenterActivity extends BaseActivity implements View.OnClickListener {
     private ImageView mBack;

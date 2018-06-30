@@ -5,11 +5,12 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
+import com.wftd.kongyan.adapter.MessageAdapter
 import com.wftd.kongyan.base.BaseActivity
-import com.wftd.kongyan.bean.Message
-import com.wftd.kongyan.bean.User
+import com.wftd.kongyan.entity.Message
+import com.wftd.kongyan.entity.User
 import com.wftd.kongyan.callback.MessageCallback
-import com.wftd.kongyan.utils.HttpUtils
+import com.wftd.kongyan.util.HttpUtils
 import kotlinx.android.synthetic.main.activity_message.mylistview
 import kotlinx.android.synthetic.main.activity_modify.back
 

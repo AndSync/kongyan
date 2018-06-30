@@ -1,4 +1,4 @@
-package com.wftd.kongyan.bean;
+package com.wftd.kongyan.entity;
 
 import java.io.Serializable;
 
