@@ -7,10 +7,6 @@ import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
-import com.wftd.kongyan.R.id.all_data
-import com.wftd.kongyan.R.id.data_number
-import com.wftd.kongyan.R.id.mlitview
-import com.wftd.kongyan.R.id.not_up
 import com.wftd.kongyan.adapter.DataAdapter
 import com.wftd.kongyan.base.BaseActivity
 import com.wftd.kongyan.callback.QuestionCallback
@@ -116,6 +112,11 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
 
             }
         }
+        if (tempSize > 0) {
+            all_data.visibility = View.VISIBLE
+        } else {
+            all_data.visibility = View.GONE
+        }
 
     }
 
@@ -131,7 +132,6 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
                 not_up.setTextColor(Color.GRAY)
                 all.background = this.getDrawable(R.drawable.shape_data_all_select)
                 all.setTextColor(Color.WHITE)
-                all_data.visibility = View.GONE
                 data_number.setText("共有数据" + size)
                 quests = null;
                 quests = db.findAll(Question::class.java)
@@ -140,13 +140,28 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
                     (mlitview.adapter as DataAdapter).addItem(quests)
                     (mlitview.adapter as DataAdapter).notifyDataSetChanged()
                 }
+                var iterator = quests?.iterator()
+                tempSize = 0
+                if (iterator != null) {
+                    while (iterator?.hasNext()!!) {
+                        var question = iterator.next()
+                        if (question.isUpdate == false) {
+                            tempSize++
+                        }
+
+                    }
+                }
+                if (tempSize > 0) {
+                    all_data.visibility = View.VISIBLE
+                } else {
+                    all_data.visibility = View.GONE
+                }
             }
             R.id.not_up -> {
                 all.background = this.getDrawable(R.drawable.shape_data_all_default)
                 all.setTextColor(Color.GRAY)
                 not_up.background = this.getDrawable(R.drawable.shape_data_part_select)
                 not_up.setTextColor(Color.WHITE)
-                all_data.visibility = View.VISIBLE
 
                 quests = db.findAll(Question::class.java)
                 var iterator = quests?.iterator()
@@ -161,6 +176,11 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
                         }
 
                     }
+                }
+                if (tempSize > 0) {
+                    all_data.visibility = View.VISIBLE
+                } else {
+                    all_data.visibility = View.GONE
                 }
 
                 data_number.setText("未上传数据" + tempSize)
