@@ -1,0 +1,69 @@
+package com.wftd.kongyan;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import com.wftd.kongyan.activity.LoginActivity;
+import com.wftd.kongyan.base.BaseActivity;
+import java.util.Timer;
+import java.util.TimerTask;
+
+/**
+ * 启动页面
+ *
+ * @author AndSync
+ * @date 2018/6/30
+ * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
+ */
+public class SplashActivity extends BaseActivity {
+    private TimerTask mTask;
+    private Timer mTimer;
+    private static final int MSG_TIME_END = 0x100;
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case MSG_TIME_END:
+                    startLogin();
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    private void startLogin() {
+        Intent login = new Intent(this, LoginActivity.class);
+        startActivity(login);
+        finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        startCountDown();
+    }
+
+    private void startCountDown() {
+        mTask = new TimerTask() {
+            @Override
+            public void run() {
+                mHandler.sendEmptyMessage(MSG_TIME_END);
+            }
+        };
+        mTimer = new Timer();
+        mTimer.schedule(mTask, 1500);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mTask.cancel();
+        mTask = null;
+        mTimer.cancel();
+        mTimer = null;
+        mHandler = null;
+        super.onDestroy();
+    }
+}

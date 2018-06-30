@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/green"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/green">
+
+                <ImageView
+                    android:id="@+id/home_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/back"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/survey"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/go_personal_center"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/head"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:paddingTop="18dp">
+                <!--步骤一-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/step1"
+                        style="@style/step_title_yellow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="STEP1. "/>
+
+                    <TextView
+                        style="@style/step_title"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/step1"
+                        android:text="测量血压"/>
+
+
+                    <Button
+                        android:id="@+id/home_auto_get"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/baseinfo_cer_edit_shape"
+                        android:gravity="center"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:text="@string/auto_get"
+                        android:textColor="@color/green"/>
+
+                </RelativeLayout>
+                <!--收缩压舒张压-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_corner_line_gray"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/sbp"/>
+
+                        <EditText
+                            android:id="@+id/home_input_sbp"
+                            style="@style/sbp_and_dbp_style"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="100dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/mmhg"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/line_DDDDDD"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/dbp"/>
+
+                        <EditText
+                            android:id="@+id/home_input_dbp"
+                            style="@style/sbp_and_dbp_style"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="100dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/mmhg"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/kfy_hint"
+                        style="@style/selection_hint"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/kfy_hint"/>
+
+                    <TextView
+                        android:id="@+id/step2"
+                        style="@style/step_title_yellow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STEP2. "/>
+
+                    <TextView
+                        style="@style/step_title"
+                        android:layout_toRightOf="@id/step2"
+                        android:text="口服盐咀嚼片"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_white_corner">
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/first"
+                            style="@style/base_radioButton_style"
+                            android:text="@string/kfy_one"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@color/line_DDDDDD"/>
+
+                        <RadioButton
+                            android:id="@+id/second"
+                            style="@style/base_radioButton_style"
+                            android:text="@string/kfy_two"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@color/line_DDDDDD"/>
+
+                        <RadioButton
+                            android:id="@+id/third"
+                            style="@style/base_radioButton_style"
+                            android:text="@string/kfy_three"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@color/line_DDDDDD"/>
+
+                        <RadioButton
+                            android:id="@+id/fourth"
+                            style="@style/base_radioButton_style"
+                            android:text="@string/kfy_four"/>
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/shape_white_corner"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="推荐医生:"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                    <Spinner
+                        android:id="@+id/sp_doctor"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:src="@mipmap/ic_down_open"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
+
+                <TextView
+                    android:id="@+id/step3"
+                    style="@style/step_title_yellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="STEP3. "/>
+
+                <TextView
+                    style="@style/step_title"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/step3"
+                    android:text="填写问卷"/>
+
+                <ImageView
+                    android:id="@+id/next_step"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/next_step"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

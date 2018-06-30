@@ -1,0 +1,84 @@
+package com.wftd.kongyan.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.wftd.kongyan.R;
+import com.wftd.kongyan.base.BaseActivity;
+import com.wftd.kongyan.bean.User;
+import com.wftd.kongyan.bean.Version;
+import com.wftd.kongyan.callback.VersionCallback;
+import com.wftd.kongyan.utils.HttpUtils;
+
+/**
+ * @author AndSync
+ * @date 2018/6/28
+ * Copyright © 2014-2018 AndSync All rights reserved.
+ */
+public class HomePageActivity extends BaseActivity implements View.OnClickListener {
+
+    private ImageView iv_people;
+    private TextView iv_wenjuan;
+    private TextView iv_shuju;
+    User user;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        user = (User) getIntent().getSerializableExtra("user");
+        setContentView(R.layout.activity_home);
+        iv_people = (ImageView) findViewById(R.id.iv_people);
+        iv_wenjuan = (TextView) findViewById(R.id.tv_wenjuan);
+        iv_shuju = (TextView) findViewById(R.id.tv_shuju);
+        iv_people.setOnClickListener(this);
+        iv_wenjuan.setOnClickListener(this);
+        iv_shuju.setOnClickListener(this);
+        HttpUtils.appUpdate(new VersionCallback() {
+            @Override
+            public boolean success(final Version version) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (version.hasNewVersion(HomePageActivity.this)) {
+                            findViewById(R.id.tv_new).setVisibility(View.VISIBLE);
+                        } else {
+                            findViewById(R.id.tv_new).setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+                return false;
+            }
+
+            @Override
+            public boolean fail() {
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_people:
+                Intent intent = new Intent(this, PersonalCenterActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                break;
+            case R.id.tv_wenjuan:
+                Intent intent2 = new Intent(this, ScreenActivity.class);
+                intent2.putExtra("user", user);
+                startActivity(intent2);
+                break;
+            case R.id.tv_shuju:
+                Intent intent3 = new Intent(this, DataUpActivity.class);
+                intent3.putExtra("user", user);
+                startActivity(intent3);
+                break;
+            default:
+                break;
+        }
+    }
+}

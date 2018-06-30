@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/home_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_people"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/people"/>
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/home_logo"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="版本1.0"
+            android:textColor="#CCEAE8"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_new"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_version"
+            android:text="新"
+            android:textColor="#EF3453"
+            android:textSize="14sp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="178dp"
+        android:background="@color/transparent_white"
+        android:paddingLeft="56dp"
+        android:paddingRight="56dp">
+
+        <TextView
+            android:id="@+id/tv_wenjuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:drawableTop="@mipmap/wenjuan"
+            android:gravity="center_horizontal"
+            android:text="调查问卷"/>
+
+        <TextView
+            android:id="@+id/tv_shuju"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:drawableTop="@mipmap/shuju"
+            android:gravity="center_horizontal"
+            android:text="数据管理"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="65dp"
+        android:text="主办：中国医疗保健国际交流促进会高血压分会"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+
+</LinearLayout>

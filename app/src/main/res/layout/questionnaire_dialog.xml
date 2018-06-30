@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/green"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#178078">
+
+        <ImageView
+            android:id="@+id/personal_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="高盐筛查问卷"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <!--<android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--app:cardElevation="6dp"-->
+    <!--app:cardPreventCornerOverlap="true"-->
+    <!--app:cardUseCompatPadding="true">-->
+
+    <ScrollView
+        android:id="@+id/result_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <!--标题-->
+            <LinearLayout
+                android:id="@+id/result_title"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/result"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+            <!--结果-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/result_rect"
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="17dp">
+
+                <TextView
+                    android:id="@+id/result_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="张三（先生/女士）您好"
+                    android:textColor="@color/green"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/result_blood"
+                        style="@style/result_item_style"
+                        android:text="您的血压值为:"
+                        android:textStyle="bold"/>
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/result_blood"-->
+                    <!--style="@style/result_item_style"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:text="70-90" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/result_item_style"
+                        android:text="您目前日常食盐用量："/>
+
+                    <TextView
+                        android:id="@+id/result_salt"
+                        style="@style/result_item_style"
+                        android:layout_width="match_parent"
+                        android:text="88%"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/result_score"
+                        style="@style/result_item_style"
+                        android:text="您的综合得分为："
+                        android:textStyle="bold"/>
+
+                    <!--<TextView-->
+                    <!---->
+                    <!--style="@style/result_item_style"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:text="97" />-->
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- 小贴士-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/deng"
+                    android:drawablePadding="9dp"
+                    android:gravity="center_vertical"
+                    android:text="您的健康小贴士"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/question_health_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/result_rect"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/result_print"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/shape_print"
+            android:text="@string/print"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/result_back"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_back"
+            android:text="@string/back"
+            android:textColor="@color/text_black"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+    <!--</android.support.v7.widget.CardView>-->
+
+</LinearLayout>

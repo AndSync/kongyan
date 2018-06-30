@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "27.0.0"
+    defaultConfig {
+        applicationId "com.wftd.kongyan"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
+            resources.srcDirs = ['src/main/java', 'src/main/aidl']
+            aidl.srcDirs = ['src/main/aidl']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile files('libs/core-3.3.0.jar')
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okio:okio:1.7.0'
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+    compile files('libs/d2xx.jar')
+    compile files('libs/iHealthLibrary_2.4.3.jar')
+    compile files('libs/pl2303driver.jar')
+    compile files('libs/smartlinklib3.6.4_product.jar')
+    compile 'org.xutils:xutils:3.5.0'
+    compile 'com.gyf.barlibrary:barlibrary:2.3.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    apply plugin:'kotlin-android-extensions'
+
+}
+repositories {
+    mavenCentral()
+}
