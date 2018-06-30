@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import com.wftd.kongyan.activity.HomePageActivity;
 import com.wftd.kongyan.activity.LoginActivity;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,8 +36,14 @@ public class SplashActivity extends BaseActivity {
     };
 
     private void startLogin() {
-        Intent login = new Intent(this, LoginActivity.class);
-        startActivity(login);
+        if(UserHelper.isLogin()){
+            Intent intent = new Intent(this, HomePageActivity.class);
+            startActivity(intent);
+        }else {
+            Intent login = new Intent(this, LoginActivity.class);
+            startActivity(login);
+        }
+
         finish();
     }
 

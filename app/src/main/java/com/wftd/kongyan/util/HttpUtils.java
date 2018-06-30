@@ -4,6 +4,7 @@ import android.os.Looper;
 import com.ihealth.communication.base.statistical.gson.Gson;
 import com.ihealth.communication.base.statistical.gson.reflect.TypeToken;
 import com.wftd.kongyan.app.Constant;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.callback.BaseCallback;
 import com.wftd.kongyan.callback.DoctorCallback;
 import com.wftd.kongyan.callback.LoginCallback;
@@ -16,7 +17,7 @@ import com.wftd.kongyan.entity.Doctor;
 import com.wftd.kongyan.entity.LoginResult;
 import com.wftd.kongyan.entity.Message;
 import com.wftd.kongyan.entity.Question;
-import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Ser1UserInfo;
 import com.wftd.kongyan.entity.Version;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -94,7 +95,7 @@ public class HttpUtils {
                     case 0:
                         String data = jsonObject.getString("data");
 
-                        List<User> loginResultDTO = new Gson().fromJson(data, new TypeToken<List<User>>() {
+                        List<Ser1UserInfo> loginResultDTO = new Gson().fromJson(data, new TypeToken<List<Ser1UserInfo>>() {
                         }.getType());
                         callback.success(loginResultDTO);
                         break;
@@ -134,12 +135,12 @@ public class HttpUtils {
                     case 0:
                         String data = jsonObject.getString("data");
                         LoginResult loginResultDTO = new Gson().fromJson(data, LoginResult.class);
+                        UserHelper.setUserInfo(loginResultDTO);
                         callback.success(loginResultDTO.getPeople());
                         break;
                     case 1:
                         callback.fail();
                         break;
-
                     default:
                         callback.fail();
                         break;

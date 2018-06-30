@@ -25,12 +25,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.app.Constant;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity2;
 import com.wftd.kongyan.callback.QuestionCallback;
 import com.wftd.kongyan.db.DBHelper;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
-import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Ser1UserInfo;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.DisplayUtils;
@@ -70,7 +71,7 @@ public class QuestionListActivity extends BaseActivity2
     private EditText Edoctor, Eaddress;
 
     private String orname;
-    private User mUser;
+    private Ser1UserInfo mUser= UserHelper.getUserInfo();
 
     private static final String[] sexs = {
         "男", "女"
@@ -204,7 +205,6 @@ public class QuestionListActivity extends BaseActivity2
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_list);
         orname = (String) getIntent().getSerializableExtra("orname");
-        mUser = (User) getIntent().getSerializableExtra("user");
         init();
         initData();
     }

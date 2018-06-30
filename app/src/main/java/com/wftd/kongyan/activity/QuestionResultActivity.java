@@ -1,6 +1,5 @@
 package com.wftd.kongyan.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -35,7 +34,6 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
     private Button mBack;
     private LinearLayout mHealthTip;
     private ScrollView mScrollerView;
-    private static Context context;
     private TextView tv_tips1;
     private TextView tv_tips2;
     private TextView tv_tips3;

@@ -9,9 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.app.App;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.VersionCallback;
-import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Ser1UserInfo;
 import com.wftd.kongyan.entity.Version;
 import com.wftd.kongyan.util.AppUtils;
 import com.wftd.kongyan.util.HttpUtils;
@@ -23,7 +24,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
     private TextView mUserName;
     private ImageView todata;
     private ImageView message;
-    private User user;
+    private Ser1UserInfo user= UserHelper.getUserInfo();
 
     private TextView people_name, people_job, hosp_name, equipment;
     private ImageView iv_new_version;
@@ -43,8 +44,6 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
     }
 
     private void init() {
-        Intent userIntent = getIntent();
-        user = (User) userIntent.getSerializableExtra("user");
         mBack = (ImageView) findViewById(R.id.personal_back);
         mExit = (TextView) findViewById(R.id.personal_exit);
         mRealName = (TextView) findViewById(R.id.personal_real_name);
@@ -112,18 +111,17 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.personal_exit:
                 //退出
+                UserHelper.clearUserInfo();
                 App.getInstance().exit();
                 break;
             case R.id.modify:
             case R.id.layout_modify:
                 Intent intent = new Intent(PersonalCenterActivity.this, ModifyPwdActivity.class);
-                intent.putExtra("user", user);
                 startActivity(intent);
                 break;
             case R.id.message:
             case R.id.layout_message:
                 Intent msgintent = new Intent(PersonalCenterActivity.this, MsgActivity.class);
-                msgintent.putExtra("user", user);
                 startActivity(msgintent);
                 break;
             case R.id.layout_version:

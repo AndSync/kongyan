@@ -2,13 +2,15 @@ package com.wftd.kongyan.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.Serializable;
 
 /**
  * Created by liwei on 2018/6/17.
  */
 
-public class Doctor implements Parcelable {
+public class Doctor implements Parcelable,Serializable {
 
+    private static final long serialVersionUID = -714018897634924671L;
     /**
      * id : 60b4ca6b9ea64342aec4f42a987fc98e
      * organizationId : 010-001

@@ -6,9 +6,10 @@ import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
+import com.wftd.kongyan.app.UserHelper
 import com.wftd.kongyan.base.BaseActivity
 import com.wftd.kongyan.callback.ModifyCallback
-import com.wftd.kongyan.entity.User
+import com.wftd.kongyan.entity.Ser1UserInfo
 import com.wftd.kongyan.util.CommonUtils
 import com.wftd.kongyan.util.HttpUtils
 import com.wftd.kongyan.util.PhoneUtils
@@ -54,7 +55,7 @@ class ModifyPwdActivity : BaseActivity(), View.OnClickListener, ModifyCallback {
 //        Toast.makeText(this, "修改密码失败", Toast.LENGTH_SHORT).show()
     }
 
-    lateinit var user: User
+    lateinit var user: Ser1UserInfo
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.confirm -> {
@@ -86,7 +87,7 @@ class ModifyPwdActivity : BaseActivity(), View.OnClickListener, ModifyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modify)
-        user = intent.getSerializableExtra("user") as User
+        user = UserHelper.getUserInfo()
 
         confirm.setOnClickListener(this)
         back.setOnClickListener(this)

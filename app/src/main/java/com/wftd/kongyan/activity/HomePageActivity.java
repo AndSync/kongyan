@@ -8,9 +8,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.VersionCallback;
-import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Ser1UserInfo;
 import com.wftd.kongyan.entity.Version;
 import com.wftd.kongyan.util.HttpUtils;
 
@@ -24,7 +25,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private ImageView iv_people;
     private TextView iv_wenjuan;
     private TextView iv_shuju;
-    User user;
+    private Ser1UserInfo user= UserHelper.getUserInfo();
     private RelativeLayout layout_version;
 
     private Version versionInfo;
@@ -32,7 +33,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = (User) getIntent().getSerializableExtra("user");
         setContentView(R.layout.activity_home);
         layout_version = (RelativeLayout) findViewById(R.id.layout_version);
         iv_people = (ImageView) findViewById(R.id.iv_people);
@@ -72,17 +72,14 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.iv_people:
                 Intent intent = new Intent(this, PersonalCenterActivity.class);
-                intent.putExtra("user", user);
                 startActivity(intent);
                 break;
             case R.id.tv_wenjuan:
                 Intent intent2 = new Intent(this, QuestionIndexActivity.class);
-                intent2.putExtra("user", user);
                 startActivity(intent2);
                 break;
             case R.id.tv_shuju:
                 Intent intent3 = new Intent(this, DataUpActivity.class);
-                intent3.putExtra("user", user);
                 startActivity(intent3);
                 break;
             case R.id.layout_version:

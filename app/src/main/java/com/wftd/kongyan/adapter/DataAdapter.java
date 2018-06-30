@@ -60,7 +60,7 @@ public class DataAdapter extends BaseAdapter<Question> {
         } else {
             holder.upfile.setVisibility(View.VISIBLE);
         }
-        holder.number.setText(textformat.format(i) + "号用户");
+        holder.number.setText(textformat.format(question.getId()) + "号用户");
 
         holder.upfile.setOnClickListener(new View.OnClickListener() {
             @Override

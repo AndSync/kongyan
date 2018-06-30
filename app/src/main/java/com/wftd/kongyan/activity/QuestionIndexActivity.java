@@ -22,15 +22,15 @@ import com.ihealth.communication.manager.iHealthDevicesCallback;
 import com.ihealth.communication.manager.iHealthDevicesManager;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.adapter.DoctorListAdapter;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.DoctorCallback;
 import com.wftd.kongyan.entity.Doctor;
-import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Ser1UserInfo;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import com.wftd.kongyan.util.LogUtils;
 import com.wftd.kongyan.util.StringUtils;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
@@ -56,13 +56,13 @@ public class QuestionIndexActivity extends BaseActivity
     private RadioButton second;
     private RadioButton third;
     private RadioButton fourth;
-    private User user;
+    private Ser1UserInfo user = UserHelper.getUserInfo();
 
     private String mType, mMac;
     private static Bp3lControl bp3lControl;
     private int clientCallbackId;
     String userName = "kongyan";
-    private List<Doctor> doctorList = new ArrayList<>();
+    private List<Doctor> doctorList = UserHelper.getDoctorList();
     private DoctorListAdapter spinnerAdapter;
     private Spinner spinner;
 
@@ -70,12 +70,11 @@ public class QuestionIndexActivity extends BaseActivity
     /**
      * 扫描到血压仪
      */
-    private static final int MESSAGE_SCAN_SUCCESS=100;
+    private static final int MESSAGE_SCAN_SUCCESS = 100;
     private static final int HANDLER_MESSAGE = 101;
     private static final int HANDLER_END = 102;
     private static final int HANDLER_ERROR = 103;
     private static final int DORTOR = 104;
-
 
     private Handler mHandler = new Handler() {
         @SuppressLint("WrongConstant")
@@ -153,7 +152,6 @@ public class QuestionIndexActivity extends BaseActivity
         clientCallbackId = iHealthDevicesManager.getInstance().registerClientCallback(miHealthDevicesCallback);
         /* Limited wants to receive notification specified device */
         iHealthDevicesManager.getInstance().startDiscovery(32L);
-        user = (User) getIntent().getSerializableExtra("user");
         if (user != null && user.getOrganizationId() != null) {
             HttpUtils.DoctorGet(user.getOrganizationId(), this);
         }
@@ -185,14 +183,14 @@ public class QuestionIndexActivity extends BaseActivity
             mMac = mac;
             mType = deviceType;
             mHandler.sendEmptyMessage(MESSAGE_SCAN_SUCCESS);
-            LogUtils.d(TAG,"扫描到血压仪:"+mac+"、"+deviceType);
+            LogUtils.d(TAG, "扫描到血压仪:" + mac + "、" + deviceType);
         }
 
         @Override
         public void onDeviceNotify(String mac, String deviceType, String action, String message) {
             i++;
 
-            LogUtils.d(TAG, "mac:"+mac+"\ndeviceType"+deviceType+"\naction:"+action + "\nmessage:" + message);
+            LogUtils.d(TAG, "mac:" + mac + "\ndeviceType" + deviceType + "\naction:" + action + "\nmessage:" + message);
 
             if (BpProfile.ACTION_BATTERY_BP.equals(action)) {
                 try {
@@ -350,10 +348,7 @@ public class QuestionIndexActivity extends BaseActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.go_personal_center:
-                Intent userIntent = getIntent();
-                user = (User) userIntent.getSerializableExtra("user");
                 Intent personalIntent = new Intent(this, PersonalCenterActivity.class);
-                personalIntent.putExtra("user", user);
                 startActivity(personalIntent);
                 break;
             case R.id.next_step:
@@ -377,7 +372,6 @@ public class QuestionIndexActivity extends BaseActivity
                 Intent nextIntent = new Intent(this, QuestionListActivity.class);
 
                 nextIntent.putExtra("orname", TextUtils.isEmpty(doctorName) ? "暂无数据" : doctorName);
-                nextIntent.putExtra("user", user);
                 nextIntent.putExtra("sbp", sbp);
                 nextIntent.putExtra("dbp", dbp);
                 int index = 0;
@@ -435,6 +429,7 @@ public class QuestionIndexActivity extends BaseActivity
 
     @Override
     public boolean success(List<Doctor> doctors) {
+        UserHelper.updateDoctorList(doctors);
         doctorList.clear();
         doctorList.addAll(doctors);
         Message message = new Message();

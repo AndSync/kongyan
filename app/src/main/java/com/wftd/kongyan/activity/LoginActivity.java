@@ -13,7 +13,7 @@ import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.LoginCallback;
 import com.wftd.kongyan.callback.PeopleCallback;
 import com.wftd.kongyan.db.DBManager;
-import com.wftd.kongyan.entity.User;
+import com.wftd.kongyan.entity.Ser1UserInfo;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import com.wftd.kongyan.util.PhoneUtils;
@@ -59,7 +59,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
         mLogin.setOnClickListener(this);
         DBManager.copyDatabaseFile(this);
-        //mHelper.addUser("15011050191","aaaa","15011050191","123456");
     }
 
     @Override
@@ -81,33 +80,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
 
                 if (PhoneUtils.isNetworkAvailable(this)) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Intent intent=new Intent(LoginActivity.this,SelectActivity.class);
-                            //startActivity(intent);
-
-                            //HttpUtils.LoginPost(userName, pwd, (LoginCallback) LoginActivity.this);
-                        }
-                    }).start();
                     HttpUtils.LoginGet(PhoneNumber, pwd, (LoginCallback) LoginActivity.this);
                 } else {//没有网络的情况下
-                    try {
-                        User user = db.selector(User.class)
-                            .where("phoneNumber", "=", PhoneNumber)
-                            .and("passwordText", "=", pwd)
-                            .findFirst();
-                        if (user == null) {
-                            ToastUtils.show(this, "用户名或密码错误");
-                            return;
-                        }
-
-                        Intent homePagdeIntent = new Intent(LoginActivity.this, HomePageActivity.class);
-                        homePagdeIntent.putExtra("user", user);
-                        startActivity(homePagdeIntent);
-                    } catch (DbException e) {
-                        e.printStackTrace();
-                    }
+                    ToastUtils.show(context, "没有网络，请检查网络是否连接");
                 }
 
                 break;
@@ -120,25 +95,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
-    public boolean success(User obj) {
-        try {
-            obj.setPhoneNumber(mUserName.getText().toString());
-            db.save(obj);
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
+    public boolean success(Ser1UserInfo obj) {
         Intent homePageIntent = new Intent(LoginActivity.this, HomePageActivity.class);
-        homePageIntent.putExtra("user", obj);
         startActivity(homePageIntent);
-
         if (obj.getOrganizationId() != null) {
             HttpUtils.PeopleGet(obj.getOrganizationId(), this);
         }
+        finish();
         return false;
     }
 
     @Override
-    public boolean success(List<User> mLoginResult) {
+    public boolean success(List<Ser1UserInfo> mLoginResult) {
         try {
             db.save(mLoginResult);
             Log.e("aaa", "数据更新成功");
@@ -150,7 +118,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public boolean fail() {
-
         mHandler.sendEmptyMessage(2);
         Log.e("fail", "登录失败,请检查用户名密码是否正确");
         return false;

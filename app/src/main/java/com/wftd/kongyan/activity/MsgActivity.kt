@@ -6,10 +6,11 @@ import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
 import com.wftd.kongyan.adapter.MessageAdapter
+import com.wftd.kongyan.app.UserHelper
 import com.wftd.kongyan.base.BaseActivity
 import com.wftd.kongyan.callback.MessageCallback
 import com.wftd.kongyan.entity.Message
-import com.wftd.kongyan.entity.User
+import com.wftd.kongyan.entity.Ser1UserInfo
 import com.wftd.kongyan.util.HttpUtils
 import kotlinx.android.synthetic.main.activity_message.back
 import kotlinx.android.synthetic.main.activity_message.mylistview
@@ -61,8 +62,8 @@ class MsgActivity : BaseActivity(), View.OnClickListener, MessageCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
-        var user = intent.getSerializableExtra("user")
-        HttpUtils.MessageGet((user as User).id, this@MsgActivity)
+        var user = UserHelper.getUserInfo()
+        HttpUtils.MessageGet((user as Ser1UserInfo).id, this@MsgActivity)
         mylistview.adapter = MessageAdapter(this@MsgActivity)
         back.setOnClickListener(this)
     }

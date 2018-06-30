@@ -1,5 +1,6 @@
 package com.wftd.kongyan.entity;
 
+import android.text.TextUtils;
 import java.io.Serializable;
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;
@@ -8,7 +9,7 @@ import org.xutils.db.annotation.Table;
  * 用户
  */
 @Table(name = "user")
-public class User implements Serializable {
+public class Ser1UserInfo implements Serializable {
     @Column(name = "id", isId = true, autoGen = true)
     private String id;
     @Column(name = "organizationId")
@@ -124,5 +125,9 @@ public class User implements Serializable {
 
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public boolean isLogin(){
+        return !TextUtils.isEmpty(name);
     }
 }
