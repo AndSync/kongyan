@@ -199,7 +199,7 @@ public class QuestionListActivity extends BaseActivity2
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questionnaire);
+        setContentView(R.layout.activity_question_list);
         orname = (String) getIntent().getSerializableExtra("orname");
         mUser = (User) getIntent().getSerializableExtra("user");
         init();

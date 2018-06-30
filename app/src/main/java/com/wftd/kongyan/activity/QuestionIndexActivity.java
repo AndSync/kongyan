@@ -116,7 +116,7 @@ public class QuestionIndexActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screen);
+        setContentView(R.layout.activity_question_index);
         init();
     }
 

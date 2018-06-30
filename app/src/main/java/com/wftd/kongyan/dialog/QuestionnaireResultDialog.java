@@ -39,7 +39,7 @@ public class QuestionnaireResultDialog {
         mBacDialog = new Dialog(mContext, R.style.myDialog);
         mBacDialog.setCancelable(false);
         mBacDialog.setCanceledOnTouchOutside(true);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.questionnaire_dialog, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_question_result, null);
         mBacDialog.setContentView(view);
         mBacDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
