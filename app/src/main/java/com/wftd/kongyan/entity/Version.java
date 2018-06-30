@@ -29,7 +29,7 @@ public class Version {
         this.url = url;
     }
 
-    public boolean hasNewVersion(Context context){
-        return versionCode>AppUtils.getVersionCode(context);
+    public boolean hasNewVersion(Context context) {
+        return versionCode > AppUtils.getVersionCode(context);
     }
 }

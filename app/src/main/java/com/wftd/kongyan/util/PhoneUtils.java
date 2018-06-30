@@ -15,8 +15,7 @@ public class PhoneUtils {
      * @return true 表示网络可用
      */
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo info = connectivity.getActiveNetworkInfo();
             if (info != null && info.isConnected()) {
@@ -38,10 +37,8 @@ public class PhoneUtils {
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             i.setClassName("com.android.settings", "com.android.settings.Settings$WifiSettingsActivity");
         } else {
-            i.setClassName("com.android.settings"
-                    , "com.android.settings.wifi.WifiSettings");
+            i.setClassName("com.android.settings", "com.android.settings.wifi.WifiSettings");
         }
         context.startActivity(i);
     }
-
 }

@@ -7,11 +7,12 @@ import android.widget.Toast
 import com.wftd.kongyan.R
 import com.wftd.kongyan.adapter.MessageAdapter
 import com.wftd.kongyan.base.BaseActivity
+import com.wftd.kongyan.callback.MessageCallback
 import com.wftd.kongyan.entity.Message
 import com.wftd.kongyan.entity.User
-import com.wftd.kongyan.callback.MessageCallback
 import com.wftd.kongyan.util.HttpUtils
-import kotlinx.android.synthetic.main.activity_message.*
+import kotlinx.android.synthetic.main.activity_message.back
+import kotlinx.android.synthetic.main.activity_message.mylistview
 
 /**
  * Created by liwei on 2018/6/19.

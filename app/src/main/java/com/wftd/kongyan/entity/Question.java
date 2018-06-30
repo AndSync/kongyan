@@ -14,6 +14,12 @@ public class Question implements java.io.Serializable {
     private boolean isUpdate;
     @Column(name = "name")
     private String name;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+    @Column(name = "height")
+    private String height;
+    @Column(name = "weight")
+    private String weight;
     @Column(name = "sex")
     private int sex;
     @Column(name = "age")
@@ -99,12 +105,11 @@ public class Question implements java.io.Serializable {
     @Column(name = "returnVisitDate")
     private String returnVisitDate;
 
-
     public Question() {
     }
 
     public Question(int id, String name, int sex, int age, int systolicPressure, int diastolicPressure,
-                    int saltThreshold) {
+        int saltThreshold) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -114,14 +119,14 @@ public class Question implements java.io.Serializable {
         this.saltThreshold = saltThreshold;
     }
 
-    public Question(int id, String name, int sex, int age, int ageType, String district,
-                    int systolicPressure, int systolicPressureType, int diastolicPressure, int diastolicPressureType,
-                    int saltThreshold, int patientType, Integer takeDrugsA, Integer takeDrugsB, Integer takeDrugsC,
-                    Integer takeDrugsD, Integer takeDrugsE, Integer takeDrugsF, Integer takeDrugsG, int takeDrugsType,
-                    int takeDrugs1Type, int takeDrugs2Type, int takeDrugs3Type, Integer q1, Integer q2, Integer q3,
-                    Integer q4, Integer q5, Integer q6, Integer q7, Integer q8, Integer q9, Integer q10, Integer q11,
-                    Integer q12, Integer q13, Integer score, int scoreType, String peopleId, String doctorId,
-                    String organizationId, String submitDate, int isReturnVisit, String returnVisitDate) {
+    public Question(int id, String name, int sex, int age, int ageType, String district, int systolicPressure,
+        int systolicPressureType, int diastolicPressure, int diastolicPressureType, int saltThreshold, int patientType,
+        Integer takeDrugsA, Integer takeDrugsB, Integer takeDrugsC, Integer takeDrugsD, Integer takeDrugsE,
+        Integer takeDrugsF, Integer takeDrugsG, int takeDrugsType, int takeDrugs1Type, int takeDrugs2Type,
+        int takeDrugs3Type, Integer q1, Integer q2, Integer q3, Integer q4, Integer q5, Integer q6, Integer q7,
+        Integer q8, Integer q9, Integer q10, Integer q11, Integer q12, Integer q13, Integer score, int scoreType,
+        String peopleId, String doctorId, String organizationId, String submitDate, int isReturnVisit,
+        String returnVisitDate) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -190,6 +195,34 @@ public class Question implements java.io.Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public int getSex() {
+        return sex;
     }
 
     public int isSex() {
@@ -527,5 +560,4 @@ public class Question implements java.io.Serializable {
     public void setReturnVisitDate(String returnVisitDate) {
         this.returnVisitDate = returnVisitDate;
     }
-
 }

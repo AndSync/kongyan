@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.wftd.kongyan.R;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Set;
@@ -45,19 +43,16 @@ public class BluetoothUtil {
         BluetoothSocket socket = null;
         socket = device.createRfcommSocketToServiceRecord(PRINTER_UUID);
         socket.connect();
-        return  socket;
+        return socket;
     }
 
     /**
      * 连接蓝牙
-     *
-     * @param context
-     * @return
      */
     public static boolean connectBlueTooth(Context context) {
         if (bluetoothSocket == null) {
             if (getBTAdapter() == null) {
-                Toast.makeText(context,  R.string.toast_3, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.toast_3, Toast.LENGTH_SHORT).show();
                 return false;
             }
             if (!getBTAdapter().isEnabled()) {
@@ -99,7 +94,6 @@ public class BluetoothUtil {
     /**
      * 蓝牙方式打印均使用epson指令
      *
-     * @param bytes
      * @throws IOException
      */
     public static void sendData(byte[] bytes) {
@@ -115,10 +109,9 @@ public class BluetoothUtil {
             Log.i("kaltin", "bluetoothSocketttt null");
         }
     }
+
     /**
      * 判断蓝牙是否开启
-     *
-     * @return
      */
     public static boolean isBluetoothEnable() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -127,8 +120,6 @@ public class BluetoothUtil {
 
     /**
      * 打开蓝牙设置
-     *
-     * @return
      */
     private void openSetting(Context context) {
         Intent intent = new Intent();

@@ -20,7 +20,6 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
-
 import com.wftd.kongyan.R;
 
 /**
@@ -34,10 +33,8 @@ public class PowerfulEditText extends EditText {
 
     private static final int DEFAULT_STYLE_COLOR = Color.WHITE;
 
-    private final int DEFAULT_BUTTON_PADDING =
-            getResources().getDimensionPixelSize(R.dimen.btn_edittext_padding);
-    private final int DEFAULT_BUTTON_WIDTH =
-            getResources().getDimensionPixelSize(R.dimen.btn_edittext_width);
+    private final int DEFAULT_BUTTON_PADDING = getResources().getDimensionPixelSize(R.dimen.btn_edittext_padding);
+    private final int DEFAULT_BUTTON_WIDTH = getResources().getDimensionPixelSize(R.dimen.btn_edittext_width);
 
     private static final String STYLE_RECT = "rectangle";
     private static final String STYLE_ROUND_RECT = "roundRect";
@@ -79,18 +76,18 @@ public class PowerfulEditText extends EditText {
     private ObjectAnimator mAnimator;
 
     //自定义属性动画
-    private static final Property<PowerfulEditText, Integer> BORDER_PROGRESS
-            = new Property<PowerfulEditText, Integer>(Integer.class, "borderProgress") {
-        @Override
-        public Integer get(PowerfulEditText powerfulEditText) {
-            return powerfulEditText.getBorderProgress();
-        }
+    private static final Property<PowerfulEditText, Integer> BORDER_PROGRESS =
+        new Property<PowerfulEditText, Integer>(Integer.class, "borderProgress") {
+            @Override
+            public Integer get(PowerfulEditText powerfulEditText) {
+                return powerfulEditText.getBorderProgress();
+            }
 
-        @Override
-        public void set(PowerfulEditText powerfulEditText, Integer value) {
-            powerfulEditText.setBorderProgress(value);
-        }
-    };
+            @Override
+            public void set(PowerfulEditText powerfulEditText, Integer value) {
+                powerfulEditText.setBorderProgress(value);
+            }
+        };
 
     private Paint mPaint;
 
@@ -103,7 +100,7 @@ public class PowerfulEditText extends EditText {
         init(context, attrs);
     }
 
-    public PowerfulEditText(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public PowerfulEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -170,9 +167,7 @@ public class PowerfulEditText extends EditText {
         mVisibleAnimator = ValueAnimator.ofFloat(0f, 1f).setDuration(ANIMATOR_TIME);
 
         //是否是密码样式
-        isPassword =
-                getInputType() == (InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
-
+        isPassword = getInputType() == (InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
     }
 
     @Override
@@ -232,15 +227,12 @@ public class PowerfulEditText extends EditText {
                 }
                 mPaint.setStrokeWidth(roundRectLineWidth);
                 if (Build.VERSION.SDK_INT >= 21) {
-                    canvas.drawRoundRect(
-                            roundRectLineWidth/2, roundRectLineWidth/2, width - roundRectLineWidth/2, height - roundRectLineWidth/2,
-                            DEFAULT_ROUND_RADIUS, DEFAULT_ROUND_RADIUS,
-                            mPaint);
+                    canvas.drawRoundRect(roundRectLineWidth / 2, roundRectLineWidth / 2, width - roundRectLineWidth / 2,
+                        height - roundRectLineWidth / 2, DEFAULT_ROUND_RADIUS, DEFAULT_ROUND_RADIUS, mPaint);
                 } else {
                     canvas.drawRoundRect(
-                            new RectF(roundRectLineWidth/2, roundRectLineWidth/2, width - roundRectLineWidth/2, height - roundRectLineWidth/2),
-                            DEFAULT_ROUND_RADIUS, DEFAULT_ROUND_RADIUS,
-                            mPaint);
+                        new RectF(roundRectLineWidth / 2, roundRectLineWidth / 2, width - roundRectLineWidth / 2,
+                            height - roundRectLineWidth / 2), DEFAULT_ROUND_RADIUS, DEFAULT_ROUND_RADIUS, mPaint);
                 }
                 break;
 
@@ -256,7 +248,8 @@ public class PowerfulEditText extends EditText {
             case STYLE_ANIMATOR:
                 setBackground(null);
                 if (isAnimatorRunning) {
-                    canvas.drawLine(width / 2 - mAnimatorProgress, height, width / 2 + mAnimatorProgress, height, mPaint);
+                    canvas.drawLine(width / 2 - mAnimatorProgress, height, width / 2 + mAnimatorProgress, height,
+                        mPaint);
                     if (mAnimatorProgress == width / 2) {
                         isAnimatorRunning = false;
                     }
@@ -277,7 +270,7 @@ public class PowerfulEditText extends EditText {
                     drawVisibleButton(scale, canvas, isPasswordVisible);
                 }
                 invalidate();
-            //绘制静态的按钮
+                //绘制静态的按钮
             } else {
                 drawClearButton(1, canvas);
                 if (isPassword) {
@@ -310,7 +303,8 @@ public class PowerfulEditText extends EditText {
     private void drawVisibleButton(float scale, Canvas canvas, boolean isVisible) {
 
         int right = (int) (getWidth() + getScrollX() - mBtnPadding * 3 - mBtnWidth - mBtnWidth * (1f - scale) / 2f);
-        int left = (int) (getWidth() + getScrollX() - mBtnPadding * 3 - mBtnWidth - mBtnWidth * (scale + (1f - scale) / 2f));
+        int left =
+            (int) (getWidth() + getScrollX() - mBtnPadding * 3 - mBtnWidth - mBtnWidth * (scale + (1f - scale) / 2f));
         int top = (int) ((getHeight() - mBtnWidth * scale) / 2);
         int bottom = (int) (top + mBtnWidth * scale);
         Rect rect = new Rect(left, top, right, bottom);
@@ -319,7 +313,6 @@ public class PowerfulEditText extends EditText {
         } else {
             canvas.drawBitmap(mBitmapInvisible, null, rect, mPaint);
         }
-
     }
 
     // 清除按钮出现时的动画效果
@@ -337,7 +330,7 @@ public class PowerfulEditText extends EditText {
     }
 
     // 结束所有动画
-    private void endAllAnimator(){
+    private void endAllAnimator() {
         mGoneAnimator.end();
         mVisibleAnimator.end();
     }
@@ -398,14 +391,11 @@ public class PowerfulEditText extends EditText {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
-            boolean clearTouched =
-                    ( getWidth() - mBtnPadding - mBtnWidth < event.getX() )
-                            && (event.getX() < getWidth() - mBtnPadding)
-                            && isFocused();
-            boolean visibleTouched =
-                    (getWidth() - mBtnPadding * 3 - mBtnWidth * 2 < event.getX())
-                            && (event.getX() < getWidth() - mBtnPadding * 3 - mBtnWidth)
-                            && isPassword && isFocused();
+            boolean clearTouched = (getWidth() - mBtnPadding - mBtnWidth < event.getX())
+                && (event.getX() < getWidth() - mBtnPadding)
+                && isFocused();
+            boolean visibleTouched = (getWidth() - mBtnPadding * 3 - mBtnWidth * 2 < event.getX()) && (event.getX()
+                < getWidth() - mBtnPadding * 3 - mBtnWidth) && isPassword && isFocused();
 
             if (clearTouched) {
                 setError(null);
@@ -430,8 +420,8 @@ public class PowerfulEditText extends EditText {
     }
 
     // 开始晃动的入口
-    public void startShakeAnimation(){
-        if(getAnimation() == null){
+    public void startShakeAnimation() {
+        if (getAnimation() == null) {
             setAnimation(shakeAnimation(4));
         }
         startAnimation(getAnimation());
@@ -439,10 +429,10 @@ public class PowerfulEditText extends EditText {
 
     /**
      * 晃动动画
+     *
      * @param counts 0.5秒钟晃动多少下
-     * @return
      */
-    private Animation shakeAnimation(int counts){
+    private Animation shakeAnimation(int counts) {
         Animation translateAnimation = new TranslateAnimation(0, 10, 0, 0);
         translateAnimation.setInterpolator(new CycleInterpolator(counts));
         translateAnimation.setDuration(500);

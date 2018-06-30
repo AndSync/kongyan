@@ -10,15 +10,11 @@ import android.graphics.Bitmap;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.widget.Toast;
-
 import com.wftd.kongyan.R;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import woyou.aidlservice.jiuiv5.ICallback;
 import woyou.aidlservice.jiuiv5.IWoyouService;
-
 
 public class AidlUtil {
     private static final String SERVICE＿PACKAGE = "woyou.aidlservice.jiuiv5";
@@ -81,7 +77,6 @@ public class AidlUtil {
     public ICallback generateCB(final PrinterCallback printerCallback) {
         return new ICallback.Stub() {
 
-
             @Override
             public void onRunResult(boolean isSuccess) throws RemoteException {
 
@@ -102,8 +97,9 @@ public class AidlUtil {
     /**
      * 设置打印浓度
      */
-    private int[] darkness = new int[]{0x0600, 0x0500, 0x0400, 0x0300, 0x0200, 0x0100, 0,
-            0xffff, 0xfeff, 0xfdff, 0xfcff, 0xfbff, 0xfaff};
+    private int[] darkness = new int[] {
+        0x0600, 0x0500, 0x0400, 0x0300, 0x0200, 0x0100, 0, 0xffff, 0xfeff, 0xfdff, 0xfcff, 0xfbff, 0xfaff
+    };
 
     public void setDarkness(int index) {
         if (woyouService == null) {
@@ -153,7 +149,6 @@ public class AidlUtil {
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -175,7 +170,6 @@ public class AidlUtil {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 打印文字
@@ -204,7 +198,6 @@ public class AidlUtil {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -223,7 +216,6 @@ public class AidlUtil {
             e.printStackTrace();
         }
     }
-
 
     public void sendRawData(byte[] data) {
         if (woyouService == null) {

@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,7 +33,9 @@ import com.wftd.kongyan.entity.Result;
 import com.wftd.kongyan.entity.User;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.DialogUtils;
+import com.wftd.kongyan.util.DisplayUtils;
 import com.wftd.kongyan.util.HttpUtils;
+import com.wftd.kongyan.util.LogUtils;
 import com.wftd.kongyan.util.StringUtils;
 import com.wftd.kongyan.view.AddressSelector;
 import com.wftd.kongyan.view.address.City;
@@ -570,8 +571,11 @@ public class QuestionListActivity extends BaseActivity2
                     saveQuestion.setId(0);
                     saveQuestion.setAge(Integer.valueOf(age));
                     saveQuestion.setName(name);
+                    saveQuestion.setPhoneNumber(phone);
+                    saveQuestion.setHeight(height);
+                    saveQuestion.setWeight(weight);
                     saveQuestion.setSex(sex.equals("女") == true ? 1 : 0);
-                    //                    saveQuestion.setDistrict(orname);
+                    saveQuestion.setDistrict(orname);
                     saveQuestion.setPeopleId(mUser.getId());
                     saveQuestion.setOrganizationId(mUser.getOrganizationId());
                     saveQuestion.setSystolicPressure(Integer.valueOf(sbp));
@@ -680,6 +684,7 @@ public class QuestionListActivity extends BaseActivity2
         }
         if (StringUtils.isEmpty(m11Content)) {
             m11Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m11Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
@@ -697,61 +702,73 @@ public class QuestionListActivity extends BaseActivity2
         }
         if (StringUtils.isEmpty(m12Content)) {
             m12Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m12Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m13Content)) {
             m13Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m13Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m14Content)) {
             m14Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m14Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m15Content)) {
             m15Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m15Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m16Content)) {
             m16Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m16Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m21Content)) {
             m21Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m21Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m22Content)) {
             m22Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m22Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m23Content)) {
             m23Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m23Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m24Content)) {
             m24Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m24Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m25Content)) {
             m25Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m25Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m26Content)) {
             m26Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m26Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m27Content)) {
             m27Hint.setVisibility(View.VISIBLE);
+            scrollTarget(m27Hint);
             DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
             return false;
         }
@@ -760,10 +777,10 @@ public class QuestionListActivity extends BaseActivity2
 
     //输入框请求焦点
     private void questFocus(EditText edit) {
-        edit.setFocusable(true);
-        edit.setFocusableInTouchMode(true);
-        edit.requestFocus();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        //edit.setFocusable(true);
+        //edit.setFocusableInTouchMode(true);
+        //edit.requestFocus();
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
     @Override
@@ -972,5 +989,27 @@ public class QuestionListActivity extends BaseActivity2
     @Override
     public void fail() {
 
+    }
+
+    private void scrollTarget(final View targetView) {
+        mScrollerView.post(new Runnable() {
+            @Override
+            public void run() {
+                int[] location = new int[2];
+                targetView.getLocationOnScreen(location);
+                int viewHeight = 0;
+                // 获取scrollview实际高度
+                for (int i = 0; i < mScrollerView.getChildCount(); i++) {
+                    viewHeight += mScrollerView.getChildAt(i).getHeight();
+                }
+                LogUtils.d(TAG, "" + location[1]);
+                LogUtils.d(TAG, "" + viewHeight);
+                int offset = viewHeight + location[1] - DisplayUtils.getScreenHeight();
+                if (offset < 0) {
+                    offset = 0;
+                }
+                mScrollerView.smoothScrollTo(0, offset);
+            }
+        });
     }
 }

@@ -6,5 +6,6 @@ package com.wftd.kongyan.util;
 
 public interface PrinterCallback {
     String getResult();
+
     void onReturnString(String result);
 }

@@ -1,15 +1,11 @@
 package com.wftd.kongyan.db;
 
-
 import android.content.Context;
-
 import com.wftd.kongyan.R;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 
 public class DBManager {
     private static final String DATABASES_DIR = "/data/data/com.wftd.kongyan/databases";
@@ -61,6 +57,5 @@ public class DBManager {
                 }
             }
         }
-
     }
 }

@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.base.BaseAdapter;
 import com.wftd.kongyan.entity.Message;
 import com.wftd.kongyan.entity.Question;
-
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -27,7 +25,6 @@ public class MessageAdapter extends BaseAdapter<Question> {
     public boolean isUp() {
         return isUp;
     }
-
 
     public MessageAdapter(Activity context, List<Message> messages) {
         this.mContext = context;
@@ -60,11 +57,9 @@ public class MessageAdapter extends BaseAdapter<Question> {
         return convertView;
     }
 
-
     class ViewHolder {
         private TextView title, context;
     }
-
 
     public static interface OnQuestion {
         // true add; false cancel
@@ -77,8 +72,6 @@ public class MessageAdapter extends BaseAdapter<Question> {
     public void setOnAddClickListener(OnQuestion onItemAddClick) {
         this.onItemAddClick = onItemAddClick;
     }
-
-
 }
 
 

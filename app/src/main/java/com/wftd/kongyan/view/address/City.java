@@ -1,7 +1,6 @@
 package com.wftd.kongyan.view.address;
 
-
-public class City implements CityInterface{
+public class City implements CityInterface {
     private int id; //id
     private String name; //city
     private String code; //cityid
@@ -13,6 +12,7 @@ public class City implements CityInterface{
         this.code = code;
         this.parent = parent;
     }
+
     //省
     public City(int id, String name, String code) {
         this.id = id;

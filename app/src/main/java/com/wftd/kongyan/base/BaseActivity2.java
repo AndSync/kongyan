@@ -34,6 +34,7 @@ public class BaseActivity2 extends Activity {
         App.getInstance().remove(this);
         super.onDestroy();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

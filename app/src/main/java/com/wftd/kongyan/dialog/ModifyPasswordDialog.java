@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.ToastUtils;
@@ -59,7 +58,9 @@ public class ModifyPasswordDialog {
                     ToastUtils.show(mContext, "请输入密码");
                     return;
                 }
-                if ((oldP.length() < 6 && oldP.length() > 0) || (newP.length() < 6 && newP.length() > 0) || (againP.length() < 6 && againP.length() > 0)) {
+                if ((oldP.length() < 6 && oldP.length() > 0)
+                    || (newP.length() < 6 && newP.length() > 0)
+                    || (againP.length() < 6 && againP.length() > 0)) {
                     ToastUtils.show(mContext, "密码格式错误");
                     return;
                 }

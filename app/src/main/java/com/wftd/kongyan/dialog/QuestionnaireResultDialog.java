@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import com.wftd.kongyan.R;
 
 /**
@@ -19,6 +18,7 @@ public class QuestionnaireResultDialog {
     private QuestionnaireResultDialog(Context context) {
         mContext = context;
     }
+
     public static QuestionnaireResultDialog getInstance(Context context) {
         if (mQuestionnaireResultDialog == null) {
             synchronized (QuestionnaireResultDialog.class) {
@@ -33,7 +33,7 @@ public class QuestionnaireResultDialog {
     private Dialog mBacDialog;
 
     public Dialog build() {
-        if(mBacDialog != null){
+        if (mBacDialog != null) {
             return mBacDialog;
         }
         mBacDialog = new Dialog(mContext, R.style.myDialog);
@@ -51,14 +51,16 @@ public class QuestionnaireResultDialog {
         });
         return mBacDialog;
     }
+
     public void show() {
-        if(mBacDialog.isShowing()){
+        if (mBacDialog.isShowing()) {
             return;
         }
         mBacDialog.show();
     }
+
     public void dismiss() {
-        if(mBacDialog.isShowing()){
+        if (mBacDialog.isShowing()) {
             mBacDialog.dismiss();
         }
     }

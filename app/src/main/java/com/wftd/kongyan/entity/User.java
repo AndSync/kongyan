@@ -1,9 +1,8 @@
 package com.wftd.kongyan.entity;
 
+import java.io.Serializable;
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;
-
-import java.io.Serializable;
 
 /**
  * 用户

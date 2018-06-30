@@ -3,7 +3,6 @@ package com.wftd.kongyan.base;
 import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -42,17 +41,17 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter implemen
 
     @Override
     public int getCount() {
-        if (mDataList != null)
-            return mDataList.size();
+        if (mDataList != null) return mDataList.size();
         return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        if (position < mDataList.size())
+        if (position < mDataList.size()) {
             return mDataList.get(position);
-        else
+        } else {
             return null;
+        }
     }
 
     @Override
@@ -82,7 +81,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter implemen
      * 在指定索引位置添加数据
      *
      * @param location 索引
-     * @param object   数据
+     * @param object 数据
      */
     public void addItem(int location, Object object) {
         mDataList.add(location, object);
@@ -100,7 +99,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter implemen
     /**
      * 在指定索引位置添加数据集合
      *
-     * @param location   索引
+     * @param location 索引
      * @param collection 数据集合
      */
     public boolean addItem(int location, Collection<? extends Object> collection) {
@@ -152,8 +151,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter implemen
     public Activity getActivity() {
         if (null == mContext) return null;
 
-        if (mContext instanceof BaseActivity)
-            return mContext;
+        if (mContext instanceof BaseActivity) return mContext;
 
         return null;
     }

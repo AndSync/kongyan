@@ -7,15 +7,24 @@ import android.os.Message
 import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
+import com.wftd.kongyan.R.id.all_data
+import com.wftd.kongyan.R.id.data_number
+import com.wftd.kongyan.R.id.mlitview
+import com.wftd.kongyan.R.id.not_up
 import com.wftd.kongyan.adapter.DataAdapter
 import com.wftd.kongyan.base.BaseActivity
 import com.wftd.kongyan.callback.QuestionCallback
 import com.wftd.kongyan.entity.Question
 import com.wftd.kongyan.util.HttpUtils
+import kotlinx.android.synthetic.main.activity_data_upfile.all
+import kotlinx.android.synthetic.main.activity_data_upfile.all_data
+import kotlinx.android.synthetic.main.activity_data_upfile.back
+import kotlinx.android.synthetic.main.activity_data_upfile.data_number
+import kotlinx.android.synthetic.main.activity_data_upfile.mlitview
+import kotlinx.android.synthetic.main.activity_data_upfile.not_up
 import org.xutils.common.util.KeyValue
 import org.xutils.db.sqlite.WhereBuilder
 import java.util.ArrayList
-import kotlinx.android.synthetic.main.activity_data_upfile.*
 
 /**
  * Created by liwei on 2018/6/15.
@@ -66,7 +75,8 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
             upQuestion = iterator.next()
             upQuestion.isUpdate = true
             db.update(upQuestion, "isUpdate")
-            var i = db.update(Question::class.java, WhereBuilder.b("id", "=", upQuestion.id), KeyValue("isUpdate", true))
+            var i = db.update(Question::class.java, WhereBuilder.b("id", "=", upQuestion.id),
+                KeyValue("isUpdate", true))
         }
 
     }
@@ -117,7 +127,7 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
             }
             R.id.all -> {
 
-                not_up.background=this.getDrawable(R.drawable.shape_data_part_default)
+                not_up.background = this.getDrawable(R.drawable.shape_data_part_default)
                 not_up.setTextColor(Color.GRAY)
                 all.background = this.getDrawable(R.drawable.shape_data_all_select)
                 all.setTextColor(Color.WHITE)
@@ -132,7 +142,7 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
                 }
             }
             R.id.not_up -> {
-                all.background=this.getDrawable(R.drawable.shape_data_all_default)
+                all.background = this.getDrawable(R.drawable.shape_data_all_default)
                 all.setTextColor(Color.GRAY)
                 not_up.background = this.getDrawable(R.drawable.shape_data_part_select)
                 not_up.setTextColor(Color.WHITE)

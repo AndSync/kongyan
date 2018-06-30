@@ -15,10 +15,10 @@ public class ServerConfig {
     public static boolean DEBUG = BuildConfig.DEBUG;
 
     //public static String getServerUrl(String func) {
-        //StringBuilder serverBuilder = new StringBuilder("");
-        //serverBuilder.append(ConfigHelper.getSysConfig().getServerQcttUrl());
-        //serverBuilder.append("/");
-        //serverBuilder.append(func);
-        //return serverBuilder.toString();
+    //StringBuilder serverBuilder = new StringBuilder("");
+    //serverBuilder.append(ConfigHelper.getSysConfig().getServerQcttUrl());
+    //serverBuilder.append("/");
+    //serverBuilder.append(func);
+    //return serverBuilder.toString();
     //}
 }

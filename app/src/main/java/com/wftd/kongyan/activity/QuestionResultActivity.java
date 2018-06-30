@@ -7,8 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,12 +17,7 @@ import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.entity.Result;
 import com.wftd.kongyan.util.AidlUtil;
 import com.wftd.kongyan.util.ConvertUtils;
-import com.wftd.kongyan.util.FileHelper;
 import com.wftd.kongyan.util.ToastUtils;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -89,79 +82,10 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
         mBlood.setText(Html.fromHtml(textStr));
         mSalt.setText(salt);
         mScore.setText(Html.fromHtml(textStr1));
-        String [] tipArr = healthTip.split("-");
-        tv_tips1.setText(tipArr.length>0?tipArr[0].trim():"");
-        tv_tips2.setText(tipArr.length>1?tipArr[1].trim():"");
-        tv_tips3.setText(tipArr.length>2?tipArr[2].trim():"");
-        for (int i = 0; i < tipArr.length; i++) {
-            //switch (i) {
-            //    case 0:
-            //        TextView t = new TextView(this);
-            //        t.setText("根据评估，您的饮食习惯属于：");
-            //        t.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-            //        t.setHeight(ConvertUtils.dip2px(this, 20));
-            //        t.setGravity(Gravity.CENTER_VERTICAL);
-            //        t.setTextSize(16);
-            //        t.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-            //        t.setTextColor(getResources().getColor(R.color.text_black));
-            //        mHealthTip.addView(t);
-            //        break;
-            //    case 1:
-            //        TextView t1 = new TextView(this);
-            //        t1.setText("您目前的血压水平：");
-            //        t1.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-            //        t1.setHeight(ConvertUtils.dip2px(this, 20));
-            //        t1.setGravity(Gravity.CENTER_VERTICAL);
-            //        t1.setTextSize(16);
-            //        t1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-            //        t1.setTextColor(getResources().getColor(R.color.text_black));
-            //        mHealthTip.addView(t1);
-            //        break;
-            //    case 2:
-            //        TextView t2 = new TextView(this);
-            //        t2.setText("建议：");
-            //        t2.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-            //        t2.setHeight(ConvertUtils.dip2px(this, 20));
-            //        t2.setGravity(Gravity.CENTER_VERTICAL);
-            //        t2.setTextSize(16);
-            //        t2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-            //        t2.setTextColor(getResources().getColor(R.color.text_black));
-            //        mHealthTip.addView(t2);
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //TextView t = new TextView(this);
-            //t.setText(tips[i]);
-            //t.setWidth(ConvertUtils.dip2px(this, 200));
-            //t.setHeight(ConvertUtils.dip2px(this, 60));
-            //t.setGravity(Gravity.CENTER_VERTICAL);
-            //if (tips[i].length() < 15) {
-            //    t.setTextSize(16);
-            //} else {
-            //    t.setTextSize(16);
-            //}
-            //t.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-            //t.setTextColor(getResources().getColor(R.color.green));
-            //mHealthTip.addView(t);
-            //if (i == tips.length) {
-            //    TextView v = new TextView(this);
-            //    v.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-            //    v.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-            //    mHealthTip.addView(v);
-            //}
-        }
-
-        //        for (String tip : tips) {
-        //            TextView t = new TextView(this);
-        //            t.setText(tip);
-        //            t.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-        //            t.setHeight(ConvertUtils.dip2px(this, 40));
-        //            t.setGravity(Gravity.CENTER_VERTICAL);
-        //            t.setTextSize(16);
-        //            t.setTextColor(getResources().getColor(R.color.black));
-        //            mHealthTip.addView(t);
-        //        }
+        String[] tipArr = healthTip.split("-");
+        tv_tips1.setText(tipArr.length > 0 ? tipArr[0].trim() : "");
+        tv_tips2.setText(tipArr.length > 1 ? tipArr[1].trim() : "");
+        tv_tips3.setText(tipArr.length > 2 ? tipArr[2].trim() : "");
     }
 
     @Override
@@ -170,11 +94,7 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
             case R.id.result_print:
                 mPrint.setVisibility(View.GONE);
                 mBack.setVisibility(View.GONE);
-                //Bitmap bitmap=null;
-                //saveLongImageFile(mScrollerView);
                 Bitmap bitmap = getBitmap(mScrollerView);
-                String filePath= FileHelper.getLongImageFile().getAbsolutePath();
-                saveBitmapToSdCard(filePath,bitmap);
                 if (null != bitmap) {
                     AidlUtil.getInstance().printBitmap(bitmap);
                     bitmap.recycle();
@@ -231,64 +151,5 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
         final Canvas canvas = new Canvas(bitmap);
         scrollView.draw(canvas);
         return bitmap;
-    }
-
-    public static String saveLongImageFile(ScrollView scrollView) {
-        String filePath = "";
-
-        try {
-            int viewWidth = scrollView.getWidth();
-            int viewHeight = 0;
-            // 获取scrollview实际高度
-            for (int i = 0; i < scrollView.getChildCount(); i++) {
-                viewHeight += scrollView.getChildAt(i).getHeight();
-                scrollView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
-            }
-
-            // 创建对应大小的bitmap
-            Bitmap bitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.RGB_565);
-            final Canvas canvas = new Canvas(bitmap);
-            scrollView.draw(canvas);
-            if (bitmap != null) {
-                filePath = context.getExternalCacheDir().getPath();
-                Log.d("aaaaaa", filePath);
-                saveBitmapToSdCard(filePath, bitmap);
-                bitmap.recycle();
-            }
-        } catch (OutOfMemoryError e) {
-            System.gc();
-            return "";
-        }
-        if (TextUtils.isEmpty(filePath)) {
-            return "";
-        }
-        return filePath;
-    }
-
-    public static void saveBitmapToSdCard(String path, Bitmap bitmap) {
-        if (bitmap == null || TextUtils.isEmpty(path)) {
-            return;
-        }
-        BufferedOutputStream bos = null;
-        try {
-            bos = new BufferedOutputStream(new FileOutputStream(path));
-            // 采用压缩转档方法
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            // 调用flush()方法，更新BufferStream
-            bos.flush();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (bos != null) {
-                try {
-                    bos.close();
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }

@@ -21,6 +21,7 @@ public class CommonUtils {
         Matcher m = p.matcher(phone);
         return m.matches();
     }
+
     public static boolean isPassWord(String pwd) {
         Pattern p = Pattern.compile(REGEX_PASSWORD);
         Matcher m = p.matcher(pwd);
