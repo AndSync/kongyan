@@ -11,8 +11,7 @@ import com.wftd.kongyan.entity.Message
 import com.wftd.kongyan.entity.User
 import com.wftd.kongyan.callback.MessageCallback
 import com.wftd.kongyan.util.HttpUtils
-import kotlinx.android.synthetic.main.activity_message.mylistview
-import kotlinx.android.synthetic.main.activity_modify.back
+import kotlinx.android.synthetic.main.activity_message.*
 
 /**
  * Created by liwei on 2018/6/19.

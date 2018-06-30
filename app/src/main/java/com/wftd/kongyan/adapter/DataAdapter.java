@@ -7,13 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.activity.QuestionnaireResultActivity;
 import com.wftd.kongyan.base.BaseAdapter;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
-
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -122,7 +120,7 @@ public class DataAdapter extends BaseAdapter<Question> {
     }
 
     // add click callback
-    OnQuestion onItemAddClick;
+    public OnQuestion onItemAddClick;
 
     public void setOnAddClickListener(OnQuestion onItemAddClick) {
         this.onItemAddClick = onItemAddClick;

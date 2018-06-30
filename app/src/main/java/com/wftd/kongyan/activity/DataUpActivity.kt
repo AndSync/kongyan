@@ -9,12 +9,13 @@ import android.widget.Toast
 import com.wftd.kongyan.R
 import com.wftd.kongyan.adapter.DataAdapter
 import com.wftd.kongyan.base.BaseActivity
-import com.wftd.kongyan.entity.Question
 import com.wftd.kongyan.callback.QuestionCallback
+import com.wftd.kongyan.entity.Question
 import com.wftd.kongyan.util.HttpUtils
 import org.xutils.common.util.KeyValue
 import org.xutils.db.sqlite.WhereBuilder
 import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_data_upfile.*
 
 /**
  * Created by liwei on 2018/6/15.
@@ -89,6 +90,7 @@ class DataUpActivity : BaseActivity(), View.OnClickListener, QuestionCallback, D
 
         mlitview.adapter = DataAdapter(this, quests)
         (mlitview.adapter as DataAdapter).isUp = true
+
         (mlitview.adapter as DataAdapter).onItemAddClick = this
         data_number.setText("共有数据" + size)
 

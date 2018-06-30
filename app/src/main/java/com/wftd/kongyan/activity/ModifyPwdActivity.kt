@@ -7,11 +7,16 @@ import android.view.View
 import android.widget.Toast
 import com.wftd.kongyan.R
 import com.wftd.kongyan.base.BaseActivity
-import com.wftd.kongyan.entity.User
 import com.wftd.kongyan.callback.ModifyCallback
+import com.wftd.kongyan.entity.User
 import com.wftd.kongyan.util.CommonUtils
 import com.wftd.kongyan.util.HttpUtils
 import com.wftd.kongyan.util.PhoneUtils
+import kotlinx.android.synthetic.main.activity_modify.back
+import kotlinx.android.synthetic.main.activity_modify.check_password
+import kotlinx.android.synthetic.main.activity_modify.confirm
+import kotlinx.android.synthetic.main.activity_modify.new_password
+import kotlinx.android.synthetic.main.activity_modify.old_password
 
 
 /**
