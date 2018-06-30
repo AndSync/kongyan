@@ -10,10 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.base.BaseActivity;
-import com.wftd.kongyan.entity.User;
 import com.wftd.kongyan.callback.LoginCallback;
 import com.wftd.kongyan.callback.PeopleCallback;
 import com.wftd.kongyan.db.DBManager;
+import com.wftd.kongyan.entity.User;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import com.wftd.kongyan.util.PhoneUtils;
@@ -30,18 +30,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private PowerfulEditText mUserName;
     private PowerfulEditText mPassWord;
     private TextView mLogin;
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
 
                     break;
                 case 2:
-                    Toast.makeText(LoginActivity.this,"登录失败,请检查用户名密码是否正确",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录失败,请检查用户名密码是否正确", Toast.LENGTH_SHORT).show();
                     break;
-
             }
         }
     };
@@ -73,12 +72,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     ToastUtils.show(this, "请输入用户名和密码");
                     return;
                 }
-                if (PhoneNumber.length() < 11 || pwd.length() < 6 || !CommonUtils.isMobile(PhoneNumber) || !CommonUtils.isPassWord(pwd)) {
+                if (PhoneNumber.length() < 11
+                    || pwd.length() < 6
+                    || !CommonUtils.isMobile(PhoneNumber)
+                    || !CommonUtils.isPassWord(pwd)) {
                     ToastUtils.show(this, "用户名或密码错误");
                     return;
                 }
-
-//检测网络是否连接
 
                 if (PhoneUtils.isNetworkAvailable(this)) {
                     new Thread(new Runnable() {
@@ -93,7 +93,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     HttpUtils.LoginGet(PhoneNumber, pwd, (LoginCallback) LoginActivity.this);
                 } else {//没有网络的情况下
                     try {
-                        User user = db.selector(User.class).where("phoneNumber", "=", PhoneNumber).and("passwordText", "=", pwd).findFirst();
+                        User user = db.selector(User.class)
+                            .where("phoneNumber", "=", PhoneNumber)
+                            .and("passwordText", "=", pwd)
+                            .findFirst();
                         if (user == null) {
                             ToastUtils.show(this, "用户名或密码错误");
                             return;
@@ -105,16 +108,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     } catch (DbException e) {
                         e.printStackTrace();
                     }
-
                 }
 
                 break;
             case R.id.home_back:
                 finish();
                 break;
+            default:
+                break;
         }
     }
-
 
     @Override
     public boolean success(User obj) {
@@ -138,7 +141,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public boolean success(List<User> mLoginResult) {
         try {
             db.save(mLoginResult);
-            Log.e("aaa","数据更新成功");
+            Log.e("aaa", "数据更新成功");
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -152,6 +155,4 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         Log.e("fail", "登录失败,请检查用户名密码是否正确");
         return false;
     }
-
-
 }

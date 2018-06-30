@@ -26,11 +26,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.base.BaseActivity2;
+import com.wftd.kongyan.callback.QuestionCallback;
+import com.wftd.kongyan.db.DBHelper;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
 import com.wftd.kongyan.entity.User;
-import com.wftd.kongyan.callback.QuestionCallback;
-import com.wftd.kongyan.db.DBHelper;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
@@ -678,6 +678,7 @@ public class QuestionnaireActivity extends BaseActivity2
         }
         if (StringUtils.isEmpty(m11Content)) {
             m11Hint.setVisibility(View.VISIBLE);
+            DialogUtils.showAlertDialog(QuestionnaireActivity.this,"提交失败","选项不可为空");
             return false;
         }
         if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {

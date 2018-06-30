@@ -1,15 +1,17 @@
 package com.wftd.kongyan.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.base.BaseActivity;
+import com.wftd.kongyan.callback.VersionCallback;
 import com.wftd.kongyan.entity.User;
 import com.wftd.kongyan.entity.Version;
-import com.wftd.kongyan.callback.VersionCallback;
 import com.wftd.kongyan.util.HttpUtils;
 
 /**
@@ -23,24 +25,30 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private TextView iv_wenjuan;
     private TextView iv_shuju;
     User user;
+    private RelativeLayout layout_version;
+
+    private Version versionInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = (User) getIntent().getSerializableExtra("user");
         setContentView(R.layout.activity_home);
+        layout_version = (RelativeLayout) findViewById(R.id.layout_version);
         iv_people = (ImageView) findViewById(R.id.iv_people);
         iv_wenjuan = (TextView) findViewById(R.id.tv_wenjuan);
         iv_shuju = (TextView) findViewById(R.id.tv_shuju);
         iv_people.setOnClickListener(this);
         iv_wenjuan.setOnClickListener(this);
         iv_shuju.setOnClickListener(this);
+        layout_version.setOnClickListener(this);
         HttpUtils.appUpdate(new VersionCallback() {
             @Override
             public boolean success(final Version version) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        versionInfo = version;
                         if (version.hasNewVersion(HomePageActivity.this)) {
                             findViewById(R.id.tv_new).setVisibility(View.VISIBLE);
                         } else {
@@ -76,6 +84,13 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 Intent intent3 = new Intent(this, DataUpActivity.class);
                 intent3.putExtra("user", user);
                 startActivity(intent3);
+                break;
+            case R.id.layout_version:
+                if (versionInfo != null && versionInfo.hasNewVersion(context)) {
+                    Uri uri = Uri.parse(versionInfo.getUrl());
+                    Intent intentApp = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intentApp);
+                }
                 break;
             default:
                 break;
