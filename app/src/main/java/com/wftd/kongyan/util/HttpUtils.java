@@ -34,12 +34,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpUtils {
+
     private static final String TAG = "HttpUtils";
     //测试
     //private static final String SERVER_ROOT = "http://47.93.150.167:8084/";
-    //正式4
+    //正式
     private static final String SERVER_ROOT = "http://47.93.254.44/";
-    private static final OkHttpClient client = new OkHttpClient();
 
     private static String createRequestUrl(String cmd, String method, Map<String, String> queryMap) {
         String param = createQueryString(queryMap);
@@ -266,7 +266,6 @@ public class HttpUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
             }
 
             @Override

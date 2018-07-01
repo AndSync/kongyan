@@ -19,17 +19,6 @@
         <item name="android:background">@drawable/login_shape</item>>
     </style>
 
-    <style name="myDialog" parent="android:Theme.Translucent.NoTitleBar.Fullscreen">
-        <item name="android:background">#00000000</item> <!-- 设置自定义布局的背景透明 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>  <!-- 设置window背景透明，也就是去边框 -->
-        <item name="android:windowNoTitle">true</item>
-        <!--是否浮现在activity之上-->
-        <item name="android:windowIsFloating">true</item>
-        <!--是否模糊-->
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowFrame">@null</item>
-    </style>
     <!--大标题-->
     <style name="step_title">
         <item name="android:layout_width">wrap_content</item>
@@ -83,6 +72,7 @@
         <item name="android:background">@drawable/baseinfo_edit_shape</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
     <style name="baseInfo_select_list">
         <item name="android:focusable">false</item>
         <item name="android:layout_width">match_parent</item>

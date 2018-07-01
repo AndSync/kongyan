@@ -90,6 +90,8 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                         mTvDataCount.setText("共有数据" + dbList.size() + "条");
                         LogUtils.d(TAG, dbList.toString());
                         mAdapter.notifyDataSetChanged();
+                    } else {
+                        mTvDataCount.setText("共有数据" + 0 + "条");
                     }
                 } catch (DbException e) {
                     e.printStackTrace();
@@ -111,6 +113,8 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                         } else {
                             mBtAllUpload.setVisibility(View.GONE);
                         }
+                    } else {
+                        mTvDataCount.setText("未上传数据" + 0 + "条");
                     }
                 } catch (DbException e) {
                     e.printStackTrace();

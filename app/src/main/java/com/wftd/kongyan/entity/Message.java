@@ -18,6 +18,13 @@ public class Message {
     private String title;
     private String content;
 
+    public Message(String id, String peopleId, String title, String content) {
+        this.id = id;
+        this.peopleId = peopleId;
+        this.title = title;
+        this.content = content;
+    }
+
     public String getId() {
         return id;
     }

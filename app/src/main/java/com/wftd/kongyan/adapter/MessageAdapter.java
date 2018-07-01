@@ -41,7 +41,7 @@ public class MessageAdapter extends BaseAdapter<Question> {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.message_item, viewGroup, false);
+            convertView = inflater.inflate(R.layout.item_message, viewGroup, false);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.context = (TextView) convertView.findViewById(R.id.context);

@@ -41,7 +41,7 @@ public class DataAdapter extends BaseAdapter<Question> {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.data_layout, viewGroup, false);
+            convertView = inflater.inflate(R.layout.item_data_manager, viewGroup, false);
             holder = new ViewHolder();
             holder.print = (ImageView) convertView.findViewById(R.id.print);
             holder.upfile = (ImageView) convertView.findViewById(R.id.upfile);

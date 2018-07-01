@@ -27,8 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:text="系统消息"
             android:textColor="@color/white"
@@ -39,8 +39,8 @@
         android:id="@+id/mylistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/gray"
-        android:dividerHeight="1dp"></ListView>
+        android:divider="@color/line_DDDDDD"
+        android:dividerHeight="1px"></ListView>
 
 
 </LinearLayout>

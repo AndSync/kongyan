@@ -121,7 +121,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.message:
             case R.id.layout_message:
-                Intent msgintent = new Intent(PersonalCenterActivity.this, MsgActivity.class);
+                Intent msgintent = new Intent(PersonalCenterActivity.this, MessageActivity.class);
                 startActivity(msgintent);
                 break;
             case R.id.layout_version:

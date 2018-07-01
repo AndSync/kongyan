@@ -80,7 +80,7 @@
             android:name=".activity.ModifyPwdActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.MsgActivity"
+            android:name=".activity.MessageActivity"
             android:screenOrientation="portrait"/>
     </application>
 
