@@ -69,7 +69,7 @@
             android:drawablePadding="5dp"
             android:drawableTop="@mipmap/wenjuan"
             android:gravity="center_horizontal"
-            android:text="调查问卷"/>
+            android:text="高盐筛查"/>
 
         <TextView
             android:id="@+id/tv_shuju"

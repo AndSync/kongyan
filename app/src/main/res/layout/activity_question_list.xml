@@ -22,11 +22,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="@string/question"
+            android:text="调查问卷"
             android:textColor="@color/white"
             android:textSize="16sp"/>
     </RelativeLayout>
@@ -86,10 +86,11 @@
 
                     <EditText
                         android:id="@+id/address"
-                        android:focusable="false"
                         style="@style/baseInfo_edit_style"
                         android:background="@drawable/baseinfo_not_edit_shape"
                         android:clickable="false"
+                        android:focusable="false"
+                        android:textColor="@color/text_gray"
                         android:hint="暂无数据"
                         android:maxLength="40"/>
                 </LinearLayout>
@@ -103,11 +104,12 @@
 
                     <EditText
                         android:id="@+id/doctor"
-                        android:focusable="false"
                         style="@style/baseInfo_edit_style"
                         android:background="@drawable/baseinfo_not_edit_shape"
                         android:clickable="false"
+                        android:focusable="false"
                         android:hint="暂无数据"
+                        android:textColor="@color/text_gray"
                         android:maxLength="40"/>
                 </LinearLayout>
 
@@ -242,8 +244,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/shape_white_corner"
+                android:background="@drawable/rect_shape"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -257,19 +258,26 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
-                        android:text="@string/sbp"/>
+                        android:text="@string/sbp"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
 
                     <EditText
                         android:id="@+id/input_sbp"
                         style="@style/sbp_and_dbp_style"
-                        android:focusable="false"/>
+                        android:focusable="false"
+                        android:textColor="@color/text_gray"
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="116dp"
+                        android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
-                        android:text="@string/mmhg"/>
+                        android:text="@string/mmhg"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
                 </LinearLayout>
 
                 <View
@@ -288,19 +296,26 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
-                        android:text="@string/dbp"/>
+                        android:text="@string/dbp"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
 
                     <EditText
                         android:id="@+id/input_dbp"
                         style="@style/sbp_and_dbp_style"
-                        android:focusable="false"/>
+                        android:focusable="false"
+                        android:textColor="@color/text_gray"
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="116dp"
+                        android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
-                        android:text="@string/mmhg"/>
+                        android:text="@string/mmhg"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -316,7 +331,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="是高血压患者"
+                    android:text="是否高血压患者"
                     android:textColor="@color/green"
                     android:textSize="14sp"/>
 
@@ -542,8 +557,8 @@
                 <RadioGroup
                     android:id="@+id/subject_11_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -561,8 +576,8 @@
 
                     <RadioButton
                         android:id="@+id/subject_11_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -617,8 +632,8 @@
                     android:id="@+id/subject_12_score_group"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
                     android:layout_alignParentRight="true"
+                    android:focusable="true"
                     android:orientation="vertical">
 
                     <RadioButton
@@ -695,8 +710,8 @@
                 <RadioGroup
                     android:id="@+id/subject_13_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -780,8 +795,8 @@
                 <RadioGroup
                     android:id="@+id/subject_14_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -866,8 +881,8 @@
                 <RadioGroup
                     android:id="@+id/subject_15_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -879,20 +894,20 @@
 
                     <RadioButton
                         android:id="@+id/subject_15_score_2"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（2分）"/>
 
                     <RadioButton
                         android:id="@+id/subject_15_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（1分）"/>
 
                     <RadioButton
                         android:id="@+id/subject_15_score_4"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -951,8 +966,8 @@
                 <RadioGroup
                     android:id="@+id/subject_16_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -976,8 +991,8 @@
 
                     <RadioButton
                         android:id="@+id/subject_16_score_4"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -1056,8 +1071,8 @@
                     android:id="@+id/subject_21_score_group"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
                     android:layout_alignParentRight="true"
+                    android:focusable="true"
                     android:orientation="vertical">
 
                     <RadioButton
@@ -1138,10 +1153,10 @@
                 </RadioGroup>
 
                 <RadioGroup
-                    android:layout_alignParentRight="true"
                     android:id="@+id/subject_22_score_group"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -1153,20 +1168,20 @@
 
                     <RadioButton
                         android:id="@+id/subject_22_score_2"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（2分）"/>
 
                     <RadioButton
                         android:id="@+id/subject_22_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（1分）"/>
 
                     <RadioButton
                         android:id="@+id/subject_22_score_4"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -1226,8 +1241,8 @@
                 <RadioGroup
                     android:id="@+id/subject_23_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -1307,8 +1322,8 @@
                 <RadioGroup
                     android:id="@+id/subject_24_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
@@ -1326,8 +1341,8 @@
 
                     <RadioButton
                         android:id="@+id/subject_24_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -1383,15 +1398,15 @@
                 <RadioGroup
                     android:id="@+id/subject_25_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
                     <RadioButton
                         android:id="@+id/subject_25_score_1"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（2分）"/>
 
                     <RadioButton
@@ -1402,8 +1417,8 @@
 
                     <RadioButton
                         android:id="@+id/subject_25_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -1460,14 +1475,14 @@
                     android:id="@+id/subject_26_score_group"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
                     android:layout_alignParentRight="true"
+                    android:focusable="true"
                     android:orientation="vertical">
 
                     <RadioButton
                         android:id="@+id/subject_26_score_1"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（2分）"/>
 
                     <RadioButton
@@ -1478,8 +1493,8 @@
 
                     <RadioButton
                         android:id="@+id/subject_26_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>
@@ -1534,27 +1549,27 @@
                 <RadioGroup
                     android:id="@+id/subject_27_score_group"
                     android:layout_width="100dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:focusable="true"
                     android:orientation="vertical">
 
                     <RadioButton
                         android:id="@+id/subject_27_score_1"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（2分）"/>
 
                     <RadioButton
                         android:id="@+id/subject_27_score_2"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（1分）"/>
 
                     <RadioButton
                         android:id="@+id/subject_27_score_3"
-                        android:background="@color/transparent"
                         style="@style/score_radioButton_style"
+                        android:background="@color/transparent"
                         android:text="（0分）"/>
                 </RadioGroup>
             </RelativeLayout>

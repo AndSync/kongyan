@@ -50,7 +50,7 @@ public class BloodMeasureActivity extends BaseActivity
     private ImageView mBack;
     private EditText mEtSBP;//收缩压
     private EditText mEtDBP;//舒张压
-    private TextView mAuto;//自动获取
+    private TextView mAuto;//测量血压
     private TextView mHint;//未选择口服盐编号提示
     private RadioGroup mGroup;
     private RadioButton first;
@@ -89,13 +89,13 @@ public class BloodMeasureActivity extends BaseActivity
 
             switch (msg.what) {
                 case MESSAGE_SCAN_SUCCESS:
-                    mAuto.setText("连接设备");
+                    mAuto.setText("匹配设备");
                     break;
                 case MESSAGE_LINK_SUCCESS:
-                    mAuto.setText("自动获取");
+                    mAuto.setText("测量血压");
                     break;
                 case MESSAGE_LINK_FAILURE:
-                    mAuto.setText("连接设备");
+                    mAuto.setText("匹配设备");
                     break;
                 case MESSAGE_MEASURE_END:
                     Bundle bundle = msg.getData();
@@ -103,15 +103,21 @@ public class BloodMeasureActivity extends BaseActivity
                     String hight = bundle.getString("hight", "");
                     mEtSBP.setText(hight);
                     mEtDBP.setText(low);
-                    mAuto.setText("自动获取");
+                    mAuto.setText("测量结束");
+                    mAuto.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAuto.setText("测量血压");
+                        }
+                    },3000);
                     break;
                 case HANDLER_ERROR:
-                    mAuto.setText("自动获取");
-                    DialogUtils.showAlertDialog(context, "获取失败", "请确保正确佩戴设备");
+                    mAuto.setText("测量血压");
+                    DialogUtils.showAlertDialog(context, "测量失败", "请确保正确佩戴血压仪袖带");
                     break;
                 case MESSAGE_MEASURE_TIMEOUT:
-                    mAuto.setText("自动获取");
-                    DialogUtils.showAlertDialog(context, "获取失败", "获取超时请重新获取");
+                    mAuto.setText("测量血压");
+                    DialogUtils.showAlertDialog(context, "测量失败", "请确保正确佩戴血压仪袖带");
                     break;
                 case HANDLER_MESSAGE:
                     Log.d(TAG, (String) msg.obj);
@@ -125,7 +131,7 @@ public class BloodMeasureActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question_index);
+        setContentView(R.layout.activity_blood_measure);
         init();
     }
 
@@ -430,8 +436,8 @@ public class BloodMeasureActivity extends BaseActivity
                 startActivityForResult(nextIntent, 0);
                 break;
             case R.id.home_auto_get:
-                if ("自动获取".equals(mAuto.getText().toString())) {
-                    mAuto.setText("获取中，请稍等...");
+                if ("测量血压".equals(mAuto.getText().toString())) {
+                    mAuto.setText("测量中，请等待...");
                     mEtSBP.setText("");
                     mEtDBP.setText("");
                     if (bp3lControl != null) {
@@ -440,8 +446,8 @@ public class BloodMeasureActivity extends BaseActivity
                         ToastUtils.show(context, "iHealth未连接");
                     }
                 }
-                if ("连接设备".equals(mAuto.getText().toString())) {
-                    mAuto.setText("连接中，请稍等...");
+                if ("匹配设备".equals(mAuto.getText().toString())) {
+                    mAuto.setText("匹配中，请等待...");
                     boolean req = iHealthDevicesManager.getInstance()
                         .connectDevice(userName, deviceMac, iHealthDevicesManager.TYPE_BP3L);
                     if (!req) {

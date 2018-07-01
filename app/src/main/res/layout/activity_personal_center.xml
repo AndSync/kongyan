@@ -170,7 +170,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="设备卡号："
+            android:text="绑定手机："
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
@@ -198,9 +198,9 @@
         android:background="@color/line_DDDDDD"/>
 
     <LinearLayout
+        android:id="@+id/layout_modify"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/layout_modify"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -244,9 +244,9 @@
         android:layout_height="45dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:paddingRight="20dp"
         android:orientation="horizontal"
-        android:paddingLeft="20dp">
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -260,9 +260,9 @@
         <ImageView
             android:id="@+id/iv_new_version"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_new"/>
+            android:src="@mipmap/ic_new"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_version"
@@ -276,14 +276,14 @@
         <ImageView
             android:id="@+id/iv_arrow_version"
             android:layout_width="20dp"
-            android:visibility="gone"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:scaleType="centerInside"
             android:src="@mipmap/arrow_right"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <View
