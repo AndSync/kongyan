@@ -10,7 +10,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
  *
  * @author AndSync
  * @date 2017/10/18
- * Copyright © 2014-2017 北京智阅网络科技有限公司 All rights reserved.
+ * Copyright © 2014-2017 AndSync All rights reserved.
  */
 public class AppUtils {
 

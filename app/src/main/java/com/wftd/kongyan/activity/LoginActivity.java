@@ -36,11 +36,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 1:
-
-                    break;
                 case 2:
-                    Toast.makeText(LoginActivity.this, "登录失败,请检查用户名密码是否正确", Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(context,"登录失败,请检查用户名密码是否正确");
                     break;
             }
         }

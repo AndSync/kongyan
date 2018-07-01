@@ -6,7 +6,7 @@ import android.view.View;
 /**
  * @author AndSync
  * @date 2017/11/13
- * Copyright © 2014-2017 北京智阅网络科技有限公司 All rights reserved.
+ * Copyright © 2014-2017 AndSync All rights reserved.
  */
 public class ViewHolder {
     @SuppressWarnings("unchecked")

@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author AndSync
  * @date 2016/5/18
- * Copyright © 2014-2017 北京智阅网络科技有限公司 All rights reserved.
+ * Copyright © 2014-2017 AndSync All rights reserved.
  */
 public class UserHelper {
     /**

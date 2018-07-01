@@ -15,7 +15,7 @@ import org.xutils.x;
 /**
  * @author AndSync
  * @date 2018/6/30
- * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
+ * Copyright © 2014-2018 AndSync All rights reserved.
  */
 public class App extends Application {
     private static App mApp;
