@@ -560,4 +560,116 @@ public class Question implements java.io.Serializable {
     public void setReturnVisitDate(String returnVisitDate) {
         this.returnVisitDate = returnVisitDate;
     }
+
+    @Override
+    public String toString() {
+        return "Question{"
+            + "id="
+            + id
+            + ", isUpdate="
+            + isUpdate
+            + ", name='"
+            + name
+            + '\''
+            + ", phoneNumber='"
+            + phoneNumber
+            + '\''
+            + ", height='"
+            + height
+            + '\''
+            + ", weight='"
+            + weight
+            + '\''
+            + ", sex="
+            + sex
+            + ", age="
+            + age
+            + ", ageType="
+            + ageType
+            + ", district='"
+            + district
+            + '\''
+            + ", systolicPressure="
+            + systolicPressure
+            + ", systolicPressureType="
+            + systolicPressureType
+            + ", diastolicPressure="
+            + diastolicPressure
+            + ", diastolicPressureType="
+            + diastolicPressureType
+            + ", saltThreshold="
+            + saltThreshold
+            + ", patientType="
+            + patientType
+            + ", takeDrugsA="
+            + takeDrugsA
+            + ", takeDrugsB="
+            + takeDrugsB
+            + ", takeDrugsC="
+            + takeDrugsC
+            + ", takeDrugsD="
+            + takeDrugsD
+            + ", takeDrugsE="
+            + takeDrugsE
+            + ", takeDrugsF="
+            + takeDrugsF
+            + ", takeDrugsG="
+            + takeDrugsG
+            + ", takeDrugsType="
+            + takeDrugsType
+            + ", takeDrugs1Type="
+            + takeDrugs1Type
+            + ", takeDrugs2Type="
+            + takeDrugs2Type
+            + ", takeDrugs3Type="
+            + takeDrugs3Type
+            + ", q1="
+            + q1
+            + ", q2="
+            + q2
+            + ", q3="
+            + q3
+            + ", q4="
+            + q4
+            + ", q5="
+            + q5
+            + ", q6="
+            + q6
+            + ", q7="
+            + q7
+            + ", q8="
+            + q8
+            + ", q9="
+            + q9
+            + ", q10="
+            + q10
+            + ", q11="
+            + q11
+            + ", q12="
+            + q12
+            + ", q13="
+            + q13
+            + ", score="
+            + score
+            + ", scoreType="
+            + scoreType
+            + ", peopleId='"
+            + peopleId
+            + '\''
+            + ", doctorId='"
+            + doctorId
+            + '\''
+            + ", organizationId='"
+            + organizationId
+            + '\''
+            + ", submitDate='"
+            + submitDate
+            + '\''
+            + ", isReturnVisit="
+            + isReturnVisit
+            + ", returnVisitDate='"
+            + returnVisitDate
+            + '\''
+            + '}';
+    }
 }

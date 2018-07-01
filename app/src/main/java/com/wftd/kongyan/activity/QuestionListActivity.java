@@ -42,7 +42,9 @@ import com.wftd.kongyan.view.AddressSelector;
 import com.wftd.kongyan.view.address.City;
 import com.wftd.kongyan.view.address.CityInterface;
 import com.wftd.kongyan.view.address.OnItemClickListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.xutils.common.util.KeyValue;
 import org.xutils.db.sqlite.WhereBuilder;
@@ -615,6 +617,9 @@ public class QuestionListActivity extends BaseActivity2
                     saveQuestion.setQ12(m26Score);
                     saveQuestion.setQ13(m27Score);
                     saveQuestion.setScore(mNumber);
+
+                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+                    saveQuestion.setSubmitDate(df.format(new Date()));
                     db.save(saveQuestion);
                     List<Question> All = db.findAll(Question.class);
                     Question question = All.get(All.size() - 1);

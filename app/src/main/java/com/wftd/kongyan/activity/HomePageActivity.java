@@ -79,7 +79,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 startActivity(intent2);
                 break;
             case R.id.tv_shuju:
-                Intent intent3 = new Intent(this, DataUpActivity.class);
+                Intent intent3 = new Intent(this, DataManagerActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.layout_version:

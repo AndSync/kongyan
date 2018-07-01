@@ -17,7 +17,6 @@ import com.wftd.kongyan.db.DBManager;
 import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.HttpUtils;
-import com.wftd.kongyan.util.LogUtils;
 import com.wftd.kongyan.util.PhoneUtils;
 import com.wftd.kongyan.util.StringUtils;
 import com.wftd.kongyan.util.ToastUtils;
@@ -82,11 +81,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
 
                 if (PhoneUtils.isNetworkAvailable(this)) {
-                    HttpUtils.LoginGet(PhoneNumber, pwd, (LoginCallback) LoginActivity.this);
+                    HttpUtils.LoginGet(PhoneNumber, pwd, LoginActivity.this);
                 } else {//没有网络的情况下
                     try {
-                        List<People> list = db.findAll(People.class);
-                        LogUtils.d(TAG, list.toString());
                         People user = db.selector(People.class)
                             .where("phoneNumber", "=", PhoneNumber)
                             .and("passwordText", "=", pwd)

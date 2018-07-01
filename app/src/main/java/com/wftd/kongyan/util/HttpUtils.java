@@ -34,6 +34,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpUtils {
+    private static final String TAG = "HttpUtils";
     private static final String SERVER_ROOT = "http://47.93.150.167:8084/";
     private static final OkHttpClient client = new OkHttpClient();
 
@@ -230,13 +231,13 @@ public class HttpUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                LogUtils.d(TAG, e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
                 String result = response.body().string();
+                LogUtils.d(TAG, result);
                 JSONObject jsonObject = JSONObject.fromObject(result);
                 int code = jsonObject.getInt("code");
                 if (code == 0) {

@@ -12,7 +12,6 @@ import com.wftd.kongyan.activity.QuestionResultActivity;
 import com.wftd.kongyan.base.BaseAdapter;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
-import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -22,7 +21,6 @@ import java.util.List;
 public class DataAdapter extends BaseAdapter<Question> {
 
     private LayoutInflater inflater;
-    DecimalFormat textformat = null;
     private boolean isUp = false;
 
     public boolean isUp() {
@@ -37,7 +35,6 @@ public class DataAdapter extends BaseAdapter<Question> {
         this.mContext = context;
         this.mDataList = questions;
         inflater = LayoutInflater.from(context);
-        textformat = new DecimalFormat("000");
     }
 
     @Override
@@ -55,22 +52,17 @@ public class DataAdapter extends BaseAdapter<Question> {
         }
 
         final Question question = (Question) mDataList.get(i);
-        if (question.isUpdate()) {//上传了就不显示
+        if (question.isUpdate()) {
             holder.upfile.setVisibility(View.GONE);
         } else {
             holder.upfile.setVisibility(View.VISIBLE);
         }
-        holder.number.setText(textformat.format(question.getId()) + "号用户");
+        holder.number.setText(question.getSubmitDate());
 
         holder.upfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onItemAddClick.onItemClick(question);
-                if (!isUp) {
-                    view.setVisibility(View.GONE);
-                }
-                mDataList.remove(question);
-                notifyDataSetChanged();
             }
         });
 
@@ -80,16 +72,16 @@ public class DataAdapter extends BaseAdapter<Question> {
 
                 Result result1 = null;
 
-                int mNumber = getValues(question);//获取的总值
-                if (mNumber < 9) {//没有超标
+                int mNumber = getValues(question);
+                if (mNumber < 9) {
                     result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
                         question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
                         mNumber + "", "低盐（食盐摄入量合适）- 处于正常范围 - 保持清淡饮食，合理膳食");
-                } else if (9 <= mNumber && mNumber < 13) {
+                } else if (9 <= mNumber && mNumber <= 13) {
                     result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
                         question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
                         mNumber + "", "正常（食盐摄入量合适）- 处于正常范围 - 请保持清淡饮食，建议咨询门诊医生是否需要调整降压治疗");
-                } else if (14 <= mNumber && mNumber < 19) {
+                } else if (14 <= mNumber && mNumber <= 19) {
                     result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
                         question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
                         mNumber + "", "中盐（食盐摄入量偏高）- 超出正常范围偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压");
@@ -111,12 +103,10 @@ public class DataAdapter extends BaseAdapter<Question> {
         private TextView number;
     }
 
-    public static interface OnQuestion {
-        // true add; false cancel
-        public void onItemClick(Question question); //传递boolean类型数据给activity
+    public interface OnQuestion {
+        void onItemClick(Question question);
     }
 
-    // add click callback
     public OnQuestion onItemAddClick;
 
     public void setOnAddClickListener(OnQuestion onItemAddClick) {

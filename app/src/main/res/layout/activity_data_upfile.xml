@@ -16,6 +16,7 @@
         android:background="@color/green">
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -52,25 +53,25 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_data_all_select"
+            android:background="@drawable/selector_data_radio_left"
             android:button="@null"
             android:checked="true"
             android:gravity="center"
             android:text="全部"
-            android:textColor="@color/white"
-            android:textSize="14sp"></RadioButton>
+            android:textColor="@color/selector_text_black2gray"
+            android:textSize="14sp"/>
 
         <RadioButton
             android:id="@+id/not_up"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_data_part_default"
+            android:background="@drawable/selector_data_radio_right"
             android:button="@null"
             android:gravity="center"
             android:text="未上传"
-            android:textColor="@color/text_gray"
-            android:textSize="14sp"></RadioButton>
+            android:textColor="@color/selector_text_black2gray"
+            android:textSize="14sp"/>
     </RadioGroup>
 
 
@@ -90,7 +91,7 @@
             android:layout_centerVertical="true"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="共有数据"
+            android:text="共有数据0条"
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 

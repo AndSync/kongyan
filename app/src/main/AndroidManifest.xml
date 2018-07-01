@@ -44,7 +44,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -63,6 +64,9 @@
             android:name=".activity.PersonalCenterActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".activity.DataManagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".activity.QuestionResultActivity"
             android:screenOrientation="portrait"/>
         <activity
@@ -71,9 +75,6 @@
             android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".activity.HomePageActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.DataUpActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.ModifyPwdActivity"

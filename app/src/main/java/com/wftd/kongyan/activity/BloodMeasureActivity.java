@@ -109,7 +109,7 @@ public class BloodMeasureActivity extends BaseActivity
                         public void run() {
                             mAuto.setText("测量血压");
                         }
-                    },3000);
+                    }, 3000);
                     break;
                 case HANDLER_ERROR:
                     mAuto.setText("测量血压");
