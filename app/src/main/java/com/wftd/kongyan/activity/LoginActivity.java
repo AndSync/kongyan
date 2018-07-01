@@ -7,7 +7,6 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.app.App;
 import com.wftd.kongyan.base.BaseActivity;
@@ -37,7 +36,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             super.handleMessage(msg);
             switch (msg.what) {
                 case 2:
-                    ToastUtils.show(context,"登录失败,请检查用户名密码是否正确");
+                    ToastUtils.show(context, "登录失败,请检查用户名密码是否正确");
                     break;
             }
         }

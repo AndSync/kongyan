@@ -35,7 +35,10 @@ import okhttp3.Response;
 
 public class HttpUtils {
     private static final String TAG = "HttpUtils";
-    private static final String SERVER_ROOT = "http://47.93.150.167:8084/";
+    //测试
+    //private static final String SERVER_ROOT = "http://47.93.150.167:8084/";
+    //正式4
+    private static final String SERVER_ROOT = "http://47.93.254.44/";
     private static final OkHttpClient client = new OkHttpClient();
 
     private static String createRequestUrl(String cmd, String method, Map<String, String> queryMap) {

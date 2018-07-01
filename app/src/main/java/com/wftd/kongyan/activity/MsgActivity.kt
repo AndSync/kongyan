@@ -26,7 +26,7 @@ class MsgActivity : BaseActivity(), View.OnClickListener, MessageCallback {
 
             when (msg.what) {
                 1 -> {
-                    Toast.makeText(this@MsgActivity, "暂无数据", 1).show()
+                    Toast.makeText(this@MsgActivity, "暂无数据", Toast.LENGTH_LONG).show()
                 }
                 2 -> {
                     (mylistview.adapter as MessageAdapter).notifyDataSetChanged()
