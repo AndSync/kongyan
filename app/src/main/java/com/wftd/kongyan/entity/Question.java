@@ -104,6 +104,8 @@ public class Question implements java.io.Serializable {
     private int isReturnVisit;
     @Column(name = "returnVisitDate")
     private String returnVisitDate;
+    @Column(name = "loginUserId")
+    private String loginUserId;
 
     public Question() {
     }
@@ -559,6 +561,14 @@ public class Question implements java.io.Serializable {
 
     public void setReturnVisitDate(String returnVisitDate) {
         this.returnVisitDate = returnVisitDate;
+    }
+
+    public String getLoginUserId() {
+        return loginUserId;
+    }
+
+    public void setLoginUserId(String loginUserId) {
+        this.loginUserId = loginUserId;
     }
 
     @Override

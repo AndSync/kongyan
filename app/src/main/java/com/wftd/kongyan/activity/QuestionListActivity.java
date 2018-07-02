@@ -201,6 +201,7 @@ public class QuestionListActivity extends BaseActivity2
     private boolean isUsedJyy;
     private boolean highBloodSelected;
     private boolean jyySelected;
+    private Result result1 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,6 +248,8 @@ public class QuestionListActivity extends BaseActivity2
                             mPopupWindow.dismiss();
                         }
                         break;
+                    default:
+                        break;
                 }
             }
         });
@@ -267,6 +270,8 @@ public class QuestionListActivity extends BaseActivity2
                         break;
                     case 2:
                         addressSelector.setCities(mAreaList);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -469,10 +474,11 @@ public class QuestionListActivity extends BaseActivity2
         rg_is_jyy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 if (checkedId == R.id.rb_jyy1) {
+                    isUsedJyy = true;
                     setJyyType(true);
                 } else {
+                    isUsedJyy = false;
                     setJyyType(false);
                 }
                 jyySelected = true;
@@ -513,46 +519,35 @@ public class QuestionListActivity extends BaseActivity2
                     return;
                 }
                 int mNumber = getValues();//获取的总值
-                Result result1 = null;
                 //这里需要判断一下对应的药物
 
                 boolean isNext = false;
                 switch (index) {
-
                     case 1:
-                        if (0 <= mNumber && mNumber <= 19) {
+                        if (1 <= mNumber && mNumber <= 19) {
                             isNext = true;
+                        }
+                        if (mNumber <= 18) {
+                            mNumber = 19;
                         }
                         break;
                     case 2:
-                        if (9 <= mNumber && mNumber <= 13) {
-                            isNext = true;
-                        }
-                        if (mNumber <= 13) {
-                            mNumber = 13;
-                        }
+                        isNext = true;
                         break;
                     case 3:
-                        if (14 <= mNumber && mNumber <= 19) {
-
-                        }
-                        if (mNumber <= 19) {
-                            mNumber = 19;
-                        }
                         isNext = true;
                         break;
                     case 4:
-                        if (9 < mNumber) {
-                            if (mNumber < 20) {
-                                mNumber = 20;
-                            }
+                        if (mNumber >= 9) {
                             isNext = true;
                         }
+                        break;
+                    default:
                         break;
                 }
 
                 if (!isNext) {
-                    DialogUtils.showAlertDialog(QuestionListActivity.this, "提示", "得分与适用盐度有出入建议复核问卷数据");
+                    DialogUtils.showAlertDialog(context, "提示", "得分与适用盐度有出入建议复核问卷数据");
                     return;
                 }
                 if (mNumber < 9) {
@@ -620,19 +615,17 @@ public class QuestionListActivity extends BaseActivity2
 
                     SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
                     saveQuestion.setSubmitDate(df.format(new Date()));
+                    saveQuestion.setLoginUserId(mUser.getId());
                     db.save(saveQuestion);
-                    List<Question> All = db.findAll(Question.class);
-                    Question question = All.get(All.size() - 1);
+                    //存储后在获取出来，主要是为了获取数据库生成的id，这也是个办法
+                    List<Question> allData = db.findAll(Question.class);
+                    Question question = allData.get(allData.size() - 1);
                     List<Question> questions = new ArrayList<>();
                     questions.add(question);
                     HttpUtils.QuestionPost(questions, this);
                 } catch (DbException e) {
                     e.printStackTrace();
                 }
-
-                Intent intent = new Intent(context, QuestionResultActivity.class);
-                intent.putExtra("result", result1);
-                startActivityForResult(intent, Constant.FINISH_ACTIVITY);
                 break;
             //返回
             case R.id.question_back:
@@ -684,118 +677,138 @@ public class QuestionListActivity extends BaseActivity2
         weight = mBaseWeight.getText().toString();
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(phone) || StringUtils.isEmpty(age) || StringUtils.isEmpty(
             sex) || StringUtils.isEmpty(height) || StringUtils.isEmpty(weight)) {
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "基本信息不完整");
+            DialogUtils.showAlertDialog(context, "提交失败", "基本信息不完整");
             mScrollerView.scrollTo(0, 0);
             return false;
         }
         if (!CommonUtils.isMobile(phone)) {
             mScrollerView.scrollTo(0, 0);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的手机号");
+            DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的手机号");
             return false;
         }
 
         if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {
             mScrollerView.scrollTo(0, 0);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的年龄");
+            DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的年龄");
             return false;
         }
         if (height.substring(0, 1).equals("0") || Integer.parseInt(height) < 10 || Integer.parseInt(height) > 300) {
             mScrollerView.scrollTo(0, 0);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的身高");
+            DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的身高");
             return false;
         }
         if (weight.substring(0, 1).equals("0") || Integer.parseInt(weight) < 1 || Integer.parseInt(weight) > 500) {
             mScrollerView.scrollTo(0, 0);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请输入正确的体重");
+            DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的体重");
             return false;
         }
 
         if (!highBloodSelected) {
             scrollTarget(rg_is_high_blood);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请选择是否高血压患者");
+            DialogUtils.showAlertDialog(context, "提交失败", "请选择是否高血压患者");
+            return false;
+        }
+        if (isHighBlood && mHighBloodGroup.getCheckedRadioButtonId() == -1) {
+            scrollTarget(rg_is_high_blood);
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (!jyySelected) {
             scrollTarget(rg_is_jyy);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "请选择目前是否服用降压药");
+            DialogUtils.showAlertDialog(context, "提交失败", "请选择目前是否服用降压药");
             return false;
+        }
+        if (isUsedJyy) {
+            boolean hasJyyChecked = false;
+            for (int i = 0; i < mJyyTypeGroup.getChildCount(); i++) {
+                CheckBox button = (CheckBox) mJyyTypeGroup.getChildAt(i);
+                if (button.isChecked()) {
+                    hasJyyChecked = true;
+                    break;
+                }
+            }
+            if (!hasJyyChecked) {
+                scrollTarget(rg_is_jyy);
+                DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
+                return false;
+            }
         }
         if (StringUtils.isEmpty(m11Content)) {
             m11Hint.setVisibility(View.VISIBLE);
             scrollTarget(m11Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m12Content)) {
             m12Hint.setVisibility(View.VISIBLE);
             scrollTarget(m12Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m13Content)) {
             m13Hint.setVisibility(View.VISIBLE);
             scrollTarget(m13Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m14Content)) {
             m14Hint.setVisibility(View.VISIBLE);
             scrollTarget(m14Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m15Content)) {
             m15Hint.setVisibility(View.VISIBLE);
             scrollTarget(m15Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m16Content)) {
             m16Hint.setVisibility(View.VISIBLE);
             scrollTarget(m16Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m21Content)) {
             m21Hint.setVisibility(View.VISIBLE);
             scrollTarget(m21Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m22Content)) {
             m22Hint.setVisibility(View.VISIBLE);
             scrollTarget(m22Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m23Content)) {
             m23Hint.setVisibility(View.VISIBLE);
             scrollTarget(m23Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m24Content)) {
             m24Hint.setVisibility(View.VISIBLE);
             scrollTarget(m24Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m25Content)) {
             m25Hint.setVisibility(View.VISIBLE);
             scrollTarget(m25Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m26Content)) {
             m26Hint.setVisibility(View.VISIBLE);
             scrollTarget(m26Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         if (StringUtils.isEmpty(m27Content)) {
             m27Hint.setVisibility(View.VISIBLE);
             scrollTarget(m27Hint);
-            DialogUtils.showAlertDialog(QuestionListActivity.this, "提交失败", "选项不可为空");
+            DialogUtils.showAlertDialog(context, "提交失败", "选项不可为空");
             return false;
         }
         return true;
@@ -825,7 +838,7 @@ public class QuestionListActivity extends BaseActivity2
             if (!state) {
                 r.setChecked(state);
             }
-            r.setClickable(state);
+            r.setEnabled(state);
         }
     }
 
@@ -836,7 +849,7 @@ public class QuestionListActivity extends BaseActivity2
             if (!state) {
                 c.setChecked(state);
             }
-            c.setClickable(state);
+            c.setEnabled(state);
         }
     }
 
@@ -881,6 +894,8 @@ public class QuestionListActivity extends BaseActivity2
                 break;
             case R.id.subject_27_text_group:
                 getRadioButtonValues(27, radioGroupText, checkedId, mRadioGroup27Score);
+                break;
+            default:
                 break;
         }
     }
@@ -960,6 +975,8 @@ public class QuestionListActivity extends BaseActivity2
                 m27Score = Integer.parseInt(score.substring(1, score.length() - 2));
                 m27Hint.setVisibility(View.GONE);
                 break;
+            default:
+                break;
         }
     }
 
@@ -999,12 +1016,20 @@ public class QuestionListActivity extends BaseActivity2
         if (question != null) {
             question.setUpdate(true);
             try {
-                //                db.update(question, "isUpdate");
                 db.update(Question.class, WhereBuilder.b("id", "=", question.getId()), new KeyValue("isUpdate", true));
             } catch (DbException e) {
                 e.printStackTrace();
             }
         }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(context, QuestionResultActivity.class);
+                intent.putExtra("result", result1);
+                startActivityForResult(intent, Constant.FINISH_ACTIVITY);
+                finishActivity();
+            }
+        });
     }
 
     @Override
@@ -1014,7 +1039,21 @@ public class QuestionListActivity extends BaseActivity2
 
     @Override
     public void fail() {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.showAlertDialog(context, "提交失败", "请稍后到\"数据管理\"页面重新提交",
+                    new DialogUtils.OnSubmitFailureListener() {
+                        @Override
+                        public void onClick() {
+                            Intent intent = new Intent(context, QuestionResultActivity.class);
+                            intent.putExtra("result", result1);
+                            startActivityForResult(intent, Constant.FINISH_ACTIVITY);
+                            finishActivity();
+                        }
+                    });
+            }
+        });
     }
 
     private void scrollTarget(final View targetView) {

@@ -19,6 +19,10 @@ import com.wftd.kongyan.R;
  */
 public class DialogUtils {
 
+    public interface OnSubmitFailureListener {
+        void onClick();
+    }
+
     public static Dialog showAlertDialog(Context context, String title, String content) {
         final Dialog dialog = showCenterDialog(context, R.layout.dialog_alert);
         TextView tvTitle = (TextView) dialog.findViewById(R.id.tv_title);
@@ -32,7 +36,26 @@ public class DialogUtils {
                 dialog.dismiss();
             }
         });
+        return dialog;
+    }
 
+    public static Dialog showAlertDialog(Context context, String title, String content,
+        final OnSubmitFailureListener listener) {
+        final Dialog dialog = showCenterDialog(context, R.layout.dialog_alert);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.tv_title);
+        TextView tvContent = (TextView) dialog.findViewById(R.id.tv_content);
+        ImageView ivSure = (ImageView) dialog.findViewById(R.id.iv_sure);
+        tvTitle.setText(Html.fromHtml(title));
+        tvContent.setText(Html.fromHtml(content));
+        ivSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (listener != null) {
+                    listener.onClick();
+                }
+            }
+        });
         return dialog;
     }
 

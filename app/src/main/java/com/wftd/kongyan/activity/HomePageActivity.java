@@ -12,8 +12,11 @@ import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.VersionCallback;
 import com.wftd.kongyan.entity.People;
+import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Version;
 import com.wftd.kongyan.util.HttpUtils;
+import java.util.List;
+import org.xutils.ex.DbException;
 
 /**
  * @author AndSync
@@ -25,10 +28,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private ImageView iv_people;
     private TextView iv_wenjuan;
     private TextView iv_shuju;
-    private People user = UserHelper.getUserInfo();
     private RelativeLayout layout_version;
 
     private Version versionInfo;
+    private ImageView iv_alert;
+    private People user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +42,12 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         iv_people = (ImageView) findViewById(R.id.iv_people);
         iv_wenjuan = (TextView) findViewById(R.id.tv_wenjuan);
         iv_shuju = (TextView) findViewById(R.id.tv_shuju);
+        iv_alert = (ImageView) findViewById(R.id.iv_alert);
         iv_people.setOnClickListener(this);
         iv_wenjuan.setOnClickListener(this);
         iv_shuju.setOnClickListener(this);
         layout_version.setOnClickListener(this);
+        user = UserHelper.getUserInfo();
         HttpUtils.appUpdate(new VersionCallback() {
             @Override
             public boolean success(final Version version) {
@@ -65,6 +71,24 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            List dbList = db.selector(Question.class)
+                .where("isUpdate", "=", false)
+                .and("loginUserId", "=", user.getId())
+                .findAll();
+            if (dbList != null && dbList.size() > 0) {
+                iv_alert.setVisibility(View.VISIBLE);
+            } else {
+                iv_alert.setVisibility(View.GONE);
+            }
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

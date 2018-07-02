@@ -37,9 +37,9 @@ public class HttpUtils {
 
     private static final String TAG = "HttpUtils";
     //测试
-    //private static final String SERVER_ROOT = "http://47.93.150.167:8084/";
+    private static final String SERVER_ROOT = "http://47.93.150.167:8084/";
     //正式
-    private static final String SERVER_ROOT = "http://47.93.254.44/";
+    //private static final String SERVER_ROOT = "http://47.93.254.44/";
 
     private static String createRequestUrl(String cmd, String method, Map<String, String> queryMap) {
         String param = createQueryString(queryMap);
@@ -210,7 +210,6 @@ public class HttpUtils {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
                 String result = response.body().string();
                 JSONObject jsonObject = JSONObject.fromObject(result);
                 int code = jsonObject.getInt("code");
@@ -234,7 +233,7 @@ public class HttpUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                LogUtils.d(TAG, e.getMessage());
+                callback.fail();
             }
 
             @Override

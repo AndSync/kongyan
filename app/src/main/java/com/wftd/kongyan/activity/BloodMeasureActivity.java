@@ -500,11 +500,6 @@ public class BloodMeasureActivity extends BaseActivity
     private void clearInput() {
         mEtSBP.setText("");
         mEtDBP.setText("");
-        for (int i = 0; i < mGroup.getChildCount(); i++) {
-            View view = mGroup.getChildAt(i);
-            if (view instanceof RadioButton) {
-                ((RadioButton) view).setChecked(false);
-            }
-        }
+        mGroup.clearCheck();
     }
 }

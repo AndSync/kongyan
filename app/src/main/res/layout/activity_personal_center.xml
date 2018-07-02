@@ -342,7 +342,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="查看消息"
+            android:text="系统通知"
             android:textColor="@color/text_black"
             android:textSize="14sp"/>
 

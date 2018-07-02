@@ -12,6 +12,6 @@
         <attr name="BtnSpacing" format="dimension"/>
         <!--边框颜色和样式-->
         <attr name="styleColor" format="color"/>
-        <attr name="borderStyle" format="string" />
+        <attr name="borderStyle" format="string"/>
     </declare-styleable>
 </resources>

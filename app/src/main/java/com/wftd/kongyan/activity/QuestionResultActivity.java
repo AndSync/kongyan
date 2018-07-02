@@ -77,7 +77,7 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
         }
         mName.setText(name + call + GREETING);
         String textStr = "您的血压值为: <font color=\"#178078\">" + blood + "</font>";
-        String textStr1 = "您的综合得分为: <font color=\"#178078\">" + score + "</font>";
+        String textStr1 = "您的综合得分为: <font color=\"#178078\">" + score + "分</font>";
         mBlood.setText(Html.fromHtml(textStr));
         mSalt.setText(salt);
         mScore.setText(Html.fromHtml(textStr1));

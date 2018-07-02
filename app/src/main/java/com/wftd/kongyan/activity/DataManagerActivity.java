@@ -9,8 +9,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
 import com.wftd.kongyan.adapter.DataAdapter;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.QuestionCallback;
+import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.HttpUtils;
@@ -39,6 +41,8 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
     private List<Question> dataList = new ArrayList<>();
     private DataAdapter mAdapter;
     private int index;
+    private ImageView iv_alert;
+    private People user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +54,12 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
         mTvDataCount = (TextView) findViewById(R.id.data_number);
         mBtAllUpload = (Button) findViewById(R.id.all_data);
         mListView = (ListView) findViewById(R.id.mlitview);
+        iv_alert = (ImageView) findViewById(R.id.iv_alert);
         mIvBack.setOnClickListener(this);
         mRbAll.setOnClickListener(this);
         mRbNotUp.setOnClickListener(this);
         mBtAllUpload.setOnClickListener(this);
+        user = UserHelper.getUserInfo();
         mAdapter = new DataAdapter(this, dataList);
         mListView.setAdapter(mAdapter);
         mRbAll.performClick();
@@ -72,6 +78,24 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            List dbList = db.selector(Question.class)
+                .where("isUpdate", "=", false)
+                .and("loginUserId", "=", user.getId())
+                .findAll();
+            if (dbList != null && dbList.size() > 0) {
+                iv_alert.setVisibility(View.VISIBLE);
+            } else {
+                iv_alert.setVisibility(View.GONE);
+            }
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_back:
@@ -83,7 +107,10 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                 mRbNotUp.setChecked(false);
                 mBtAllUpload.setVisibility(View.GONE);
                 try {
-                    List dbList = db.findAll(Question.class);
+                    List dbList = db.selector(Question.class)
+                        .where("loginUserId", "=", user.getId())
+                        .orderBy("submitDate", true)
+                        .findAll();
                     if (dbList != null) {
                         dataList.clear();
                         dataList.addAll(dbList);
@@ -102,7 +129,11 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                 mRbAll.setChecked(false);
                 mRbNotUp.setChecked(true);
                 try {
-                    List dbList = db.selector(Question.class).where("isUpdate", "=", false).findAll();
+                    List dbList = db.selector(Question.class)
+                        .where("isUpdate", "=", false)
+                        .and("loginUserId", "=", user.getId())
+                        .orderBy("submitDate", true)
+                        .findAll();
                     if (dbList != null) {
                         dataList.clear();
                         dataList.addAll(dbList);
@@ -145,6 +176,7 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                     mAdapter.notifyDataSetChanged();
                     ToastUtils.show(context, "上传成功");
                     mBtAllUpload.setVisibility(View.GONE);
+                    iv_alert.setVisibility(View.GONE);
                 } catch (DbException e) {
                     e.printStackTrace();
                 }

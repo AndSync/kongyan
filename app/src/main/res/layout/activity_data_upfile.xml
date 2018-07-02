@@ -27,8 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:text="数据管理"
             android:textColor="@color/white"
@@ -36,43 +36,58 @@
 
     </RelativeLayout>
 
-
-    <RadioGroup
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="7dp"
-        android:layout_marginTop="7dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/all"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_data_radio_left"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center"
-            android:text="全部"
-            android:textColor="@color/selector_text_black2gray"
-            android:textSize="14sp"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp">
 
-        <RadioButton
-            android:id="@+id/not_up"
+            <RadioButton
+                android:id="@+id/all"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_data_radio_left"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="全部"
+                android:textColor="@color/selector_text_gray2white"
+                android:textSize="14sp"/>
+
+            <RadioButton
+                android:id="@+id/not_up"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_data_radio_right"
+                android:button="@null"
+                android:gravity="center"
+                android:text="未上传"
+                android:textColor="@color/selector_text_gray2white"
+                android:textSize="14sp"/>
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/iv_alert"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_data_radio_right"
-            android:button="@null"
-            android:gravity="center"
-            android:text="未上传"
-            android:textColor="@color/selector_text_black2gray"
-            android:textSize="14sp"/>
-    </RadioGroup>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="70dp"
+            android:visibility="gone"
+            android:scaleType="centerInside"
+            android:src="@mipmap/data_no_upload_alert"/>
+
+    </RelativeLayout>
 
 
     <RelativeLayout
@@ -104,9 +119,9 @@
             android:background="@drawable/baseinfo_cer_edit_shape"
             android:gravity="center"
             android:text="全部上传"
-            android:visibility="gone"
             android:textColor="@color/green"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <ListView
