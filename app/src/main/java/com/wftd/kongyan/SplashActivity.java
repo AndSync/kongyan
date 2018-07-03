@@ -71,10 +71,14 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        mTask.cancel();
-        mTask = null;
-        mTimer.cancel();
-        mTimer = null;
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
+        }
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
         mHandler = null;
         super.onDestroy();
     }

@@ -14,6 +14,7 @@ import com.wftd.kongyan.callback.VersionCallback;
 import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Version;
+import com.wftd.kongyan.util.AppUtils;
 import com.wftd.kongyan.util.HttpUtils;
 import java.util.List;
 import org.xutils.ex.DbException;
@@ -48,6 +49,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         iv_shuju.setOnClickListener(this);
         layout_version.setOnClickListener(this);
         user = UserHelper.getUserInfo();
+        TextView tv_version = (TextView) findViewById(R.id.tv_version);
+        tv_version.setText("版本" + AppUtils.getVersionName(context));
         HttpUtils.appUpdate(new VersionCallback() {
             @Override
             public boolean success(final Version version) {

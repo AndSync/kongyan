@@ -3,8 +3,10 @@ package com.wftd.kongyan.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import com.ihealth.communication.manager.iHealthDevicesManager;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.AidlUtil;
 import java.io.IOException;
@@ -47,6 +49,7 @@ public class App extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }  //写入权限的
+        initCrashReport();
     }
 
     public static Context getContext() {
@@ -68,6 +71,16 @@ public class App extends Application {
     public void exit() {
         for (Activity activity : mList) {
             activity.finish();
+        }
+    }
+
+    private void initCrashReport() {
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
+        strategy.setAppChannel("kongyan");
+        CrashReport.initCrashReport(context, "50208299f2", ServerConfig.DEBUG, strategy);
+        String userId = UserHelper.getUserInfo().getId();
+        if (!TextUtils.isEmpty(userId)) {
+            CrashReport.setUserId(UserHelper.getUserInfo().getId());
         }
     }
 }
