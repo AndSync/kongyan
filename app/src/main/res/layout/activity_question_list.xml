@@ -172,7 +172,7 @@
                         <Spinner
                             android:id="@+id/base_sex_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="35dp"></Spinner>
+                            android:layout_height="35dp"/>
                     </LinearLayout>
 
 

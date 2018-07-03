@@ -24,7 +24,7 @@ import java.util.Date;
  * 调查结果
  */
 public class QuestionResultActivity extends BaseActivity implements View.OnClickListener {
-    private final static String GREETING = ",您好";
+    private final static String GREETING = "，您好";
     private String call = "先生";
     private TextView mName;
     private TextView mSalt;

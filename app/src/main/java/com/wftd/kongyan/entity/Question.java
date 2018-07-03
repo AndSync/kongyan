@@ -29,11 +29,11 @@ public class Question implements java.io.Serializable {
     @Column(name = "district")
     private String district;
     @Column(name = "systolicPressure")
-    private int systolicPressure;
+    private int systolicPressure;//收缩压
     @Column(name = "systolicPressureType")
     private int systolicPressureType;
     @Column(name = "diastolicPressure")
-    private int diastolicPressure;
+    private int diastolicPressure;//舒张压
     @Column(name = "diastolicPressureType")
     private int diastolicPressureType;
     @Column(name = "saltThreshold")

@@ -182,7 +182,7 @@ public class BloodMeasureActivity extends BaseActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                doctor=doctorList.get(pos);
+                doctor = doctorList.get(pos);
             }
 
             @Override

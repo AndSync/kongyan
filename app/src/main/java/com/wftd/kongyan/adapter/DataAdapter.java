@@ -12,6 +12,9 @@ import com.wftd.kongyan.activity.QuestionResultActivity;
 import com.wftd.kongyan.base.BaseAdapter;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +60,14 @@ public class DataAdapter extends BaseAdapter<Question> {
         } else {
             holder.upfile.setVisibility(View.VISIBLE);
         }
-        holder.number.setText(question.getSubmitDate());
+        SimpleDateFormat oldDf = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat newDf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            Date date = oldDf.parse(question.getSubmitDate());
+            holder.number.setText(newDf.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         holder.upfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,26 +80,33 @@ public class DataAdapter extends BaseAdapter<Question> {
             @Override
             public void onClick(View view) {
 
-                Result result1 = null;
+                int index = question.getSaltThreshold();
 
                 int mNumber = getValues(question);
-                if (mNumber < 9) {
-                    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
-                        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
-                        mNumber + "", "低盐（食盐摄入量合适）- 处于正常范围 - 保持清淡饮食，合理膳食");
-                } else if (9 <= mNumber && mNumber <= 13) {
-                    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
-                        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
-                        mNumber + "", "正常（食盐摄入量合适）- 处于正常范围 - 请保持清淡饮食，建议咨询门诊医生是否需要调整降压治疗");
-                } else if (14 <= mNumber && mNumber <= 19) {
-                    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
-                        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
-                        mNumber + "", "中盐（食盐摄入量偏高）- 超出正常范围偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压");
-                } else if (20 <= mNumber) {
-                    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
-                        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
-                        mNumber + "", "高盐（食盐摄入量偏高）- 超出正常范围偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，您的血压水平是否合适，以获得更恰当的治疗");
+                if (index == 1) {
+                    if (mNumber <= 18) {
+                        mNumber = 19;
+                    }
                 }
+                Result result1 = Result.getRelult(question, mNumber);
+
+                //if (mNumber < 9) {
+                //    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+                //        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
+                //        mNumber + "", "低盐（食盐摄入量合适）- 处于正常范围 - 保持清淡饮食，合理膳食");
+                //} else if (9 <= mNumber && mNumber <= 13) {
+                //    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+                //        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
+                //        mNumber + "", "正d常（食盐摄入量合适）- 处于正常范围 - 请保持清淡饮食，建议咨询门诊医生是否需要调整降压治疗");
+                //} else if (14 <= mNumber && mNumber <= 19) {
+                //    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+                //        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
+                //        mNumber + "", "中盐（食盐摄入量偏高）- 超出正常范围偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压");
+                //} else if (20 <= mNumber) {
+                //    result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+                //        question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%",
+                //        mNumber + "", "高盐（食盐摄入量偏高）- 超出正常范围偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，您的血压水平是否合适，以获得更恰当的治疗");
+                //}
                 Intent intent = new Intent(mContext, QuestionResultActivity.class);
                 intent.putExtra("result", result1);
                 mContext.startActivity(intent);
