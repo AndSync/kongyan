@@ -113,6 +113,8 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 //退出
                 UserHelper.clearUserInfo();
                 App.getInstance().exit();
+                Intent loginIntent = new Intent(context, LoginActivity.class);
+                startActivity(loginIntent);
                 break;
             case R.id.modify:
             case R.id.layout_modify:

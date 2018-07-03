@@ -206,6 +206,15 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                     }
                     mAdapter.notifyDataSetChanged();
                     ToastUtils.show(context, "上传成功");
+                    List dbList = db.selector(Question.class)
+                        .where("isUpdate", "=", false)
+                        .and("loginUserId", "=", user.getId())
+                        .findAll();
+                    if (dbList != null && dbList.size() > 0) {
+                        iv_alert.setVisibility(View.VISIBLE);
+                    } else {
+                        iv_alert.setVisibility(View.GONE);
+                    }
                 } catch (DbException e) {
                     e.printStackTrace();
                 }

@@ -78,7 +78,7 @@ public class ModifyPasswordActivity extends BaseActivity implements View.OnClick
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastUtils.show(context,"修改密码成功");
+                ToastUtils.show(context, "修改密码成功");
                 user.setPasswordText(check_password.getText().toString());
                 try {
                     db.update(user, "passwordText");
