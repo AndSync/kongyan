@@ -43,6 +43,7 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
     private int index;
     private ImageView iv_alert;
     private People user;
+    boolean isFirstIn=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,16 @@ public class DataManagerActivity extends BaseActivity implements View.OnClickLis
                 .findAll();
             if (dbList != null && dbList.size() > 0) {
                 iv_alert.setVisibility(View.VISIBLE);
+                if(isFirstIn){
+                    mRbNotUp.performClick();
+                }
             } else {
                 iv_alert.setVisibility(View.GONE);
             }
         } catch (DbException e) {
             e.printStackTrace();
         }
+        isFirstIn=false;
     }
 
     @Override

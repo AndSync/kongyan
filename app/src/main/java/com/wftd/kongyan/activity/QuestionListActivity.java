@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -55,8 +54,7 @@ import org.xutils.ex.DbException;
  * 调查问卷页
  */
 public class QuestionListActivity extends BaseActivity2
-    implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener,
-    QuestionCallback {
+    implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, QuestionCallback {
     private EditText mBaseAddress;//省份
     private EditText mBaseName;//姓名
     private EditText mBasePhone;//电话
@@ -331,7 +329,6 @@ public class QuestionListActivity extends BaseActivity2
         adapter.setDropDownViewResource(R.layout.item_sex_menu);
         //将适配器绑定到下拉菜单
         mBaseSexSpinner.setAdapter(adapter);
-        mBaseSexSpinner.setOnItemSelectedListener(this);
     }
 
     //日常饮食
@@ -573,7 +570,7 @@ public class QuestionListActivity extends BaseActivity2
                     Question saveQuestion = new Question();
                     saveQuestion.setId(0);
                     saveQuestion.setName(name);
-                    saveQuestion.setSex(sex.equals("女") == true ? 1 : 0);
+                    saveQuestion.setSex(sex.equals("女") == true ? 2 : 1);
                     saveQuestion.setPhoneNumber(phone);
                     saveQuestion.setHeight(height);
                     saveQuestion.setWeight(weight);
@@ -989,16 +986,6 @@ public class QuestionListActivity extends BaseActivity2
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     public int getValues() {

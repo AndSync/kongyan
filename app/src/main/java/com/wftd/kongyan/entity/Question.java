@@ -227,10 +227,6 @@ public class Question implements java.io.Serializable {
         return sex;
     }
 
-    public int isSex() {
-        return this.sex;
-    }
-
     public void setSex(int sex) {
         this.sex = sex;
     }

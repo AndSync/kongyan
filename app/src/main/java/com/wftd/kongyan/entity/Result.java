@@ -93,7 +93,7 @@ public class Result implements Serializable {
             } else {
                 healthTip3 = "保持清淡饮食，合理膳食";
             }
-            result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+            result1 = new Result(question.getName(), question.getSex() == 1 ? "先生" : "女士",
                 question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%", mNumber + "",
                 "低盐（食盐摄入量合适）- " + healthTip2 + " - " + healthTip3 + "");
         } else if (9 <= mNumber && mNumber <= 13) {
@@ -102,7 +102,7 @@ public class Result implements Serializable {
             } else {
                 healthTip3 = "保持清淡饮食，合理膳食";
             }
-            result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+            result1 = new Result(question.getName(), question.getSex() == 1 ? "先生" : "女士",
                 question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%", mNumber + "",
                 "正常（食盐摄入量合适）- " + healthTip2 + "  - " + healthTip3 + "");
         } else if (14 <= mNumber && mNumber <= 19) {
@@ -111,7 +111,7 @@ public class Result implements Serializable {
             } else {
                 healthTip3 = "请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压";
             }
-            result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+            result1 = new Result(question.getName(), question.getSex() == 1 ? "先生" : "女士",
                 question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%", mNumber + "",
                 "中盐（食盐摄入量偏高）- " + healthTip2 + "  - " + healthTip3 + "");
         } else if (20 <= mNumber) {
@@ -120,7 +120,7 @@ public class Result implements Serializable {
             } else {
                 healthTip3 = "请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压";
             }
-            result1 = new Result(question.getName(), question.isSex() == 0 ? "先生" : "女士",
+            result1 = new Result(question.getName(), question.getSex() == 1 ? "先生" : "女士",
                 question.getSystolicPressure() + "/" + question.getDiastolicPressure() + " mmHg", "30%", mNumber + "",
                 "高盐（食盐摄入量偏高）- " + healthTip2 + "  - " + healthTip3 + "");
         }

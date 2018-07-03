@@ -25,7 +25,6 @@ import java.util.Date;
  */
 public class QuestionResultActivity extends BaseActivity implements View.OnClickListener {
     private final static String GREETING = "，您好";
-    private String call = "先生";
     private TextView mName;
     private TextView mSalt;
     private TextView mBlood;
@@ -72,10 +71,7 @@ public class QuestionResultActivity extends BaseActivity implements View.OnClick
         String salt = result.getSalt();
         String score = result.getScore();
         String healthTip = result.getHealthTip();
-        if (sex.equals("1")) {
-            call = "女士";
-        }
-        mName.setText(name + call + GREETING);
+        mName.setText(name + sex + GREETING);
         String textStr = "您的血压值为: <font color=\"#178078\">" + blood + "</font>";
         String textStr1 = "您的综合得分为: <font color=\"#178078\">" + score + "分</font>";
         mBlood.setText(Html.fromHtml(textStr));
