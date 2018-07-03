@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -67,7 +66,7 @@ public class BloodMeasureActivity extends BaseActivity
     private DoctorListAdapter spinnerAdapter;
     private Spinner spinner;
 
-    String doctorName;
+    Doctor doctor;
     /**
      * 扫描到血压仪
      */
@@ -183,7 +182,7 @@ public class BloodMeasureActivity extends BaseActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                doctorName = doctorList.get(pos).getName();
+                doctor=doctorList.get(pos);
             }
 
             @Override
@@ -417,8 +416,7 @@ public class BloodMeasureActivity extends BaseActivity
                     return;
                 }
                 Intent nextIntent = new Intent(this, QuestionListActivity.class);
-
-                nextIntent.putExtra("orname", TextUtils.isEmpty(doctorName) ? "暂无数据" : doctorName);
+                nextIntent.putExtra("doctor", doctor);
                 nextIntent.putExtra("sbp", sbp);
                 nextIntent.putExtra("dbp", dbp);
                 int index = 0;

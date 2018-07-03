@@ -29,6 +29,7 @@ import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity2;
 import com.wftd.kongyan.callback.QuestionCallback;
 import com.wftd.kongyan.db.DBHelper;
+import com.wftd.kongyan.entity.Doctor;
 import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
@@ -72,7 +73,6 @@ public class QuestionListActivity extends BaseActivity2
 
     private EditText Edoctor, Eaddress;
 
-    private String orname;
     private People mUser = UserHelper.getUserInfo();
 
     private static final String[] sexs = {
@@ -202,12 +202,13 @@ public class QuestionListActivity extends BaseActivity2
     private boolean highBloodSelected;
     private boolean jyySelected;
     private Result result1 = null;
+    private Doctor doctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_list);
-        orname = (String) getIntent().getSerializableExtra("orname");
+        doctor = (Doctor) getIntent().getSerializableExtra("doctor");
         init();
         initData();
     }
@@ -497,7 +498,7 @@ public class QuestionListActivity extends BaseActivity2
         mBaseSex = (EditText) findViewById(R.id.base_sex);
         mBaseHeight = (EditText) findViewById(R.id.base_height);
         mBaseWeight = (EditText) findViewById(R.id.base_weight);
-        Edoctor.setText(orname);
+        Edoctor.setText(doctor!=null?doctor.getName():"暂无数据");
         Eaddress.setText(TextUtils.isEmpty(mUser.getOrgnizationName()) ? "暂无数据" : mUser.getOrgnizationName());
         mBaseAddress.setOnClickListener(this);
         mBaseName.setOnClickListener(this);
@@ -570,17 +571,17 @@ public class QuestionListActivity extends BaseActivity2
                 try {
                     Question saveQuestion = new Question();
                     saveQuestion.setId(0);
-                    saveQuestion.setAge(Integer.valueOf(age));
                     saveQuestion.setName(name);
+                    saveQuestion.setSex(sex.equals("女") == true ? 1 : 0);
                     saveQuestion.setPhoneNumber(phone);
                     saveQuestion.setHeight(height);
                     saveQuestion.setWeight(weight);
-                    saveQuestion.setSex(sex.equals("女") == true ? 1 : 0);
-                    saveQuestion.setDistrict(orname);
-                    saveQuestion.setPeopleId(mUser.getId());
-                    saveQuestion.setOrganizationId(mUser.getOrganizationId());
+                    saveQuestion.setAge(Integer.valueOf(age));
+                    saveQuestion.setDistrict(mUser.getOrgnizationName());
                     saveQuestion.setSystolicPressure(Integer.valueOf(sbp));
                     saveQuestion.setDiastolicPressure(Integer.valueOf(dbp));
+                    saveQuestion.setSaltThreshold(index);
+
                     if (isHighBlood) {
                         if ((mHighBloodGroup.getCheckedRadioButtonId() % 2) == 1) {
                             saveQuestion.setPatientType(2);
@@ -612,6 +613,9 @@ public class QuestionListActivity extends BaseActivity2
                     saveQuestion.setQ12(m26Score);
                     saveQuestion.setQ13(m27Score);
                     saveQuestion.setScore(mNumber);
+                    saveQuestion.setPeopleId(mUser.getId());
+                    saveQuestion.setDoctorId(doctor != null ? doctor.getId() : "0");
+                    saveQuestion.setOrganizationId(mUser.getOrganizationId());
 
                     SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
                     saveQuestion.setSubmitDate(df.format(new Date()));
