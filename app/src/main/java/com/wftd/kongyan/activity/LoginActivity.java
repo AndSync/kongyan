@@ -24,7 +24,11 @@ import java.util.List;
 import org.xutils.ex.DbException;
 
 /**
- * 登录页
+ * 登录页面
+ *
+ * @author AndSync
+ * @date 2018/7/5
+ * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginCallback, PeopleCallback {
     private PowerfulEditText mUserName;

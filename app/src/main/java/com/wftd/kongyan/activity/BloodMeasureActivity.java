@@ -40,7 +40,11 @@ import org.json.JSONObject;
 import static com.wftd.kongyan.R.id.radioGroup;
 
 /**
- * 主页
+ * 测量血压页面，高盐筛查第一步
+ *
+ * @author AndSync
+ * @date 2018/7/5
+ * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
  */
 public class BloodMeasureActivity extends BaseActivity
     implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, DoctorCallback {

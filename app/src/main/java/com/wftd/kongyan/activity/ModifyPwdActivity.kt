@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_modify.old_password
 
 
 /**
+ * 修改密码
  * Created by liwei on 2018/6/17.
  */
 class ModifyPwdActivity : BaseActivity(), View.OnClickListener, ModifyCallback {

@@ -52,6 +52,10 @@ import org.xutils.ex.DbException;
 
 /**
  * 调查问卷页
+ *
+ * @author AndSync
+ * @date 2018/7/5
+ * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
  */
 public class QuestionListActivity extends BaseActivity2
     implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, QuestionCallback {
@@ -522,22 +526,28 @@ public class QuestionListActivity extends BaseActivity2
                 boolean isNext = false;
                 switch (index) {
                     case 1:
-                        if (1 <= mNumber && mNumber <= 19) {
+                        if (mNumber < 20) {
                             isNext = true;
-                        }
-                        if (mNumber <= 18) {
-                            mNumber = 19;
                         }
                         break;
                     case 2:
+                        if (mNumber <= 9) {
+                            mNumber = 9;
+                        }
                         isNext = true;
                         break;
                     case 3:
+                        if (mNumber <= 14) {
+                            mNumber = 14;
+                        }
                         isNext = true;
                         break;
                     case 4:
-                        if (mNumber >= 9) {
+                        if (mNumber > 8) {
                             isNext = true;
+                        }
+                        if (mNumber <= 20) {
+                            mNumber = 20;
                         }
                         break;
                     default:
@@ -548,24 +558,6 @@ public class QuestionListActivity extends BaseActivity2
                     DialogUtils.showAlertDialog(context, "提示", "得分与适用盐度有出入建议复核问卷数据");
                     return;
                 }
-
-                //if (mNumber < 9) {
-                //    //没有超标
-                //    result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
-                //        mNumber + "", "低盐（食盐摄入量合适）- 处于正常范围 - 保持清淡饮食，合理膳食。");
-                //} else if (9 <= mNumber && mNumber <= 13) {
-                //    result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
-                //        mNumber + "", "正常（食盐摄入量合适）- 处于正常范围 - 请保持清淡饮食，建议咨询门诊医生是否需要调整降压治疗。");
-                //} else if (14 <= mNumber && mNumber <= 19) {
-                //    result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
-                //        mNumber + "", "中盐（食盐摄入量偏高）- 超出正常范围，偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，建议您定期测量血压。");
-                //} else if (20 <= mNumber) {
-                //    result1 = new Result(name, sex.equals("女") == true ? "1" : "0", sbp + "/" + dbp + "mmHg", "30%",
-                //        mNumber + "", "高盐（食盐摄入量偏高）- 超出正常范围，偏高 - 请咨询门诊医生是否需要调整您的饮食习惯，您的血压水平是否合适，以获得更恰当的治疗。");
-                //}
-                //if (result1 == null) {
-                //    return;
-                //}
                 try {
                     Question saveQuestion = new Question();
                     saveQuestion.setId(0);
@@ -614,7 +606,7 @@ public class QuestionListActivity extends BaseActivity2
                     saveQuestion.setPeopleId(mUser.getId());
                     saveQuestion.setDoctorId(doctor != null ? doctor.getId() : "0");
                     saveQuestion.setOrganizationId(mUser.getOrganizationId());
-                    result1 = Result.getRelult(saveQuestion, mNumber);
+                    result1 = Result.getResult(saveQuestion, mNumber);
                     SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
                     saveQuestion.setSubmitDate(df.format(new Date()));
                     saveQuestion.setLoginUserId(mUser.getId());

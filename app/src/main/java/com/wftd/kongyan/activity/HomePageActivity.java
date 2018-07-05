@@ -20,6 +20,8 @@ import java.util.List;
 import org.xutils.ex.DbException;
 
 /**
+ * 主页-登录后页面可跳转至高盐筛查和数据管理、个人中心等页面
+ *
  * @author AndSync
  * @date 2018/6/28
  * Copyright © 2014-2018 AndSync All rights reserved.

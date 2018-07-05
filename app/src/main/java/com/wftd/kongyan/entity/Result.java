@@ -70,7 +70,7 @@ public class Result implements Serializable {
         this.healthTip = healthTip;
     }
 
-    public static Result getRelult(Question question, int mNumber) {
+    public static Result getResult(Question question, int mNumber) {
         Result result1 = null;
         String healthTip2 = "处于正常范围";
         boolean isHighBlood = false;

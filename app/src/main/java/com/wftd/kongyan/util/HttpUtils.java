@@ -33,6 +33,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 网络请求工具类
+ *
+ * @author AndSync
+ * @date 2018/7/5
+ * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
+ */
 public class HttpUtils {
 
     private static final String TAG = "HttpUtils";

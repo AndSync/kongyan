@@ -22,6 +22,10 @@ import java.util.Date;
 
 /**
  * 调查结果
+ *
+ * @author AndSync
+ * @date 2018/7/5
+ * Copyright © 2014-2018 北京智阅网络科技有限公司 All rights reserved.
  */
 public class QuestionResultActivity extends BaseActivity implements View.OnClickListener {
     private final static String GREETING = "，您好";

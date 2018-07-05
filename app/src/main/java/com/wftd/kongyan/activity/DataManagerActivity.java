@@ -26,6 +26,8 @@ import org.xutils.db.sqlite.WhereBuilder;
 import org.xutils.ex.DbException;
 
 /**
+ * 数据管理页面
+ *
  * @author AndSync
  * @date 2018/7/1
  * Copyright © 2014-2018 AndSync All rights reserved.
