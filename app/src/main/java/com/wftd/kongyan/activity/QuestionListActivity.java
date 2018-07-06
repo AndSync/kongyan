@@ -32,7 +32,6 @@ import com.wftd.kongyan.entity.Doctor;
 import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.entity.Question;
 import com.wftd.kongyan.entity.Result;
-import com.wftd.kongyan.util.CommonUtils;
 import com.wftd.kongyan.util.DialogUtils;
 import com.wftd.kongyan.util.DisplayUtils;
 import com.wftd.kongyan.util.HttpUtils;
@@ -675,11 +674,11 @@ public class QuestionListActivity extends BaseActivity2
             mScrollerView.scrollTo(0, 0);
             return false;
         }
-        if (!CommonUtils.isMobile(phone)) {
-            mScrollerView.scrollTo(0, 0);
-            DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的手机号");
-            return false;
-        }
+        //if (!CommonUtils.isMobile(phone)) {
+        //    mScrollerView.scrollTo(0, 0);
+        //    DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的手机号");
+        //    return false;
+        //}
 
         if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {
             mScrollerView.scrollTo(0, 0);

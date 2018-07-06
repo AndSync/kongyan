@@ -138,7 +138,7 @@
                         android:id="@+id/base_phone"
                         style="@style/baseInfo_edit_style"
                         android:background="@drawable/baseinfo_edit_shape"
-                        android:inputType="phone"
+                        android:inputType="number"
                         android:maxLength="11"/>
                 </LinearLayout>
                 <!--年龄-->
