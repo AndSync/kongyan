@@ -557,6 +557,7 @@ public class QuestionListActivity extends BaseActivity2
                     DialogUtils.showAlertDialog(context, "提示", "得分与适用盐度有出入建议复核问卷数据");
                     return;
                 }
+                mCommit.setEnabled(false);
                 try {
                     Question saveQuestion = new Question();
                     saveQuestion.setId(0);
@@ -674,11 +675,6 @@ public class QuestionListActivity extends BaseActivity2
             mScrollerView.scrollTo(0, 0);
             return false;
         }
-        //if (!CommonUtils.isMobile(phone)) {
-        //    mScrollerView.scrollTo(0, 0);
-        //    DialogUtils.showAlertDialog(context, "提交失败", "请输入正确的手机号");
-        //    return false;
-        //}
 
         if (age.substring(0, 1).equals("0") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 150) {
             mScrollerView.scrollTo(0, 0);
@@ -1008,6 +1004,7 @@ public class QuestionListActivity extends BaseActivity2
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                mCommit.setEnabled(true);
                 Intent intent = new Intent(context, QuestionResultActivity.class);
                 intent.putExtra("result", result1);
                 startActivityForResult(intent, Constant.FINISH_ACTIVITY);
@@ -1026,6 +1023,7 @@ public class QuestionListActivity extends BaseActivity2
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                mCommit.setEnabled(true);
                 DialogUtils.showAlertDialog(context, "提交失败", "请稍后到\"数据管理\"页面重新提交",
                     new DialogUtils.OnSubmitFailureListener() {
                         @Override
