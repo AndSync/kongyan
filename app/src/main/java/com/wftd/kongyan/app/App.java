@@ -33,7 +33,7 @@ public class App extends Application {
         mApp = this;
         mList = new ArrayList<>();
         AidlUtil.getInstance().connectPrinterService(this);
-        iHealthDevicesManager.getInstance().init(this, Log.VERBOSE, Log.ASSERT);
+        iHealthDevicesManager.getInstance().init(this, Log.VERBOSE, Log.VERBOSE);
         try {
             InputStream is = getAssets().open("com_wftd_kongyan_android.pem");
             int size = is.available();

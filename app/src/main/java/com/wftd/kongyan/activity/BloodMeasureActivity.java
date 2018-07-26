@@ -167,7 +167,8 @@ public class BloodMeasureActivity extends BaseActivity
         mAuto.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mAuto.setText("搜索中请开启血压仪");
-        iHealthDevicesManager.getInstance().init(this, Log.VERBOSE, Log.ASSERT);
+
+        //iHealthDevicesManager.getInstance().init(this, Log.VERBOSE, Log.VERBOSE);
 
         clientCallbackId = iHealthDevicesManager.getInstance().registerClientCallback(miHealthDevicesCallback);
         /* Limited wants to receive notification specified device */
