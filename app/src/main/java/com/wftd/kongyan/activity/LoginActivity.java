@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.wftd.kongyan.R;
-import com.wftd.kongyan.app.App;
+import com.wftd.kongyan.app.UserHelper;
 import com.wftd.kongyan.base.BaseActivity;
 import com.wftd.kongyan.callback.LoginCallback;
 import com.wftd.kongyan.callback.PeopleCallback;
@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             ToastUtils.show(this, "用户名或密码错误");
                             return;
                         }
-                        App.loginUser = user;
+                        UserHelper.setUserInfoPeople(user);
                         Intent homePagdeIntent = new Intent(LoginActivity.this, HomePageActivity.class);
                         startActivity(homePagdeIntent);
                         finish();

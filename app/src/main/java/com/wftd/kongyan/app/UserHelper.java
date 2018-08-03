@@ -20,20 +20,26 @@ public class UserHelper {
      * 用户信息--本地保存的序列化对象文件名
      */
     public static final String KEY_USER_INFO = "userinfo.obj";
+    public static final String KEY_USER_INFO_PEOPLE = "userinfo_people.obj";
 
     /**
      * 设置用户信息
      */
     public static void setUserInfo(LoginResult userInfo) {
         if (userInfo != null) {
-            App.loginUser = userInfo.getPeople();
             FileHelper.saveObject2File(userInfo, KEY_USER_INFO);
+            FileHelper.saveObject2File(userInfo.getPeople(), KEY_USER_INFO_PEOPLE);
+        }
+    }
+
+    public static void setUserInfoPeople(People people) {
+        if (people != null) {
+            FileHelper.saveObject2File(people, KEY_USER_INFO_PEOPLE);
         }
     }
 
     public static void updateDoctorList(List<Doctor> doctorList) {
         LoginResult loginResult = (LoginResult) FileHelper.readObjectFromFile(KEY_USER_INFO);
-        //LoginResult loginResult = App.loginResult;
         if (loginResult != null) {
             loginResult.setDoctors(doctorList);
             setUserInfo(loginResult);
@@ -42,7 +48,6 @@ public class UserHelper {
 
     public static List<Doctor> getDoctorList() {
         LoginResult loginResult = (LoginResult) FileHelper.readObjectFromFile(KEY_USER_INFO);
-        //LoginResult loginResult = App.loginResult;
         List<Doctor> doctorList;
         if (loginResult != null) {
             doctorList = loginResult.getDoctors();
@@ -56,10 +61,10 @@ public class UserHelper {
      * 获取用户信息
      */
     public static People getUserInfo() {
-        People urlInfo = App.loginUser;
-        if (urlInfo != null) {
-            LogUtils.d("UserInfo", urlInfo.toString());
-            return urlInfo;
+        People userInfo = (People) FileHelper.readObjectFromFile(KEY_USER_INFO_PEOPLE);
+        if (userInfo != null) {
+            LogUtils.d("UserInfo", userInfo.toString());
+            return userInfo;
         } else {
             return new People();
         }
@@ -77,7 +82,6 @@ public class UserHelper {
      * 清空用户信息
      */
     public static void clearUserInfo() {
-        App.loginUser = null;
-        //FileHelper.saveObject2File(new LoginResult(), KEY_USER_INFO);
+        FileHelper.saveObject2File(new People(), KEY_USER_INFO_PEOPLE);
     }
 }

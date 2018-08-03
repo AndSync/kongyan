@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import com.ihealth.communication.manager.iHealthDevicesManager;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.wftd.kongyan.entity.People;
 import com.wftd.kongyan.util.AidlUtil;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,8 +22,6 @@ public class App extends Application {
     private static App mApp;
     private ArrayList<Activity> mList;
     private static Context context;
-
-    public static People loginUser = new People();
 
     @Override
     public void onCreate() {
